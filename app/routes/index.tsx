@@ -19,14 +19,13 @@ const register: Mutation<typeof schema> = async (values) => {
   console.log(values)
 }
 
-export const action: ActionFunction = async ({ request }) => {
-  return await formAction({
+export const action: ActionFunction = async ({ request }) =>
+  await formAction({
     request,
     schema: schema,
     mutation: register,
     successPath: '/?success=true',
   })
-}
 
 const code = `import { ActionFunction, useActionData, LoaderFunction, useLoaderData } from 'remix'
 import { formAction, Form, Mutation } from 'remix-forms'
@@ -49,14 +48,13 @@ export const loader: LoaderFunction = () => ({
   ],
 })
 
-export const action: ActionFunction = async ({ request }) => {
-  return await formAction({
+export const action: ActionFunction = async ({ request }) =>
+  await formAction({
     request,
     schema: schema,
     mutation: register,
     successPath: '/?success=true',
   })
-}
 
 export default function Index() {
   const { options } = useLoaderData()
