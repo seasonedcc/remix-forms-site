@@ -8,6 +8,15 @@ import {
 import { formAction, Mutation } from 'remix-forms'
 import { z } from 'zod'
 import Form from '~/ui/form'
+import {
+  BeakerIcon,
+  ScaleIcon,
+  ShieldCheckIcon,
+  CloudIcon,
+  BadgeCheckIcon,
+  CursorClickIcon,
+} from '@heroicons/react/solid'
+import Feature from '~/ui/feature'
 
 const code = `import { ActionFunction, useActionData, LoaderFunction, useLoaderData } from 'remix'
 import { formAction, Form, Mutation } from 'remix-forms'
@@ -88,8 +97,8 @@ export default function Index() {
   const data = useActionData()
 
   return (
-    <>
-      <h1 className="text-center text-2xl font-bold leading-7 text-pink-500 sm:text-5xl pb-8 sm:pb-16 sm:pt-8">
+    <div className="flex flex-col space-y-8">
+      <h1 className="text-center text-2xl font-bold leading-7 text-pink-500 sm:text-5xl pb-8 sm:pt-8">
         Magically create forms
         <br />+ actions in Remix
       </h1>
@@ -126,6 +135,26 @@ export default function Index() {
           />
         </div>
       </div>
-    </>
+      <dl className="pt-8 space-y-8 md:space-y-0 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-y-8">
+        <Feature icon={BeakerIcon} title="100% customizable UI">
+          Create custom inputs and use the default UI for everything else.
+        </Feature>
+        <Feature icon={ScaleIcon} title="Single source of truth">
+          Write your schema once and derive everything else from it.
+        </Feature>
+        <Feature icon={ShieldCheckIcon} title="Bulletproof DX">
+          Everything is typed. Goodbye typos, hello beautiful autocomplete!
+        </Feature>
+        <Feature icon={CloudIcon} title="Server-side action">
+          Perform secure server-side mutations with zero boilerplate.
+        </Feature>
+        <Feature icon={BadgeCheckIcon} title="Fullstack validation">
+          Validate everything both on the client and the server.
+        </Feature>
+        <Feature icon={CursorClickIcon} title="Focus management">
+          Focus on the first field with error even for server-side failures.
+        </Feature>
+      </dl>
+    </div>
   )
 }
