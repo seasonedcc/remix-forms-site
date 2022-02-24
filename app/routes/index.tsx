@@ -5,7 +5,7 @@ import {
   LoaderFunction,
   useLoaderData,
 } from 'remix'
-import { formAction, Mutation } from 'remix-forms'
+import { formAction } from 'remix-forms'
 import { z } from 'zod'
 import Form from '~/ui/form'
 import {
@@ -19,7 +19,7 @@ import {
 import Feature from '~/ui/feature'
 
 const code = `import { ActionFunction, useActionData, LoaderFunction, useLoaderData } from 'remix'
-import { formAction, Form, Mutation } from 'remix-forms'
+import { formAction, Form } from 'remix-forms'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -27,10 +27,6 @@ const schema = z.object({
   email: z.string().nonempty().email(),
   source: z.string().nonempty(),
 })
-
-const register: Mutation<typeof schema> = async (values) => {
-  console.log(values)
-}
 
 export const loader: LoaderFunction = () => ({
   sources: [
@@ -43,7 +39,7 @@ export const action: ActionFunction = async ({ request }) =>
   await formAction({
     request,
     schema,
-    mutation: register,
+    mutation: async (values) => { console.log(values) },
     successPath: '/?success=true',
   })
 
@@ -72,15 +68,13 @@ const schema = z.object({
   source: z.string().nonempty(),
 })
 
-const register: Mutation<typeof schema> = async (values) => {
-  console.log(values)
-}
-
 export const action: ActionFunction = async ({ request }) =>
   await formAction({
     request,
     schema,
-    mutation: register,
+    mutation: async (values) => {
+      console.log(values)
+    },
     successPath: '/?success=true',
   })
 
