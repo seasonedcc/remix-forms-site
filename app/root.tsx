@@ -9,6 +9,7 @@ import {
 
 import type { MetaFunction, LinksFunction } from 'remix'
 import styles from './styles/app.css'
+import highlightStyles from 'highlight.js/styles/a11y-dark.css'
 import favicon from './favicon.png'
 
 export const meta: MetaFunction = () => {
@@ -23,6 +24,7 @@ export const links: LinksFunction = () => {
       type: 'image/png',
     },
     { rel: 'stylesheet', href: styles },
+    { rel: 'stylesheet', href: highlightStyles },
   ]
 }
 

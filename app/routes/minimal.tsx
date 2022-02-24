@@ -18,12 +18,6 @@ export const action: ActionFunction = async ({ request }) => {
     schema: registerSchema,
     mutation: register,
     successPath: '/?success=true',
-    beforeAction: async () => {
-      console.log('BEFORE!')
-    },
-    beforeSuccess: async () => {
-      console.log('SUCCESS!')
-    },
   })
 }
 
