@@ -44,12 +44,12 @@ export default function Index() {
 
   return (
     <div className="relative">
-      <h1 className="text-center text-2xl font-bold leading-7 text-pink-500 sm:text-5xl pb-8 sm:pb-18 sm:pt-8">
+      <h1 className="text-center text-2xl font-bold leading-7 text-pink-500 sm:text-5xl pb-8 sm:pb-16 sm:pt-8">
         Magically create forms
         <br />+ actions in Remix
       </h1>
       <pre
-        className="bg-black text-white p-2 overflow-x-auto"
+        className="bg-black text-white p-2 overflow-auto max-h-[60vh] text-xs sm:text-sm"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>
