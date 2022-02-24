@@ -98,7 +98,7 @@ export default function Index() {
 
   return (
     <div className="flex flex-col space-y-8">
-      <h1 className="text-center text-2xl font-bold leading-7 text-pink-500 sm:text-5xl pb-8 sm:pt-8">
+      <h1 className="text-center text-2xl font-bold leading-7 text-pink-500 sm:text-5xl sm:pb-8 sm:pt-8">
         Magically create forms
         <br />+ actions in Remix
       </h1>
@@ -135,7 +135,7 @@ export default function Index() {
           />
         </div>
       </div>
-      <dl className="pt-8 space-y-8 md:space-y-0 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-y-8">
+      <dl className="sm:pt-8 space-y-8 md:space-y-0 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-y-8">
         <Feature icon={BeakerIcon} title="100% customizable UI">
           Create custom inputs and use the default UI for everything else.
         </Feature>
