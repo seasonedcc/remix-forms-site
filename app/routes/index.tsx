@@ -9,24 +9,6 @@ import { formAction, Mutation } from 'remix-forms'
 import { z } from 'zod'
 import Form from '~/ui/form'
 
-const schema = z.object({
-  firstName: z.string().nonempty(),
-  email: z.string().nonempty().email(),
-  source: z.string().nonempty(),
-})
-
-const register: Mutation<typeof schema> = async (values) => {
-  console.log(values)
-}
-
-export const action: ActionFunction = async ({ request }) =>
-  await formAction({
-    request,
-    schema: schema,
-    mutation: register,
-    successPath: '/?success=true',
-  })
-
 const code = `import { ActionFunction, useActionData, LoaderFunction, useLoaderData } from 'remix'
 import { formAction, Form, Mutation } from 'remix-forms'
 import { z } from 'zod'
@@ -42,7 +24,7 @@ const register: Mutation<typeof schema> = async (values) => {
 }
 
 export const loader: LoaderFunction = () => ({
-  options: [
+  sources: [
     { name: 'From a friend', value: 'friend' },
     { name: 'Google', value: 'google' },
   ],
@@ -51,13 +33,13 @@ export const loader: LoaderFunction = () => ({
 export const action: ActionFunction = async ({ request }) =>
   await formAction({
     request,
-    schema: schema,
+    schema,
     mutation: register,
     successPath: '/?success=true',
   })
 
 export default function Index() {
-  const { options } = useLoaderData()
+  const { sources } = useLoaderData()
   const data = useActionData()
 
   return (
@@ -67,7 +49,7 @@ export default function Index() {
         email: 'E-mail',
         source: 'How did you find out about us?',
       }}
-      options={{ source: options }}
+      options={{ source: sources }}
       schema={schema}
       errors={data?.errors}
       values={data?.values}
@@ -75,16 +57,34 @@ export default function Index() {
   )
 }`
 
+const schema = z.object({
+  firstName: z.string().nonempty(),
+  email: z.string().nonempty().email(),
+  source: z.string().nonempty(),
+})
+
+const register: Mutation<typeof schema> = async (values) => {
+  console.log(values)
+}
+
+export const action: ActionFunction = async ({ request }) =>
+  await formAction({
+    request,
+    schema,
+    mutation: register,
+    successPath: '/?success=true',
+  })
+
 export const loader: LoaderFunction = () => ({
   html: hljs.highlight(code, { language: 'ts' }).value,
-  options: [
+  sources: [
     { name: 'From a friend', value: 'friend' },
     { name: 'Google', value: 'google' },
   ],
 })
 
 export default function Index() {
-  const { html, options } = useLoaderData()
+  const { html, sources } = useLoaderData()
   const data = useActionData()
 
   return (
@@ -119,7 +119,7 @@ export default function Index() {
               email: 'E-mail',
               source: 'How did you find out about us?',
             }}
-            options={{ source: options }}
+            options={{ source: sources }}
             schema={schema}
             errors={data?.errors}
             values={data?.values}
