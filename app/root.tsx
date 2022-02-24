@@ -38,7 +38,7 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-gradient-to-r from-gray-900 to-gray-600">
-        <div className="max-w-7xl mx-auto p-8">
+        <div className="max-w-7xl mx-auto px-4 py-8 sm:px-8">
           <Outlet />
         </div>
         <ScrollRestoration />
