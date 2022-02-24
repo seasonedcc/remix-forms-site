@@ -1,7 +1,7 @@
 import { ActionFunction, useActionData } from 'remix'
 import { formAction, Mutation } from 'remix-forms'
 import { z } from 'zod'
-import Form from '~/ui/Form'
+import Form from '~/ui/form'
 
 const registerSchema = z.object({
   firstName: z.string().nonempty(),
