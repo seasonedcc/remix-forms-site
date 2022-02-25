@@ -48,7 +48,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-gradient-to-r from-gray-900 to-gray-600">
+      <body className="antialiased min-h-screen w-screen overflow-x-hidden overflow-y-auto bg-gradient-to-r from-gray-900 to-gray-600">
         <div className="sticky top-0 z-30 bg-gradient-to-r from-black to-gray-800 p-4">
           <div className="w-full flex items-center space-x-4">
             <div className="flex-1">
