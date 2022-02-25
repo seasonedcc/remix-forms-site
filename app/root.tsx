@@ -15,6 +15,7 @@ import favicon from './favicon.png'
 import logo from './logo.png'
 import GitHub from './ui/icons/github'
 import ButtonLink from './ui/button-link'
+import ExternalLink from './ui/external-link'
 
 export const meta: MetaFunction = () => {
   return { title: 'Magically create forms + actions in Remix · Remix Forms' }
@@ -45,24 +46,22 @@ export default function App() {
         <div className="sticky top-0 z-30 bg-gradient-to-r from-black to-gray-800 p-4">
           <div className="w-full flex items-center space-x-4">
             <div className="flex-1">
-              <Link to="/">
+              <Link to="/" className="block h-10 w-10">
                 <img
                   src={logo}
                   alt="Remix Forms"
                   title="Remix Forms"
-                  className="h-10 drop-shadow-[0_0px_8px_rgba(255,255,0,0.4)]"
+                  className="h-10 w-10 drop-shadow-[0_0px_8px_rgba(255,255,0,0.4)]"
                 />
               </Link>
             </div>
             <ButtonLink to="/get-started">Get Started</ButtonLink>
-            <a
+            <ExternalLink
               href="https://github.com/SeasonedSoftware/remix-forms"
-              target="_blank"
-              rel="noopener noreferrer"
               className="text-white"
             >
               <GitHub />
-            </a>
+            </ExternalLink>
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 py-8 sm:px-8 sm:py-16">
@@ -70,14 +69,9 @@ export default function App() {
         </div>
         <div className="bg-gradient-to-r from-black to-gray-800 text-center text-white p-4">
           Built with ❤️💪🏼 by{' '}
-          <a
-            className="underline"
-            href="https://seasoned.cc"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <ExternalLink className="underline" href="https://seasoned.cc">
             Seasoned
-          </a>
+          </ExternalLink>
         </div>
         <ScrollRestoration />
         <Scripts />
