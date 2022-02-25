@@ -72,7 +72,7 @@ const schema = z.object({
 })
 
 export const loader: LoaderFunction = () => ({
-  html: hljs.highlight(code, { language: 'ts' }).value,
+  code: hljs.highlight(code, { language: 'ts' }).value,
   sources: [
     { name: 'From a friend', value: 'friend' },
     { name: 'Google', value: 'google' },
@@ -90,7 +90,7 @@ export const action: ActionFunction = async ({ request }) =>
   })
 
 export default function Index() {
-  const { html, sources } = useLoaderData()
+  const { code, sources } = useLoaderData()
   const data = useActionData()
 
   return (
@@ -100,7 +100,7 @@ export default function Index() {
         <br />+ actions in Remix
       </Heading>
       <div className="flex flex-col space-y-6 space-x-0 xl:flex-row xl:space-x-6 xl:space-y-0">
-        <Code>{html}</Code>
+        <Code>{code}</Code>
         <div className="xl:flex-1">
           <h3 className="text-center text-gray-400 text-lg pb-6">
             This tiny code creates the form below 👇🏽
