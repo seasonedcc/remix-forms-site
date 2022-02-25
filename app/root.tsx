@@ -58,7 +58,7 @@ export default function App() {
             <ButtonLink to="/get-started">Get Started</ButtonLink>
             <ExternalLink
               href="https://github.com/SeasonedSoftware/remix-forms"
-              className="text-white"
+              className="text-white no-underline"
             >
               <GitHub />
             </ExternalLink>
@@ -69,9 +69,7 @@ export default function App() {
         </div>
         <div className="bg-gradient-to-r from-black to-gray-800 text-center text-white p-4">
           Built with ❤️💪🏼 by{' '}
-          <ExternalLink className="underline" href="https://seasoned.cc">
-            Seasoned
-          </ExternalLink>
+          <ExternalLink href="https://seasoned.cc">Seasoned</ExternalLink>
         </div>
         <ScrollRestoration />
         <Scripts />
