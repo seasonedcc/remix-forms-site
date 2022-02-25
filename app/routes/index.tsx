@@ -13,7 +13,7 @@ import {
   ScaleIcon,
   ShieldCheckIcon,
   CloudIcon,
-  BadgeCheckIcon,
+  ClipboardCheckIcon,
   CursorClickIcon,
 } from '@heroicons/react/solid'
 import Feature from '~/ui/feature'
@@ -142,7 +142,7 @@ export default function Index() {
         <Feature icon={CloudIcon} title="Server-side action">
           Perform secure server-side mutations with zero boilerplate.
         </Feature>
-        <Feature icon={BadgeCheckIcon} title="Fullstack validation">
+        <Feature icon={ClipboardCheckIcon} title="Fullstack validation">
           Validate everything both on the client and the server.
         </Feature>
         <Feature icon={CursorClickIcon} title="Focus management">
