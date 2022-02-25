@@ -137,7 +137,7 @@ export default function Index() {
           Write your schema once and derive everything else from it.
         </Feature>
         <Feature icon={ShieldCheckIcon} title="Bulletproof DX">
-          Everything is typed. Goodbye typos, hello beautiful autocomplete!
+          100% typed to your schema. Goodbye typos, hello autocomplete!
         </Feature>
         <Feature icon={CloudIcon} title="Server-side action">
           Perform secure server-side mutations with zero boilerplate.
