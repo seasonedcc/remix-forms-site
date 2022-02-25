@@ -41,6 +41,17 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 py-8 sm:px-8">
           <Outlet />
         </div>
+        <div className="bg-gradient-to-r from-black to-gray-800 text-center text-white p-4">
+          Built with ❤️💪🏼 by{' '}
+          <a
+            className="underline"
+            href="https://seasoned.cc"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Seasoned
+          </a>
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
