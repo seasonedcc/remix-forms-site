@@ -98,7 +98,7 @@ export default function Index() {
       </h1>
       <div className="flex flex-col space-y-6 space-x-0 xl:flex-row xl:space-x-6 xl:space-y-0">
         <pre
-          className="xl:flex-1 bg-black text-white p-2 overflow-auto max-h-[60vh] text-xs sm:text-sm"
+          className="xl:flex-1 bg-black text-white p-2 overflow-auto max-h-[60vh] text-xs sm:text-sm scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-gray-600"
           dangerouslySetInnerHTML={{ __html: html }}
         />
         <div className="xl:flex-1">
