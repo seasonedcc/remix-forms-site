@@ -4,6 +4,7 @@ import {
   useActionData,
   LoaderFunction,
   useLoaderData,
+  MetaFunction,
 } from 'remix'
 import { formAction } from 'remix-forms'
 import { z } from 'zod'
@@ -20,6 +21,19 @@ import Feature from '~/ui/feature'
 import ButtonLink from '~/ui/button-link'
 import Heading from '~/ui/heading'
 import Code from '~/ui/code'
+
+export const meta: MetaFunction = () => {
+  const title = 'Magically create forms + actions in Remix · Remix Forms'
+  const description =
+    'All type-safe, with client-side + server-side validations, pending UI, and focus management'
+
+  return {
+    title,
+    description,
+    'og:title': title,
+    'og:description': description,
+  }
+}
 
 const code = `import { ActionFunction, useActionData, LoaderFunction, useLoaderData } from 'remix'
 import { formAction, Form } from 'remix-forms'

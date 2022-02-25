@@ -13,12 +13,18 @@ import styles from './styles/app.css'
 import highlightStyles from 'highlight.js/styles/a11y-dark.css'
 import favicon from './favicon.png'
 import logo from './logo.png'
+import social from './social.png'
 import GitHub from './ui/icons/github'
 import ButtonLink from './ui/button-link'
 import ExternalLink from './ui/external-link'
 
 export const meta: MetaFunction = () => {
-  return { title: 'Magically create forms + actions in Remix · Remix Forms' }
+  return {
+    author: 'Seasoned',
+    'og:type': 'website',
+    'og:image': social,
+    'og:site_name': 'Remix Forms',
+  }
 }
 
 export const links: LinksFunction = () => {

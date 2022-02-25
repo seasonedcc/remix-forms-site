@@ -1,10 +1,22 @@
 import hljs from 'highlight.js/lib/common'
-import { LoaderFunction, useLoaderData } from 'remix'
+import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import Code from '~/ui/code'
 import ExternalLink from '~/ui/external-link'
 import Heading from '~/ui/heading'
 import Pre from '~/ui/pre'
 import SubHeading from '~/ui/sub-heading'
+
+export const meta: MetaFunction = () => {
+  const title = 'Get Started · Remix Forms'
+  const description = 'Magically create forms + actions in Remix'
+
+  return {
+    title,
+    description,
+    'og:title': title,
+    'og:description': description,
+  }
+}
 
 const formCode = `import { Form as RemixForm, FormProps } from 'remix-forms'
 import { SomeZodObject } from 'zod'
