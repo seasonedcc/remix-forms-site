@@ -59,7 +59,7 @@ const customFormCode = `<Form schema={schema} errors={data?.errors} values={data
     <>
       <Field name="firstName" label="First name" />
       <Field name="email" label="E-mail" />
-      <em>You're going to hear from us at this address 👆🏽</em>
+      <em>You'll hear from us at this address 👆🏽</em>
       <Errors />
       <Button />
     </>
@@ -74,7 +74,7 @@ const customFieldCode = `<Form schema={schema} errors={data?.errors} values={dat
         {({ Label, Input, Errors }) => (
           <>
             <Label>E-mail</Label>
-            <em>You're going to hear from us at this address 👇🏽</em>
+            <em>You'll hear from us at this address 👇🏽</em>
             <Input />
             <Errors />
           </>
@@ -174,7 +174,7 @@ export default function GetStarted() {
       <Code>{actionCode}</Code>
       <SubHeading>Create a basic form</SubHeading>
       <p>
-        If you don't want any custom inputs in the form, you can render{' '}
+        If you don't want any custom UI in the form, you can render{' '}
         <em>Form</em> without <em>children</em> and it will generate all the
         inputs, error messages and button for you.
       </p>
