@@ -17,6 +17,8 @@ import {
   CursorClickIcon,
 } from '@heroicons/react/solid'
 import Feature from '~/ui/feature'
+import Button from '~/ui/button'
+import ButtonLink from '~/ui/button-link'
 
 const code = `import { ActionFunction, useActionData, LoaderFunction, useLoaderData } from 'remix'
 import { formAction, Form } from 'remix-forms'
@@ -91,14 +93,14 @@ export default function Index() {
   const data = useActionData()
 
   return (
-    <div className="flex flex-col space-y-8">
-      <h1 className="text-center text-2xl font-bold leading-7 text-pink-500 sm:text-5xl sm:pb-8 sm:pt-8">
+    <div className="flex flex-col space-y-8 sm:space-y-16">
+      <h1 className="text-center text-2xl font-bold leading-7 text-pink-500 sm:text-5xl">
         Magically create forms
         <br />+ actions in Remix
       </h1>
       <div className="flex flex-col space-y-6 space-x-0 xl:flex-row xl:space-x-6 xl:space-y-0">
         <pre
-          className="xl:flex-1 bg-black text-white p-2 overflow-auto max-h-[60vh] text-xs sm:text-sm scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-gray-600"
+          className="xl:flex-1 bg-black font-mono text-white p-2 overflow-auto max-h-[60vh] text-xs sm:text-sm scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-gray-600"
           dangerouslySetInnerHTML={{ __html: html }}
         />
         <div className="xl:flex-1">
@@ -129,7 +131,7 @@ export default function Index() {
           />
         </div>
       </div>
-      <dl className="sm:pt-8 space-y-8 md:space-y-0 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-y-8">
+      <dl className="space-y-8 md:space-y-0 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-y-8">
         <Feature icon={BeakerIcon} title="100% customizable UI">
           Create custom inputs and use the default UI for everything else.
         </Feature>
@@ -149,6 +151,9 @@ export default function Index() {
           Focus on the first field with error even for server-side failures.
         </Feature>
       </dl>
+      <div className="flex justify-center">
+        <ButtonLink to="/get-started">Get Started</ButtonLink>
+      </div>
     </div>
   )
 }
