@@ -25,7 +25,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "remix": "^1.2.2",
-    "remix-forms": "^0.0.7",
+    "remix-forms": "^0.0.8",
     "zod": "^3.12.0"
   },
   "devDependencies": {
