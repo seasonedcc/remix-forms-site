@@ -54,19 +54,15 @@ const actionCode = `export const action: ActionFunction = async ({ request }) =>
   })`
 
 const basicCode = `export default function GetStarted() {
-  const data = useActionData()
-
   return (
     <Form
-      labels={{ firstName: 'First name', email: 'E-mail' }}
       schema={schema}
-      errors={data?.errors}
-      values={data?.values}
+      labels={{ firstName: 'First name', email: 'E-mail' }}
     />
   )
 }`
 
-const customFormCode = `<Form schema={schema} errors={data?.errors} values={data?.values}>
+const customFormCode = `<Form schema={schema}>
   {({ Field, Errors, Button }) => (
     <>
       <Field name="firstName" label="First name" />
@@ -78,7 +74,7 @@ const customFormCode = `<Form schema={schema} errors={data?.errors} values={data
   )}
 </Form>`
 
-const customFieldCode = `<Form schema={schema} errors={data?.errors} values={data?.values}>
+const customFieldCode = `<Form schema={schema}>
   {({ Field, Errors, Button }) => (
     <>
       <Field name="firstName" label="First name" />
@@ -98,7 +94,7 @@ const customFieldCode = `<Form schema={schema} errors={data?.errors} values={dat
   )}
 </Form>`
 
-const customInputCode = `<Form schema={schema} errors={data?.errors} values={data?.values}>
+const customInputCode = `<Form schema={schema}>
   {({ Field, Errors, Button, register }) => (
     <>
       <Field name="firstName" label="First name" />

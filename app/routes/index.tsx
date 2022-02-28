@@ -35,7 +35,7 @@ export const meta: MetaFunction = () => {
   }
 }
 
-const code = `import { ActionFunction, useActionData, LoaderFunction, useLoaderData } from 'remix'
+const code = `import { ActionFunction, LoaderFunction, useLoaderData } from 'remix'
 import { formAction, Form } from 'remix-forms'
 import { z } from 'zod'
 
@@ -62,19 +62,16 @@ export const action: ActionFunction = async ({ request }) =>
 
 export default function Index() {
   const { sources } = useLoaderData()
-  const data = useActionData()
 
   return (
     <Form
+      schema={schema}
       labels={{
         firstName: 'First name',
         email: 'E-mail',
         source: 'How did you find out about us?',
       }}
       options={{ source: sources }}
-      schema={schema}
-      errors={data?.errors}
-      values={data?.values}
     />
   )
 }`
@@ -131,15 +128,13 @@ export default function Index() {
             </span>
           </h2>
           <Form
+            schema={schema}
             labels={{
               firstName: 'First name',
               email: 'E-mail',
               source: 'How did you find out about us?',
             }}
             options={{ source: sources }}
-            schema={schema}
-            errors={data?.errors}
-            values={data?.values}
           />
         </div>
       </div>
@@ -153,7 +148,7 @@ export default function Index() {
         <Feature icon={ShieldCheckIcon} title="Bulletproof DX">
           100% typed to your schema. Goodbye typos, hello autocomplete!
         </Feature>
-        <Feature icon={CloudIcon} title="Server-side action">
+        <Feature icon={CloudIcon} title="Server-side wiring">
           Perform secure server-side mutations with zero boilerplate.
         </Feature>
         <Feature icon={ClipboardCheckIcon} title="Fullstack validation">
