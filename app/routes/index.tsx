@@ -138,7 +138,7 @@ export default function Index() {
           />
         </div>
       </div>
-      <dl className="space-y-8 md:space-y-0 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-y-8">
+      <dl className="space-y-8 auto-rows-min md:space-y-0 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-y-8">
         <Feature icon={BeakerIcon} title="100% customizable UI">
           Create custom inputs and use the default UI for everything else.
         </Feature>
