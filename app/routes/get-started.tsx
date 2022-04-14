@@ -37,20 +37,32 @@ export default function Form<Schema extends SomeZodObject>(
   )
 }`
 
-const schemaCode = `const schema = z.object({
+const schemaCode = `import { z } from 'zod'
+
+const schema = z.object({
   firstName: z.string().nonempty(),
   email: z.string().nonempty().email(),
 })`
 
-const actionCode = `export const action: ActionFunction = async ({ request }) =>
+const mutationCode = `import { makeDomainFunction } from 'remix-domains'
+
+const mutation = makeDomainFunction(schema)(async (values) => (
+  await saveMyValues(values) /* or anything else */
+))`
+
+const actionCode = `import { formAction } from 'remix-forms'
+
+export const action: ActionFunction = async ({ request }) =>
   await formAction({
     request,
     schema,
-    mutation: async (values) => { /* mutate things here */ },
+    mutation,
     successPath: /* path to redirect on success */,
   })`
 
-const basicCode = `export default () => <Form schema={schema} />`
+const basicCode = `import { Form } from /* path to your custom Form */
+
+export default () => <Form schema={schema} />`
 
 const customFormCode = `<Form schema={schema}>
   {({ Field, Errors, Button }) => (
@@ -106,6 +118,7 @@ const customInputCode = `<Form schema={schema}>
 export const loader: LoaderFunction = () => ({
   formCode: hljs.highlight(formCode, { language: 'ts' }).value,
   schemaCode: hljs.highlight(schemaCode, { language: 'ts' }).value,
+  mutationCode: hljs.highlight(mutationCode, { language: 'ts' }).value,
   actionCode: hljs.highlight(actionCode, { language: 'ts' }).value,
   basicCode: hljs.highlight(basicCode, { language: 'ts' }).value,
   customFormCode: hljs.highlight(customFormCode, { language: 'ts' }).value,
@@ -117,6 +130,7 @@ export default function GetStarted() {
   const {
     formCode,
     schemaCode,
+    mutationCode,
     actionCode,
     basicCode,
     customFormCode,
@@ -125,7 +139,7 @@ export default function GetStarted() {
   } = useLoaderData()
 
   return (
-    <div className="flex flex-col space-y-8 max-w-xl m-auto text-gray-200 px-4 py-8 sm:px-8 sm:py-16">
+    <div className="flex flex-col space-y-8 max-w-2xl m-auto text-gray-200 px-4 py-8 sm:px-8 sm:py-16">
       <Heading>Get Started</Heading>
       <SubHeading>Dependencies</SubHeading>
       <p>
@@ -165,13 +179,27 @@ export default function GetStarted() {
         validation.
       </p>
       <Code>{schemaCode}</Code>
+      <SubHeading>Create your mutation</SubHeading>
+      <p>
+        Create a mutation function using{' '}
+        <ExternalLink href="https://github.com/SeasonedSoftware/remix-domains">
+          Remix Domains
+        </ExternalLink>
+        ' <em>makeDomainFunction</em>. It's a function that receives the values
+        from the form and performs the necessary mutations, such as storing data
+        on a database.
+      </p>
+      <p>
+        Remix Domains will parse the request's <em>formData</em> and perform the
+        mutation only if everything is valid. If something goes bad, it will
+        return structured error messages for us.
+      </p>
+      <Code>{mutationCode}</Code>
       <SubHeading>Create your action</SubHeading>
       <p>
-        Remix Forms' <em>formAction</em> will parse the request's{' '}
-        <em>formData</em> and call your mutation function only if everything is
-        valid. If the mutation is successful, it will redirect to{' '}
-        <em>successPath</em>. If not, it will return <em>errors</em> and{' '}
-        <em>values</em> to pass to <em>Form</em>.
+        If the mutation is successful, Remix Forms' <em>formAction</em> will
+        redirect to <em>successPath</em>. If not, it will return <em>errors</em>{' '}
+        and <em>values</em> to pass to <em>Form</em>.
       </p>
       <Code>{actionCode}</Code>
       <SubHeading>Create a basic form</SubHeading>

@@ -9,7 +9,7 @@ const navigation = [{ name: 'The simplest form', to: $path('/examples') }]
 export default function Component() {
   return (
     <div className="min-h-[86.5vh] relative">
-      <Disclosure defaultOpen>
+      <Disclosure>
         {({ open }) => (
           <>
             {!open && (
