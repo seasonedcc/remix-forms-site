@@ -17,6 +17,9 @@ import social from './social.png'
 import GitHub from './ui/icons/github'
 import ButtonLink from './ui/button-link'
 import ExternalLink from './ui/external-link'
+import SecondaryButtonLink from './ui/secondary-button-link'
+import { $path } from 'remix-routes'
+import TopBar from './ui/top-bar'
 
 export const meta: MetaFunction = () => {
   return {
@@ -41,38 +44,16 @@ export const links: LinksFunction = () => {
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="antialiased min-h-screen w-screen overflow-x-hidden overflow-y-auto bg-gradient-to-r from-gray-900 to-gray-600">
-        <div className="sticky top-0 z-30 bg-gradient-to-r from-black to-gray-800 p-4">
-          <div className="w-full flex items-center space-x-4">
-            <div className="flex-1">
-              <Link to="/" className="block h-10 w-10">
-                <img
-                  src={logo}
-                  alt="Remix Forms"
-                  title="Remix Forms"
-                  className="h-10 w-10 drop-shadow-[0_0px_8px_rgba(255,255,0,0.4)]"
-                />
-              </Link>
-            </div>
-            <ButtonLink to="/get-started">Get Started</ButtonLink>
-            <ExternalLink
-              href="https://github.com/SeasonedSoftware/remix-forms"
-              className="text-white no-underline"
-            >
-              <GitHub />
-            </ExternalLink>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 py-8 sm:px-8 sm:py-16">
-          <Outlet />
-        </div>
+      <body className="antialiased h-full w-full overflow-x-hidden overflow-y-auto bg-gradient-to-r from-gray-900 to-gray-600 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-500">
+        <TopBar />
+        <Outlet />
         <div className="bg-gradient-to-r from-black to-gray-800 text-center text-white p-4">
           Built with ❤️💪🏼 by{' '}
           <ExternalLink href="https://seasoned.cc">Seasoned</ExternalLink>

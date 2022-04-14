@@ -1,22 +1,16 @@
 import hljs from 'highlight.js/lib/common'
 import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { metaTags } from '~/helpers'
 import Code from '~/ui/code'
 import ExternalLink from '~/ui/external-link'
 import Heading from '~/ui/heading'
 import Pre from '~/ui/pre'
 import SubHeading from '~/ui/sub-heading'
 
-export const meta: MetaFunction = () => {
-  const title = 'Get Started · Remix Forms'
-  const description = 'Magically create forms + actions in Remix'
+const title = 'Get Started'
+const description = 'Magically create forms + actions in Remix'
 
-  return {
-    title,
-    description,
-    'og:title': title,
-    'og:description': description,
-  }
-}
+export const meta: MetaFunction = () => metaTags({ title, description })
 
 const formCode = `import { Form as RemixForm, FormProps } from 'remix-forms'
 import { SomeZodObject } from 'zod'
@@ -30,7 +24,10 @@ export default function Form<Schema extends SomeZodObject>(
       fieldComponent={/* your custom Field */}
       labelComponent={/* your custom Label */}
       inputComponent={/* your custom Input */}
+      multilineComponent={/* your custom Multiline */}
       selectComponent={/* your custom Select */}
+      checkboxComponent={/* your custom Checkbox */}
+      checkboxWrapperComponent={/* your custom checkbox wrapper */}
       buttonComponent={/* your custom Button */}
       fieldErrorsComponent={/* your custom FieldErrors */}
       globalErrorsComponent={/* your custom GlobalErrors */}
@@ -53,14 +50,7 @@ const actionCode = `export const action: ActionFunction = async ({ request }) =>
     successPath: /* path to redirect on success */,
   })`
 
-const basicCode = `export default function GetStarted() {
-  return (
-    <Form
-      schema={schema}
-      labels={{ firstName: 'First name', email: 'E-mail' }}
-    />
-  )
-}`
+const basicCode = `export default () => <Form schema={schema} />`
 
 const customFormCode = `<Form schema={schema}>
   {({ Field, Errors, Button }) => (
@@ -135,14 +125,18 @@ export default function GetStarted() {
   } = useLoaderData()
 
   return (
-    <div className="flex flex-col space-y-8 max-w-xl m-auto text-gray-200">
+    <div className="flex flex-col space-y-8 max-w-xl m-auto text-gray-200 px-4 py-8 sm:px-8 sm:py-16">
       <Heading>Get Started</Heading>
       <SubHeading>Dependencies</SubHeading>
       <p>
         Make sure you have{' '}
-        <ExternalLink href="https://remix.run/">Remix</ExternalLink> and{' '}
+        <ExternalLink href="https://remix.run/">Remix</ExternalLink>,{' '}
         <ExternalLink href="https://github.com/colinhacks/zod">
           Zod
+        </ExternalLink>
+        , and{' '}
+        <ExternalLink href="https://github.com/SeasonedSoftware/remix-domains">
+          Remix Domains
         </ExternalLink>{' '}
         in your project before using Remix Forms.
       </p>
@@ -184,7 +178,7 @@ export default function GetStarted() {
       <p>
         If you don't want any custom UI in the form, you can render{' '}
         <em>Form</em> without <em>children</em> and it will generate all the
-        inputs, error messages and button for you.
+        inputs, labels, error messages and button for you.
       </p>
       <Code>{basicCode}</Code>
       <SubHeading>Custom Form, standard components</SubHeading>
