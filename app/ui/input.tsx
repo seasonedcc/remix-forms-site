@@ -7,7 +7,7 @@ const Input = React.forwardRef<
   <input
     ref={ref}
     type={type}
-    className="shadow-sm focus:ring-pink-500 focus:border-pink-500 block w-full sm:text-sm border-gray-300 rounded-md"
+    className="shadow-sm focus:ring-pink-500 focus:border-pink-500 block w-full sm:text-sm border-gray-300 rounded-md text-gray-800"
     {...props}
   />
 ))

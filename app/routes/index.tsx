@@ -49,7 +49,7 @@ export const action: ActionFunction = async ({ request }) =>
     request,
     schema,
     mutation,
-    successPath: '/?success=true',
+    successPath: '/success',
   })
 
 export default () => <Form schema={schema} />`
@@ -73,10 +73,10 @@ export const action: ActionFunction = async ({ request }) =>
     request,
     schema,
     mutation,
-    successPath: '/?success=true',
+    successPath: '/success',
   })
 
-export default function Index() {
+export default function Component() {
   const { code } = useLoaderData()
 
   return (

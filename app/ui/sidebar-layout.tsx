@@ -19,23 +19,31 @@ function Nav({ children, type = 'disclosure', close, ...props }: NavProps) {
 
   return (
     <Panel as="nav" {...props}>
-      <div className="w-[12rem] bg-pink-700 absolute inset-y-0 p-2">
+      <div className="w-[12rem] bg-pink-600 absolute inset-y-0 p-2">
         <div className="flex justify-end p-1">
-          <Button className="inline-flex items-center justify-center p-1 rounded-md text-pink-900 hover:text-white hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+          <Button className="inline-flex items-center justify-center p-1 rounded-md text-pink-900 hover:text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
             <Icon className="block h-6 w-6" />
           </Button>
         </div>
-        {React.Children.map(children, (child) => {
-          if (!React.isValidElement(child)) return child
+        <div className="-mt-4 flex flex-col space-y-2">
+          {React.Children.map(children, (child) => {
+            if (!React.isValidElement(child)) return child
 
-          if (child.type === NavLink) {
-            return React.cloneElement(child, { type, close })
-          }
+            if (child.type === NavLink) {
+              return React.cloneElement(child, { type, close })
+            }
 
-          return child
-        })}
+            return child
+          })}
+        </div>
       </div>
     </Panel>
+  )
+}
+
+function NavTitle({ className, ...props }: JSX.IntrinsicElements['h4']) {
+  return (
+    <h4 className={cx('text-pink-900 font-medium', className)} {...props} />
   )
 }
 
@@ -54,7 +62,7 @@ function NavLink({
     <UINavLink
       className={({ isActive }) =>
         cx(
-          isActive ? 'bg-pink-900' : 'hover:bg-pink-900',
+          isActive ? 'bg-pink-900' : 'hover:bg-pink-700',
           typeof className === 'function' ? className({ isActive }) : className,
         )
       }
@@ -78,9 +86,9 @@ function Closed({ type }: { type: SidebarType }) {
   const Button = type === 'disclosure' ? Disclosure.Button : Popover.Button
 
   return (
-    <div className={cx('bg-pink-700 absolute inset-y-0 p-1 w-10')}>
+    <div className={cx('bg-pink-600 absolute inset-y-0 p-1 w-10')}>
       <div className="h-full relative">
-        <Button className="sticky top-0 inline-flex items-center justify-center p-1 rounded-md text-pink-900 hover:text-white hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+        <Button className="sticky top-0 inline-flex items-center justify-center p-1 rounded-md text-pink-900 hover:text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
           <MenuAlt2Icon className="block h-6 w-6" />
         </Button>
       </div>
@@ -143,6 +151,6 @@ function SidebarRoot({
   )
 }
 
-const Sidebar = Object.assign(SidebarRoot, { Nav, NavLink, Content })
+const Sidebar = Object.assign(SidebarRoot, { Nav, NavTitle, NavLink, Content })
 
 export default Sidebar

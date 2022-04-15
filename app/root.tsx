@@ -53,7 +53,9 @@ export default function App() {
       </head>
       <body className="antialiased h-full w-full overflow-x-hidden overflow-y-auto bg-gradient-to-r from-gray-900 to-gray-600 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-500">
         <TopBar />
-        <Outlet />
+        <div className="min-h-[86.5vh]">
+          <Outlet />
+        </div>
         <div className="bg-gradient-to-r from-black to-gray-800 text-center text-white p-4">
           Built with ❤️💪🏼 by{' '}
           <ExternalLink href="https://seasoned.cc">Seasoned</ExternalLink>

@@ -128,7 +128,7 @@ export const loader: LoaderFunction = () => ({
   customInputCode: hljs.highlight(customInputCode, { language: 'ts' }).value,
 })
 
-export default function GetStarted() {
+export default function Component() {
   const {
     formCode,
     schemaCode,

@@ -7,7 +7,7 @@ export default function NavLink({ className, ...props }: RemixNavLinkProps) {
     <RemixNavLink
       className={({ isActive }) =>
         cx(
-          isActive ? 'text-white' : 'text-gray-300 hover:text-white',
+          isActive ? 'text-white' : 'text-gray-100 hover:text-white',
           'block px-3 py-2 rounded-md text-base font-medium',
           typeof className === 'function' ? className({ isActive }) : className,
         )

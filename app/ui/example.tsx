@@ -1,0 +1,35 @@
+import { useActionData, useLoaderData } from 'remix'
+import Code from '~/ui/code'
+import Heading from '~/ui/heading'
+import SubHeading from '~/ui/sub-heading'
+
+type Props = {
+  title: string
+  description: string
+  children: React.ReactNode
+}
+
+export default function Example({ title, description, children }: Props) {
+  const { code } = useLoaderData()
+  const data = useActionData()
+
+  return (
+    <>
+      <Heading>{title}</Heading>
+      <SubHeading>{description}</SubHeading>
+      <div className="flex flex-col space-y-6 space-x-0 xl:flex-row xl:space-x-6 xl:space-y-0">
+        <Code>{code}</Code>
+        <div className="xl:flex-1">{children}</div>
+      </div>
+      {data ? (
+        <div className="flex flex-col space-y-4">
+          <h4>
+            This data was returned by our <em>action</em>. We got it by calling{' '}
+            <em>useActionData()</em> inside our component.
+          </h4>
+          <Code>{JSON.stringify(data, null, 2)}</Code>
+        </div>
+      ) : null}
+    </>
+  )
+}
