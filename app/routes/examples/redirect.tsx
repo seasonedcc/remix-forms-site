@@ -7,9 +7,9 @@ import { metaTags } from '~/helpers'
 import { makeDomainFunction } from 'remix-domains'
 import Example from '~/ui/example'
 
-const title = 'The simplest form'
+const title = 'Redirect'
 const description =
-  'In this example, everything is inferred from the schema. Even the labels.'
+  'In this example, a successful sumission will redirect to our success path.'
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 

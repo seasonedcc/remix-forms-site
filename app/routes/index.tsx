@@ -22,6 +22,7 @@ import Heading from '~/ui/heading'
 import Code from '~/ui/code'
 import { metaTags } from '~/helpers'
 import { makeDomainFunction } from 'remix-domains'
+import Field from '~/ui/field'
 
 const title = 'Magically create forms + actions in Remix'
 const description =
@@ -106,10 +107,22 @@ export default function Component() {
                 focus management
               </span>
             </h2>
-            <Form schema={schema} />
-            <h4 className="text-center text-gray-500 mt-4">
-              (Go ahead, try it with JS disabled as well 😉)
-            </h4>
+            <Form schema={schema}>
+              {({ Field, Errors, Button }) => (
+                <>
+                  <Field name="firstName" />
+                  <Field name="email" />
+                  <Field name="howYouFoundOutAboutUs" />
+                  <Errors />
+                  <div className="flex space-x-4 items-center">
+                    <h4 className="flex-1 text-center text-gray-500">
+                      (Go ahead, try it with JS disabled as well 😉)
+                    </h4>
+                    <Button />
+                  </div>
+                </>
+              )}
+            </Form>
           </div>
         </div>
         <dl className="space-y-8 auto-rows-min md:space-y-0 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-y-8">
