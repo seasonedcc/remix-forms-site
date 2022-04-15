@@ -8,7 +8,7 @@ import { makeDomainFunction } from 'remix-domains'
 import type { UnpackData } from 'remix-domains'
 import Example from '~/ui/example'
 
-const title = 'Without redirect'
+const title = 'Custom response'
 const description =
   'In this example, a successful submission will render a custom JSON.'
 
