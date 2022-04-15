@@ -1,4 +1,4 @@
-import { Disclosure } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { Link, NavLink } from 'remix'
 import { $path } from 'remix-routes'
@@ -17,11 +17,11 @@ const navigation = [
 
 export default function TopBar() {
   return (
-    <Disclosure
+    <Popover
       as="nav"
       className="sticky top-0 z-30 bg-gradient-to-r from-black to-gray-800 p-4"
     >
-      {({ open }) => (
+      {({ open, close }) => (
         <>
           <div>
             <div className="w-full flex items-center space-x-2 sm:space-x-4">
@@ -51,19 +51,19 @@ export default function TopBar() {
                 <GitHub />
               </ExternalLink>
               <div className="flex items-center sm:hidden">
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
                     <MenuIcon className="block h-6 w-6" aria-hidden="true" />
                   )}
-                </Disclosure.Button>
+                </Popover.Button>
               </div>
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Popover.Panel className="sm:hidden">
             <div className="px-2 pt-4 pb-2 space-y-1 sm:px-3">
               {navigation.map((item) => (
                 <NavLink
@@ -77,14 +77,15 @@ export default function TopBar() {
                       'block px-3 py-2 rounded-md text-base font-medium',
                     )
                   }
+                  onClick={() => close()}
                 >
                   {item.name}
                 </NavLink>
               ))}
             </div>
-          </Disclosure.Panel>
+          </Popover.Panel>
         </>
       )}
-    </Disclosure>
+    </Popover>
   )
 }

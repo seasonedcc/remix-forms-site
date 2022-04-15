@@ -1,6 +1,8 @@
 import hljs from 'highlight.js/lib/common'
 import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { $path } from 'remix-routes'
 import { metaTags } from '~/helpers'
+import ButtonLink from '~/ui/button-link'
 import Code from '~/ui/code'
 import ExternalLink from '~/ui/external-link'
 import Heading from '~/ui/heading'
@@ -260,8 +262,15 @@ export default function GetStarted() {
         <ExternalLink href="https://github.com/colinhacks/zod">
           Zod
         </ExternalLink>
+        ,{' '}
+        <ExternalLink href="https://github.com/SeasonedSoftware/remix-domains">
+          Remix Domains
+        </ExternalLink>
         , and a multitude of other open-source projects. Thank you!
       </p>
+      <div className="pt-4 text-center">
+        <ButtonLink to={$path('/examples')}>Check out more examples</ButtonLink>
+      </div>
     </div>
   )
 }
