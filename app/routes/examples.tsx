@@ -8,14 +8,22 @@ export default function Component() {
       <SidebarLayout>
         <SidebarLayout.Nav>
           <SidebarLayout.NavTitle>Actions</SidebarLayout.NavTitle>
-          <SidebarLayout.NavLink to={$path('/examples/redirect')}>
+          <SidebarLayout.NavLink to={$path('/examples/actions/redirect')}>
             Redirect
           </SidebarLayout.NavLink>
-          <SidebarLayout.NavLink to={$path('/examples/without-redirect')}>
+          <SidebarLayout.NavLink
+            to={$path('/examples/actions/without-redirect')}
+          >
             Without redirect
           </SidebarLayout.NavLink>
-          <SidebarLayout.NavLink to={$path('/examples/custom-response')}>
+          <SidebarLayout.NavLink
+            to={$path('/examples/actions/custom-response')}
+          >
             Custom response
+          </SidebarLayout.NavLink>
+          <SidebarLayout.NavTitle>Schemas</SidebarLayout.NavTitle>
+          <SidebarLayout.NavLink to={$path('/examples/schemas/strings')}>
+            Strings
           </SidebarLayout.NavLink>
         </SidebarLayout.Nav>
         <SidebarLayout.Content>
