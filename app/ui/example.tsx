@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useActionData, useLoaderData } from 'remix'
 import Code from '~/ui/code'
 import Heading from '~/ui/heading'
@@ -13,6 +14,13 @@ export default function Example({ title, description, children }: Props) {
   const { code } = useLoaderData()
   const data = useActionData()
 
+  useEffect(() => {
+    if (!data) return
+
+    const element = document.querySelector('#action-data')
+    element?.scrollIntoView({ behavior: 'smooth' })
+  }, [data])
+
   return (
     <>
       <Heading>{title}</Heading>
@@ -22,7 +30,7 @@ export default function Example({ title, description, children }: Props) {
         <div className="xl:flex-1">{children}</div>
       </div>
       {data ? (
-        <div className="flex flex-col space-y-4">
+        <div id="action-data" className="flex flex-col space-y-4">
           <h4>
             This data was returned by our <em>action</em>. We got it by calling{' '}
             <em>useActionData()</em> inside our component.

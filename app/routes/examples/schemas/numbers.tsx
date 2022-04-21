@@ -7,27 +7,21 @@ import { metaTags } from '~/helpers'
 import { makeDomainFunction } from 'remix-domains'
 import Example from '~/ui/example'
 
-const title = 'Strings'
+const title = 'Numbers'
 const description =
-  'In this example, all sorts of string schemas are validated on the client and on the server.'
+  'In this example, all sorts of number schemas are validated on the client and on the server.'
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
 const code = `const schema = z.object({
-  nonEmpty: z.string().nonempty(),
-  optional: z.string().optional(),
-  nullable: z.string().nullable(),
-  minLength: z.string().min(5),
-  maxLength: z.string().max(10),
-  email: z.string().email(),
-  url: z.string().url(),
-  uuid: z.string().uuid(),
-  phoneNumber: z
-    .string()
-    .regex(
-      /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
-      'Invalid phone number',
-    ),
+  mandatory: z.number(),
+  optional: z.number().optional(),
+  nullable: z.number().nullable(),
+  greaterThan: z.number().gt(5),
+  greaterThanOrEqualTo: z.number().gte(10),
+  lowerThan: z.number().lt(5),
+  lowerThanOrEqualTo: z.number().lte(10),
+  integer: z.number().int(),
 })
 
 const mutation = makeDomainFunction(schema)(async (values) => values)
@@ -38,20 +32,14 @@ export const action: ActionFunction = async ({ request }) =>
 export default () => <Form schema={schema} />`
 
 const schema = z.object({
-  nonEmpty: z.string().nonempty(),
-  optional: z.string().optional(),
-  nullable: z.string().nullable(),
-  minLength: z.string().min(5),
-  maxLength: z.string().max(10),
-  email: z.string().email(),
-  url: z.string().url(),
-  uuid: z.string().uuid(),
-  phoneNumber: z
-    .string()
-    .regex(
-      /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
-      'Invalid phone number',
-    ),
+  mandatory: z.number(),
+  optional: z.number().optional(),
+  nullable: z.number().nullable(),
+  greaterThan: z.number().gt(5),
+  greaterThanOrEqualTo: z.number().gte(10),
+  lowerThan: z.number().lt(5),
+  lowerThanOrEqualTo: z.number().lte(10),
+  integer: z.number().int(),
 })
 
 export const loader: LoaderFunction = () => ({

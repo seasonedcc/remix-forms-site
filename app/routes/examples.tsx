@@ -25,6 +25,9 @@ export default function Component() {
           <SidebarLayout.NavLink to={$path('/examples/schemas/strings')}>
             Strings
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink to={$path('/examples/schemas/numbers')}>
+            Numbers
+          </SidebarLayout.NavLink>
         </SidebarLayout.Nav>
         <SidebarLayout.Content>
           <div className="flex flex-col space-y-4 sm:space-y-8 text-gray-200 p-4 sm:p-8">
