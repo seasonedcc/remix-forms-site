@@ -1,4 +1,4 @@
-import { Outlet } from 'remix'
+import { Outlet } from '@remix-run/react'
 import { $path } from 'remix-routes'
 import SidebarLayout from '~/ui/sidebar-layout'
 

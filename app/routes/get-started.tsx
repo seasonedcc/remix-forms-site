@@ -1,5 +1,6 @@
 import hljs from 'highlight.js/lib/common'
-import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { LoaderFunction, MetaFunction } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
 import { $path } from 'remix-routes'
 import { metaTags } from '~/helpers'
 import ButtonLink from '~/ui/button-link'

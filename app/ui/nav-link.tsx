@@ -1,4 +1,4 @@
-import { NavLink as RemixNavLink } from 'remix'
+import { NavLink as RemixNavLink } from '@remix-run/react'
 import { cx } from '~/helpers'
 import { RemixNavLinkProps } from '@remix-run/react/components'
 

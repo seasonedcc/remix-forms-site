@@ -1,4 +1,4 @@
-import { Link } from 'remix'
+import { Link } from '@remix-run/react'
 import SecondaryButton from './secondary-button'
 
 export default function SecondaryButtonLink({

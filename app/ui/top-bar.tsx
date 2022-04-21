@@ -1,6 +1,6 @@
 import { Popover } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { Link, NavLink } from 'remix'
+import { Link, NavLink } from '@remix-run/react'
 import { $path } from 'remix-routes'
 import { cx } from '~/helpers'
 import logo from '~/logo.png'
