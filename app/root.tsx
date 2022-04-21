@@ -1,5 +1,4 @@
 import {
-  Link,
   Links,
   LiveReload,
   Meta,
@@ -12,13 +11,8 @@ import type { MetaFunction, LinksFunction } from 'remix'
 import styles from './styles/app.css'
 import highlightStyles from 'highlight.js/styles/a11y-dark.css'
 import favicon from './favicon.png'
-import logo from './logo.png'
 import social from './social.png'
-import GitHub from './ui/icons/github'
-import ButtonLink from './ui/button-link'
 import ExternalLink from './ui/external-link'
-import SecondaryButtonLink from './ui/secondary-button-link'
-import { $path } from 'remix-routes'
 import TopBar from './ui/top-bar'
 
 export const meta: MetaFunction = () => {
