@@ -22,7 +22,6 @@ import Heading from '~/ui/heading'
 import Code from '~/ui/code'
 import { metaTags } from '~/helpers'
 import { makeDomainFunction } from 'remix-domains'
-import Field from '~/ui/field'
 
 const title = 'Magically create forms + actions in Remix'
 const description =
