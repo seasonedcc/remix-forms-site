@@ -56,7 +56,7 @@ const mutation = makeDomainFunction(schema)(async (values) => (
 const actionCode = `import { formAction } from 'remix-forms'
 
 export const action: ActionFunction = async ({ request }) =>
-  await formAction({
+  formAction({
     request,
     schema,
     mutation,

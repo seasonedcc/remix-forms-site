@@ -28,7 +28,7 @@ const code = `const schema = z.object({
 const mutation = makeDomainFunction(schema)(async (values) => values)
 
 export const action: ActionFunction = async ({ request }) =>
-  await formAction({ request, schema, mutation })
+  formAction({ request, schema, mutation })
 
 export default () => <Form schema={schema} />`
 
@@ -51,7 +51,7 @@ export const loader: LoaderFunction = () => ({
 const mutation = makeDomainFunction(schema)(async (values) => values)
 
 export const action: ActionFunction = async ({ request }) =>
-  await formAction({ request, schema, mutation })
+  formAction({ request, schema, mutation })
 
 export default function Component() {
   return (
