@@ -5,7 +5,6 @@ import { z } from 'zod'
 import Form from '~/ui/form'
 import { metaTags } from '~/helpers'
 import { makeDomainFunction } from 'remix-domains'
-import type { UnpackData } from 'remix-domains'
 import Example from '~/ui/example'
 
 const title = 'Custom response'
@@ -15,7 +14,6 @@ const description =
 export const meta: MetaFunction = () => metaTags({ title, description })
 
 const code = `import { performMutation } from 'remix-forms'
-import type { UnpackData } from 'remix-domains'
 
 const schema = z.object({
   firstName: z.string().nonempty(),
@@ -28,8 +26,7 @@ export const action: ActionFunction = async ({ request }) => {
   const result = await performMutation({ request, schema, mutation })
 
   if (result.success) {
-    const data = result.data as UnpackData<typeof mutation>
-    return { customName: data.firstName }
+    return { customName: result.data.firstName }
   } else {
     return result.errors
   }
@@ -52,8 +49,7 @@ export const action: ActionFunction = async ({ request }) => {
   const result = await performMutation({ request, schema, mutation })
 
   if (result.success) {
-    const data = result.data as UnpackData<typeof mutation>
-    return { customName: data.firstName }
+    return { customName: result.data.firstName }
   } else {
     return result.errors
   }
