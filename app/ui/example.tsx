@@ -12,7 +12,8 @@ type Props = {
 
 export default function Example({ title, description, children }: Props) {
   const { code } = useLoaderData()
-  const data = useActionData()
+  const actionData = useActionData()
+  const data = actionData?.errors ? null : actionData
 
   useEffect(() => {
     if (!data) return
