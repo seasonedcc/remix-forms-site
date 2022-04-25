@@ -24,6 +24,9 @@ export default function Component() {
           <SidebarLayout.NavLink to={$path('/examples/actions/global-error')}>
             Global error
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink to={$path('/examples/actions/field-error')}>
+            Field error
+          </SidebarLayout.NavLink>
           <SidebarLayout.NavTitle>Schemas</SidebarLayout.NavTitle>
           <SidebarLayout.NavLink to={$path('/examples/schemas/strings')}>
             Strings

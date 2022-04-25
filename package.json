@@ -25,8 +25,8 @@
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "remix-domains": "^0.0.2",
-    "remix-forms": "^0.8.0",
+    "remix-domains": "^0.1.0",
+    "remix-forms": "^0.8.1",
     "remix-routes": "^0.1.2",
     "zod": "^3.12.0"
   },
