@@ -25,20 +25,13 @@ const description =
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
-const code = `import { ActionFunction, LoaderFunction, useLoaderData } from 'remix'
-import { makeDomainFunction } from 'remix-domains'
-import { formAction, Form } from 'remix-forms'
-import { z } from 'zod'
-
-const schema = z.object({
+const code = `const schema = z.object({
   firstName: z.string().nonempty(),
   email: z.string().nonempty().email(),
   howYouFoundOutAboutUs: z.enum(['fromAFriend', 'google']),
 })
 
-const mutation = makeDomainFunction(schema)(async (values) => {
-  console.log(values)
-})
+const mutation = makeDomainFunction(schema)(async (values) => value)
 
 export const action: ActionFunction = async ({ request }) =>
   formAction({
@@ -60,9 +53,7 @@ export const loader: LoaderFunction = () => ({
   code: hljs.highlight(code, { language: 'ts' }).value,
 })
 
-const mutation = makeDomainFunction(schema)(async (values) => {
-  console.log(values)
-})
+const mutation = makeDomainFunction(schema)(async (values) => values)
 
 export const action: ActionFunction = async ({ request }) =>
   formAction({
