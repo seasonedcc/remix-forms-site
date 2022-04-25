@@ -15,11 +15,7 @@ export const meta: MetaFunction = () => metaTags({ title, description })
 
 const code = `import { InputError } from 'remix-domains'
 
-const schema = z.object({
-  email: z.string().nonempty().email(),
-  password: z.string().nonempty(),
-})
-
+const schema = z.object({ email: z.string().nonempty().email() })
 const takenEmails = ['foo@bar.com', 'bar@foo.com']
 
 const mutation = makeDomainFunction(schema)(async (values) => {
@@ -33,23 +29,9 @@ const mutation = makeDomainFunction(schema)(async (values) => {
 export const action: ActionFunction = async ({ request }) =>
   formAction({ request, schema, mutation })
 
-export default () => (
-  <Form schema={schema}>
-    {({ Field, Errors, Button }) => (
-      <>
-        <Field name="email" autoFocus />
-        <Field name="password" type="password" />
-        <Errors />
-        <Button />
-      </>
-    )}
-  </Form>
-)`
+export default () => <Form schema={schema} />`
 
-const schema = z.object({
-  email: z.string().nonempty().email(),
-  password: z.string().nonempty(),
-})
+const schema = z.object({ email: z.string().nonempty().email() })
 
 export const loader: LoaderFunction = () => ({
   code: hljs.highlight(code, { language: 'ts' }).value,
@@ -71,16 +53,7 @@ export const action: ActionFunction = async ({ request }) =>
 export default function Component() {
   return (
     <Example title={title} description={description}>
-      <Form schema={schema}>
-        {({ Field, Errors, Button }) => (
-          <>
-            <Field name="email" autoFocus />
-            <Field name="password" type="password" />
-            <Errors />
-            <Button />
-          </>
-        )}
-      </Form>
+      <Form schema={schema} />
     </Example>
   )
 }
