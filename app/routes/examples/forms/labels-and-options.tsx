@@ -9,33 +9,31 @@ import Example from '~/ui/example'
 
 const title = 'Labels and options'
 const description =
-  'In this example, we add a custom label to a field and custom options to our select. The rest is inferred from the schema.'
+  'In this example, we add custom label and options to a field. The rest is inferred from the schema.'
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
 const code = `const schema = z.object({
-  firstName: z.string().nonempty(),
-  email: z.string().nonempty().email(),
-  howYouFoundOutAboutUs: z.enum(['fromAFriend', 'google']),
+  name: z.string().nonempty(),
+  roleId: z.number().int(),
 })
 
 export default () => (
   <Form
     schema={schema}
-    labels={{ email: 'E-mail Address' }}
+    labels={{ roleId: 'Role' }}
     options={{
-      howYouFoundOutAboutUs: [
-        { name: 'A Friend', value: 'fromAFriend' },
-        { name: 'Search Engine', value: 'google' },
+      roleId: [
+        { name: 'Designer', value: 1 },
+        { name: 'Dev', value: 2 },
       ],
     }}
   />
 )`
 
 const schema = z.object({
-  firstName: z.string().nonempty(),
-  email: z.string().nonempty().email(),
-  howYouFoundOutAboutUs: z.enum(['fromAFriend', 'google']),
+  name: z.string().nonempty(),
+  roleId: z.number().int(),
 })
 
 export const loader: LoaderFunction = () => ({
@@ -52,11 +50,11 @@ export default function Component() {
     <Example title={title} description={description}>
       <Form
         schema={schema}
-        labels={{ email: 'E-mail Address' }}
+        labels={{ roleId: 'Role' }}
         options={{
-          howYouFoundOutAboutUs: [
-            { name: 'A Friend', value: 'fromAFriend' },
-            { name: 'Search Engine', value: 'google' },
+          roleId: [
+            { name: 'Designer', value: 1 },
+            { name: 'Dev', value: 2 },
           ],
         }}
       />
