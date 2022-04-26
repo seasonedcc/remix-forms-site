@@ -5,8 +5,8 @@ import Heading from '~/ui/heading'
 import SubHeading from '~/ui/sub-heading'
 
 type Props = {
-  title: string
-  description: string
+  title: React.ReactNode
+  description: React.ReactNode
   children: React.ReactNode
 }
 
