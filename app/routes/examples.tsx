@@ -55,6 +55,16 @@ export default function Component() {
           >
             Labels and options
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink
+            to={$path('/examples/forms/form-with-children')}
+          >
+            Form with children
+          </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink
+            to={$path('/examples/forms/field-with-children')}
+          >
+            Field with children
+          </SidebarLayout.NavLink>
         </SidebarLayout.Nav>
         <SidebarLayout.Content>
           <div className="flex flex-col space-y-4 sm:space-y-8 text-gray-200 p-4 sm:p-8">
