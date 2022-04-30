@@ -22,7 +22,6 @@ const code = `const schema = z.object({
   maxLength: z.string().max(10),
   email: z.string().email(),
   url: z.string().url(),
-  uuid: z.string().uuid(),
   phoneNumber: z
     .string()
     .regex(
@@ -47,7 +46,6 @@ const schema = z.object({
   maxLength: z.string().max(10),
   email: z.string().email(),
   url: z.string().url(),
-  uuid: z.string().uuid(),
   phoneNumber: z
     .string()
     .regex(
