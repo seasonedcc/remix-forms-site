@@ -7,42 +7,48 @@ import { metaTags } from '~/helpers'
 import { makeDomainFunction } from 'remix-domains'
 import Example from '~/ui/example'
 
-const title = 'Field with children'
+const title = 'Required indicator'
 const description =
-  'In this example, we pass a children function to gain control over the Field UI.'
+  'In this example, we use renderField to add an asterisk to required fields.'
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
 const code = `const schema = z.object({
-  firstName: z.string().nonempty(),
-  email: z.string().nonempty().email(),
+  email: z.string().email(),
+  firstName: z.string().optional(),
+  preferredSport: z.enum(['Basketball', 'Football', 'Other']),
+  newsletter: z.boolean().default(false),
 })
 
 export default () => (
-  <Form schema={schema}>
-    {({ Field, Errors, Button }) => (
-      <>
-        <Field name="firstName" />
-        <Field name="email">
+  <Form
+    schema={schema}
+    renderField={({ Field, ...props }) => {
+      const { name, label, required } = props
+
+      return (
+        <Field key={name} {...props}>
           {({ Label, SmartInput, Errors }) => (
             <>
-              <Label>E-mail</Label>
-              <em>You'll hear from us at this address 👇🏽</em>
+              <Label>
+                {label}
+                {required && <sup>*</sup>}
+              </Label>
               <SmartInput />
               <Errors />
             </>
           )}
         </Field>
-        <Errors />
-        <Button />
-      </>
-    )}
-  </Form>
+      )
+    }}
+  />
 )`
 
 const schema = z.object({
-  firstName: z.string().nonempty(),
-  email: z.string().nonempty().email(),
+  email: z.string().email(),
+  firstName: z.string().optional(),
+  preferredSport: z.enum(['Basketball', 'Football', 'Other']),
+  newsletter: z.boolean().default(false),
 })
 
 export const loader: LoaderFunction = () => ({
@@ -57,25 +63,27 @@ export const action: ActionFunction = async ({ request }) =>
 export default function Component() {
   return (
     <Example title={title} description={description}>
-      <Form schema={schema}>
-        {({ Field, Errors, Button }) => (
-          <>
-            <Field name="firstName" />
-            <Field name="email">
+      <Form
+        schema={schema}
+        renderField={({ Field, ...props }) => {
+          const { name, label, required } = props
+
+          return (
+            <Field key={name} {...props}>
               {({ Label, SmartInput, Errors }) => (
                 <>
-                  <Label>E-mail</Label>
-                  <em>You'll hear from us at this address 👇🏽</em>
+                  <Label>
+                    {label}
+                    {required && <sup>*</sup>}
+                  </Label>
                   <SmartInput />
                   <Errors />
                 </>
               )}
             </Field>
-            <Errors />
-            <Button />
-          </>
-        )}
-      </Form>
+          )
+        }}
+      />
     </Example>
   )
 }

@@ -16,10 +16,11 @@ function Nav({ children, type = 'disclosure', close, ...props }: NavProps) {
   const Panel = type === 'disclosure' ? Disclosure.Panel : Popover.Panel
   const Button = type === 'disclosure' ? Disclosure.Button : Popover.Button
   const Icon = type === 'disclosure' ? MenuAlt3Icon : XIcon
+  const classes = type === 'disclosure' ? '' : 'absolute top-0'
 
   return (
     <Panel as="nav" {...props}>
-      <div className="w-[12rem] bg-pink-600 absolute inset-y-0 p-2">
+      <div className={cx('w-[12rem] bg-pink-600 p-2 pb-4', classes)}>
         <div className="flex justify-end p-1">
           <Button className="inline-flex items-center justify-center p-1 rounded-md text-pink-900 hover:text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
             <Icon className="block h-6 w-6" />
@@ -72,11 +73,14 @@ function NavLink({
   )
 }
 
-type ContentProps = { open?: boolean } & JSX.IntrinsicElements['div']
+type ContentProps = { type?: SidebarType } & JSX.IntrinsicElements['div']
 
-function Content({ children, open = false, ...props }: ContentProps) {
+function Content({ children, type, className, ...props }: ContentProps) {
   return (
-    <div className={cx('pl-10', open && 'md:pl-[12rem]')} {...props}>
+    <div
+      className={cx(type === 'disclosure' ? 'flex-1' : 'pl-10', className)}
+      {...props}
+    >
       {children}
     </div>
   )
@@ -112,7 +116,7 @@ function mapChildren({ children, type, open, close }: MapChildren) {
     }
 
     if (child.type === Content) {
-      return React.cloneElement(child, { open })
+      return React.cloneElement(child, { type })
     }
 
     return child
@@ -129,7 +133,7 @@ function SidebarRoot({
       <Disclosure
         as="div"
         defaultOpen
-        className={cx('hidden md:block', className)}
+        className={cx('hidden md:flex', className)}
         {...props}
       >
         {({ open, close }) => (

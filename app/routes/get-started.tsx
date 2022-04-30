@@ -84,11 +84,11 @@ const customFieldCode = `<Form schema={schema}>
     <>
       <Field name="firstName" label="First name" />
       <Field name="email">
-        {({ Label, Input, Errors }) => (
+        {({ Label, SmartInput, Errors }) => (
           <>
             <Label>E-mail</Label>
             <em>You'll hear from us at this address 👇🏽</em>
-            <Input />
+            <SmartInput />
             <Errors />
           </>
         )}

@@ -65,6 +65,22 @@ export default function Component() {
           >
             Field with children
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavTitle>renderField</SidebarLayout.NavTitle>
+          <SidebarLayout.NavLink
+            to={$path('/examples/render-field/required-indicator')}
+          >
+            Required indicator
+          </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink
+            to={$path('/examples/render-field/error-indicator')}
+          >
+            Error indicator
+          </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink
+            to={$path('/examples/render-field/inline-checkboxes')}
+          >
+            Inline checkboxes
+          </SidebarLayout.NavLink>
         </SidebarLayout.Nav>
         <SidebarLayout.Content>
           <div className="flex flex-col space-y-4 sm:space-y-8 text-gray-200 p-4 sm:p-8">

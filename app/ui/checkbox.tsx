@@ -1,13 +1,18 @@
 import React from 'react'
+import { cx } from '~/helpers'
 
 const Checkbox = React.forwardRef<
   HTMLInputElement,
   JSX.IntrinsicElements['input']
->(({ type = 'checkbox', ...props }, ref) => (
+>(({ type = 'checkbox', className, ...props }, ref) => (
   <input
     ref={ref}
     type={type}
-    className="focus:ring-pink-500 h-4 w-4 text-pink-600 border-gray-300 rounded"
+    className={cx(
+      'h-4 w-4 rounded',
+      className,
+      !className && 'border-gray-300 focus:ring-pink-500 text-pink-600',
+    )}
     {...props}
   />
 ))
