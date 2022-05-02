@@ -65,6 +65,9 @@ export default function Component() {
           >
             Field with children
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink to={$path('/examples/forms/custom-input')}>
+            Custom input
+          </SidebarLayout.NavLink>
           <SidebarLayout.NavTitle>renderField</SidebarLayout.NavTitle>
           <SidebarLayout.NavLink
             to={$path('/examples/render-field/required-indicator')}
