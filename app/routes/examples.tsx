@@ -46,6 +46,11 @@ export default function Component() {
           <SidebarLayout.NavLink to={$path('/examples/schemas/enums')}>
             Enums
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink
+            to={$path('/examples/schemas/async-validation')}
+          >
+            Async validation
+          </SidebarLayout.NavLink>
           <SidebarLayout.NavTitle>Forms</SidebarLayout.NavTitle>
           <SidebarLayout.NavLink to={$path('/examples/forms/auto-generated')}>
             Auto-generated
