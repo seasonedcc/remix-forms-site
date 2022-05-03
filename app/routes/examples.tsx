@@ -58,7 +58,7 @@ export default function Component() {
           <SidebarLayout.NavLink
             to={$path('/examples/forms/labels-and-options')}
           >
-            Labels and options
+            Labels, options, etc
           </SidebarLayout.NavLink>
           <SidebarLayout.NavLink
             to={$path('/examples/forms/form-with-children')}

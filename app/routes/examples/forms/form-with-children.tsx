@@ -17,14 +17,15 @@ const code = `const schema = z.object({
   firstName: z.string().nonempty(),
   email: z.string().nonempty().email(),
   howYouFoundOutAboutUs: z.enum(['fromAFriend', 'google']),
+  message: z.string().optional(),
 })
 
 export default () => (
   <Form schema={schema}>
     {({ Field, Errors, Button }) => (
       <>
-        <Field name="firstName" />
-        <Field name="email" label="E-mail" />
+        <Field name="firstName" placeholder="Your first name" />
+        <Field name="email" label="E-mail" placeholder="Your e-mail" />
         <em>You'll hear from us at this address 👆🏽</em>
         <Field
           name="howYouFoundOutAboutUs"
@@ -33,6 +34,7 @@ export default () => (
             { name: 'Search', value: 'google' },
           ]}
         />
+        <Field name="message" multiline placeholder="Your message" />
         <Errors />
         <Button />
       </>
@@ -44,6 +46,7 @@ const schema = z.object({
   firstName: z.string().nonempty(),
   email: z.string().nonempty().email(),
   howYouFoundOutAboutUs: z.enum(['fromAFriend', 'google']),
+  message: z.string().optional(),
 })
 
 export const loader: LoaderFunction = () => ({
@@ -61,8 +64,8 @@ export default function Component() {
       <Form schema={schema}>
         {({ Field, Errors, Button }) => (
           <>
-            <Field name="firstName" />
-            <Field name="email" label="E-mail" />
+            <Field name="firstName" placeholder="Your first name" />
+            <Field name="email" label="E-mail" placeholder="Your e-mail" />
             <em>You'll hear from us at this address 👆🏽</em>
             <Field
               name="howYouFoundOutAboutUs"
@@ -71,6 +74,7 @@ export default function Component() {
                 { name: 'Search', value: 'google' },
               ]}
             />
+            <Field name="message" multiline placeholder="Your message" />
             <Errors />
             <Button />
           </>

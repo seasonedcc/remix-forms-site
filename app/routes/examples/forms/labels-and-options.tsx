@@ -9,31 +9,35 @@ import Example from '~/ui/example'
 
 const title = 'Labels and options'
 const description =
-  'In this example, we add custom label and options to a field. The rest is inferred from the schema.'
+  'In this example, we add custom labels, placeholders, options, and multiline to some of our fields. The rest is inferred from the schema.'
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
 const code = `const schema = z.object({
   name: z.string().nonempty(),
   roleId: z.number().int(),
+  bio: z.string().nonempty(),
 })
 
 export default () => (
   <Form
     schema={schema}
     labels={{ roleId: 'Role' }}
+    placeholders={{ name: 'Your name', bio: 'Your story' }}
     options={{
       roleId: [
         { name: 'Designer', value: 1 },
         { name: 'Dev', value: 2 },
       ],
     }}
+    multiline={['bio']}
   />
 )`
 
 const schema = z.object({
   name: z.string().nonempty(),
   roleId: z.number().int(),
+  bio: z.string().nonempty(),
 })
 
 export const loader: LoaderFunction = () => ({
@@ -51,12 +55,14 @@ export default function Component() {
       <Form
         schema={schema}
         labels={{ roleId: 'Role' }}
+        placeholders={{ name: 'Your name', bio: 'Your story' }}
         options={{
           roleId: [
             { name: 'Designer', value: 1 },
             { name: 'Dev', value: 2 },
           ],
         }}
+        multiline={['bio']}
       />
     </Example>
   )

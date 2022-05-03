@@ -9,6 +9,7 @@ import Select from './select'
 import SubmitButton from './submit-button'
 import Checkbox from './checkbox'
 import CheckboxWrapper from './checkbox-wrapper'
+import TextArea from './text-area'
 
 export default function Form<Schema extends SomeZodObject>(
   props: FormProps<Schema>,
@@ -19,6 +20,7 @@ export default function Form<Schema extends SomeZodObject>(
       fieldComponent={Field}
       labelComponent={Label}
       inputComponent={Input}
+      multilineComponent={TextArea}
       selectComponent={Select}
       checkboxComponent={Checkbox}
       checkboxWrapperComponent={CheckboxWrapper}
