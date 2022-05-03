@@ -30,6 +30,16 @@ export default function Component() {
           <SidebarLayout.NavLink to={$path('/examples/actions/field-error')}>
             Field error
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavTitle>Modes</SidebarLayout.NavTitle>
+          <SidebarLayout.NavLink to={$path('/examples/modes/on-submit')}>
+            onSubmit
+          </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink to={$path('/examples/modes/on-blur')}>
+            onBlur
+          </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink to={$path('/examples/modes/on-change')}>
+            onChange
+          </SidebarLayout.NavLink>
           <SidebarLayout.NavTitle>Schemas</SidebarLayout.NavTitle>
           <SidebarLayout.NavLink to={$path('/examples/schemas/strings')}>
             Strings
@@ -45,11 +55,6 @@ export default function Component() {
           </SidebarLayout.NavLink>
           <SidebarLayout.NavLink to={$path('/examples/schemas/enums')}>
             Enums
-          </SidebarLayout.NavLink>
-          <SidebarLayout.NavLink
-            to={$path('/examples/schemas/async-validation')}
-          >
-            Async validation
           </SidebarLayout.NavLink>
           <SidebarLayout.NavTitle>Forms</SidebarLayout.NavTitle>
           <SidebarLayout.NavLink to={$path('/examples/forms/auto-generated')}>
