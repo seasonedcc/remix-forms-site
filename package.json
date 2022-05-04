@@ -11,7 +11,8 @@
     "dev:remix": "cross-env NODE_ENV=development remix dev",
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
     "deploy": "fly deploy --remote-only",
-    "start": "cross-env NODE_ENV=production remix-serve build"
+    "start": "cross-env NODE_ENV=production remix-serve build",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
@@ -31,6 +32,7 @@
     "zod": "^3.12.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.21.1",
     "@remix-run/dev": "^1.4.1",
     "@types/lodash": "^4.14.178",
     "@types/react": "^17.0.24",
