@@ -81,6 +81,9 @@ export default function Component() {
           <SidebarLayout.NavLink to={$path('/examples/forms/custom-input')}>
             Custom input
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink to={$path('/examples/forms/use-fetcher')}>
+            useFetcher
+          </SidebarLayout.NavLink>
           <SidebarLayout.NavTitle>renderField</SidebarLayout.NavTitle>
           <SidebarLayout.NavLink
             to={$path('/examples/render-field/required-indicator')}

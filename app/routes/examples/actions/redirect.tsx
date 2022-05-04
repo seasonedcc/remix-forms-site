@@ -9,7 +9,7 @@ import Example from '~/ui/example'
 
 const title = 'Redirect'
 const description =
-  'In this example, a successful sumission will redirect to our success path.'
+  'In this example, a successful submission will redirect to our success path.'
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
