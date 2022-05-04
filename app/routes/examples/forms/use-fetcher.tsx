@@ -24,7 +24,7 @@ export const action: ActionFunction = async ({ request }) =>
 
 export default () => {
   const fetcher = useFetcher()
-  const name = fetcher.data?.name
+  const name = fetcher.submission?.formData.get('name') || fetcher.data?.name
 
   return (
     <Example title={title} description={description}>
