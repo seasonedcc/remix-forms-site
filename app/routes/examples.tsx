@@ -4,7 +4,7 @@ import SidebarLayout from '~/ui/sidebar-layout'
 
 export default function Component() {
   return (
-    <div className="min-h-[86.5vh] relative">
+    <div className="relative isolate flex grow flex-col">
       <SidebarLayout>
         <SidebarLayout.Nav>
           <SidebarLayout.NavTitle>Actions</SidebarLayout.NavTitle>
@@ -99,7 +99,7 @@ export default function Component() {
           </SidebarLayout.NavLink>
         </SidebarLayout.Nav>
         <SidebarLayout.Content>
-          <div className="flex flex-col space-y-4 sm:space-y-8 text-gray-200 p-4 sm:p-8">
+          <div className="flex flex-col space-y-4 p-4 text-gray-200 sm:space-y-8 sm:p-8">
             <Outlet />
           </div>
         </SidebarLayout.Content>

@@ -46,15 +46,15 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="antialiased h-full w-full overflow-x-hidden overflow-y-auto bg-gradient-to-r from-gray-900 to-gray-600 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-500">
+      <body className="flex h-full w-full flex-col overflow-y-auto overflow-x-hidden bg-gradient-to-r from-gray-900 to-gray-600 antialiased scrollbar-thin scrollbar-track-gray-500 scrollbar-thumb-gray-700">
         <TopBar />
-        <div className="min-h-[86.5vh]">
+        <main className="flex flex-1 flex-col">
           <Outlet />
-        </div>
-        <div className="bg-gradient-to-r from-black to-gray-800 text-center text-white p-4">
+        </main>
+        <footer className="bg-gradient-to-r from-black to-gray-800 p-4 text-center text-white">
           Built with ❤️💪🏼 by{' '}
           <ExternalLink href="https://seasoned.cc">Seasoned</ExternalLink>
-        </div>
+        </footer>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
