@@ -9,7 +9,10 @@ export default function Code({
   return (
     <Pre
       {...props}
-      className={cx('xl:flex-1 max-h-[60vh]', className)}
+      className={cx(
+        'max-h-[60vh] max-w-[calc(100vw-2rem)] xl:flex-1',
+        className,
+      )}
       dangerouslySetInnerHTML={{ __html: children }}
     />
   )

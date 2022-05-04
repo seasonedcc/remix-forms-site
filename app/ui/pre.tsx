@@ -8,7 +8,7 @@ export default function Pre({
     <pre
       {...props}
       className={cx(
-        'bg-black font-mono text-white p-2 overflow-auto text-xs sm:text-sm scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-gray-600 rounded',
+        'max-w-[calc(100vw-2rem)] overflow-auto  rounded bg-black p-2 font-mono text-xs text-white scrollbar-thin scrollbar-track-gray-600 scrollbar-thumb-gray-800 sm:text-sm',
         className,
       )}
     />

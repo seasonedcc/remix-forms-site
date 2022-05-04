@@ -142,7 +142,7 @@ export default function Component() {
   } = useLoaderData()
 
   return (
-    <div className="flex flex-col space-y-8 max-w-2xl m-auto text-gray-200 px-4 py-8 sm:px-8 sm:py-16">
+    <div className="m-auto flex max-w-2xl flex-col space-y-8 px-4 py-8 text-gray-200 sm:px-8 sm:py-16">
       <Heading>Get Started</Heading>
       <SubHeading>Dependencies</SubHeading>
       <p>
