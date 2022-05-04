@@ -25,7 +25,11 @@ const description =
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
-const code = `const schema = z.object({
+const code = `import { z } from 'zod'
+import { makeDomainFunction } from 'remix-domains'
+import { formAction, Form } from 'remix-forms'
+
+const schema = z.object({
   firstName: z.string().nonempty(),
   email: z.string().nonempty().email(),
   howYouFoundOutAboutUs: z.enum(['fromAFriend', 'google']),
