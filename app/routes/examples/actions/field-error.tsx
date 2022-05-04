@@ -15,7 +15,11 @@ export const meta: MetaFunction = () => metaTags({ title, description })
 
 const code = `import { InputError } from 'remix-domains'
 
-const schema = z.object({ email: z.string().nonempty().email() })
+const schema = z.object({
+  email: z.string().nonempty().email(),
+  password: z.string().nonempty(),
+})
+
 const takenEmails = ['foo@bar.com', 'bar@foo.com']
 
 const mutation = makeDomainFunction(schema)(async (values) => {
@@ -31,7 +35,10 @@ export const action: ActionFunction = async ({ request }) =>
 
 export default () => <Form schema={schema} />`
 
-const schema = z.object({ email: z.string().nonempty().email() })
+const schema = z.object({
+  email: z.string().nonempty().email(),
+  password: z.string().nonempty(),
+})
 
 export const loader: LoaderFunction = () => ({
   code: hljs.highlight(code, { language: 'ts' }).value,
