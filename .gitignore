@@ -6,3 +6,5 @@ node_modules
 /app/styles/
 /build
 .env
+test-results/
+playwright-report/
