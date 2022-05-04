@@ -8,7 +8,6 @@ import { makeDomainFunction } from 'remix-domains'
 import Example from '~/ui/example'
 import { useFetcher } from '@remix-run/react'
 import Checkbox from '~/ui/checkbox'
-import Label from '~/ui/label'
 
 const title = 'useFetcher'
 const description =
@@ -34,8 +33,8 @@ export default () => {
           <>
             {name ? (
               <div className="flex items-center space-x-2">
-                <Checkbox />
-                <Label>{name}</Label>
+                <input type="checkbox" id={name} />
+                <label htmlFor={name}>{name}</label>
               </div>
             ) : null}
             <div className="flex justify-end space-x-2">
@@ -75,7 +74,7 @@ export const action: ActionFunction = async ({ request }) =>
 
 export default function Component() {
   const fetcher = useFetcher()
-  const name = fetcher.data?.name
+  const name = fetcher.submission?.formData.get('name') || fetcher.data?.name
 
   return (
     <Example title={title} description={description}>
@@ -84,8 +83,8 @@ export default function Component() {
           <>
             {name ? (
               <div className="flex items-center space-x-2">
-                <Checkbox />
-                <Label>{name}</Label>
+                <Checkbox id={name} />
+                <label htmlFor={name}>{name}</label>
               </div>
             ) : null}
             <div className="flex justify-end space-x-2">
@@ -102,7 +101,7 @@ export default function Component() {
                   </>
                 )}
               </Field>
-              <Button className="h-[38px] self-start" />
+              <Button className="h-[38px] self-start" disabled={false} />
             </div>
             <Errors />
           </>
