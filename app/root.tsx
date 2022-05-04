@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
+import colors from 'tailwindcss/colors'
 import styles from './styles/app.css'
 import highlightStyles from 'highlight.js/styles/a11y-dark.css'
 import favicon from './favicon.png'
@@ -41,6 +42,7 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="theme-color" content={colors.gray[900]}></meta>
         <Meta />
         <Links />
       </head>
