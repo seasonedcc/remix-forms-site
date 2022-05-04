@@ -14,6 +14,7 @@ const description =
 export const meta: MetaFunction = () => metaTags({ title, description })
 
 const code = `const schema = z.object({
+  csrfToken: z.string().nonempty(),
   firstName: z.string().nonempty(),
   email: z.string().nonempty().email(),
   howYouFoundOutAboutUs: z.enum(['fromAFriend', 'google']),
@@ -24,6 +25,7 @@ export default () => (
   <Form schema={schema}>
     {({ Field, Errors, Button }) => (
       <>
+        <Field name="csrfToken" value="abc123" hidden />
         <Field name="firstName" placeholder="Your first name" />
         <Field name="email" label="E-mail" placeholder="Your e-mail" />
         <em>You'll hear from us at this address 👆🏽</em>
@@ -43,6 +45,7 @@ export default () => (
 )`
 
 const schema = z.object({
+  csrfToken: z.string().nonempty(),
   firstName: z.string().nonempty(),
   email: z.string().nonempty().email(),
   howYouFoundOutAboutUs: z.enum(['fromAFriend', 'google']),
@@ -64,6 +67,7 @@ export default function Component() {
       <Form schema={schema}>
         {({ Field, Errors, Button }) => (
           <>
+            <Field name="csrfToken" value="abc123" hidden />
             <Field name="firstName" placeholder="Your first name" />
             <Field name="email" label="E-mail" placeholder="Your e-mail" />
             <em>You'll hear from us at this address 👆🏽</em>

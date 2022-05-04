@@ -65,6 +65,9 @@ export default function Component() {
           >
             Labels, options, etc
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink to={$path('/examples/forms/hidden-field')}>
+            Hidden field
+          </SidebarLayout.NavLink>
           <SidebarLayout.NavLink
             to={$path('/examples/forms/form-with-children')}
           >
