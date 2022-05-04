@@ -24,7 +24,7 @@ export default function TopBar() {
       {({ open, close }) => (
         <>
           <header>
-            <div className="flex w-full items-center space-x-2 sm:space-x-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <div className="flex-1">
                 <div className="flex shrink-0 items-center">
                   <Link to={$path('/')} className="block h-10 w-10">

@@ -38,7 +38,7 @@ export const links: LinksFunction = () => {
 
 export default function App() {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full overflow-x-hidden">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -46,7 +46,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="flex h-full w-full flex-col overflow-y-auto overflow-x-hidden bg-gradient-to-r from-gray-900 to-gray-600 antialiased scrollbar-thin scrollbar-track-gray-500 scrollbar-thumb-gray-700">
+      <body className="flex min-h-screen w-screen max-w-[100vw] flex-col overflow-y-auto overflow-x-hidden bg-gradient-to-r from-gray-900 to-gray-600 antialiased scrollbar-thin scrollbar-track-gray-500 scrollbar-thumb-gray-700">
         <TopBar />
         <main className="flex flex-1 flex-col">
           <Outlet />
