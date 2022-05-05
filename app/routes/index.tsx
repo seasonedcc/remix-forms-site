@@ -71,7 +71,7 @@ export default function Component() {
   const { code } = useLoaderData()
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 sm:px-8 sm:py-16">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8 sm:py-16">
       <div className="flex flex-col space-y-8 sm:space-y-16">
         <Heading className="text-center">
           Magically create forms
@@ -80,17 +80,17 @@ export default function Component() {
         <div className="flex flex-col space-y-6 space-x-0 xl:flex-row xl:space-x-6 xl:space-y-0">
           <Code>{code}</Code>
           <div className="xl:flex-1">
-            <h3 className="text-center text-gray-400 text-lg pb-6">
+            <h3 className="pb-6 text-center text-lg text-gray-400">
               This tiny code creates the form below 👇🏽
             </h3>
-            <h2 className="text-center text-white text-xl md:text-3xl pb-6">
+            <h2 className="pb-6 text-center text-xl text-white md:text-3xl">
               All{' '}
               <span className="underline decoration-green-500">type-safe</span>,
-              with client-side + server-side{' '}
-              <span className="underline decoration-orange-500">
+              with client + server{' '}
+              <span className="underline decoration-purple-500">
                 validations
               </span>
-              ,{' '}
+              , <span className="underline decoration-orange-500">a11y</span>,{' '}
               <span className="underline decoration-blue-500">pending UI</span>,
               and{' '}
               <span className="underline decoration-yellow-500">
@@ -104,7 +104,7 @@ export default function Component() {
                   <Field name="email" />
                   <Field name="howYouFoundOutAboutUs" />
                   <Errors />
-                  <div className="flex space-x-4 items-center">
+                  <div className="flex items-center space-x-4">
                     <h4 className="flex-1 text-center text-gray-500">
                       (Go ahead, try it with JS disabled as well 😉)
                     </h4>
@@ -115,9 +115,9 @@ export default function Component() {
             </Form>
           </div>
         </div>
-        <dl className="space-y-8 auto-rows-min md:space-y-0 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-x-8 md:gap-y-8">
+        <dl className="auto-rows-min space-y-8 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-8 md:space-y-0 xl:grid-cols-3">
           <Feature icon={BeakerIcon} title="100% customizable UI">
-            Create custom inputs and use the default UI for everything else.
+            Customize everything without losing our accessible defaults.
           </Feature>
           <Feature icon={ScaleIcon} title="Single source of truth">
             Write your schema once and derive everything else from it.
