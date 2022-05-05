@@ -21,7 +21,7 @@ import { makeDomainFunction } from 'remix-domains'
 
 const title = 'Magically create forms + actions in Remix'
 const description =
-  'All type-safe, with client-side + server-side validations, pending UI, and focus management'
+  'All type-safe, with client + server validations, a11y, pending UI, and focus management'
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
