@@ -1,3 +1,8 @@
-export default function Field(props: JSX.IntrinsicElements['div']) {
-  return <div className="flex flex-col space-y-2" {...props} />
+import { cx } from '~/helpers'
+
+export default function Field({
+  className,
+  ...props
+}: JSX.IntrinsicElements['div']) {
+  return <div className={cx('flex flex-col space-y-2', className)} {...props} />
 }

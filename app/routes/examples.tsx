@@ -78,6 +78,9 @@ export default function Component() {
           >
             Field with children
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink to={$path('/examples/forms/field-layout')}>
+            Field layout
+          </SidebarLayout.NavLink>
           <SidebarLayout.NavLink to={$path('/examples/forms/custom-input')}>
             Custom input
           </SidebarLayout.NavLink>
