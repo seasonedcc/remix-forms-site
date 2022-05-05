@@ -17,47 +17,56 @@ export const meta: MetaFunction = () => metaTags({ title, description })
 
 const code = `const schema = z.object({ name: z.string().nonempty() })
 
-const create = makeDomainFunction(schema)(async (values) => values)
+const mutation = makeDomainFunction(schema)(async (values) => values)
 
 export const action: ActionFunction = async ({ request }) =>
-  formAction({ request, schema, mutation: create })
+  formAction({ request, schema, mutation })
 
 export default () => {
   const fetcher = useFetcher()
   const name = fetcher.submission?.formData.get('name') || fetcher.data?.name
 
   return (
-    <Example title={title} description={description}>
-      <Form fetcher={fetcher} schema={schema}>
-        {({ Field, Errors, Button }) => (
-          <>
-            {name ? (
-              <div className="flex items-center space-x-2">
-                <input type="checkbox" id={name} />
-                <label htmlFor={name}>{name}</label>
-              </div>
-            ) : null}
-            <div className="flex justify-end space-x-2">
-              <Field
-                name="name"
-                className="flex-1 flex-col space-y-2"
-                placeholder="Add to-do"
-                autoFocus
-              >
-                {({ SmartInput, Errors }) => (
-                  <>
-                    <SmartInput />
-                    <Errors />
-                  </>
-                )}
-              </Field>
-              <Button className="h-[38px] self-start" disabled={false} />
+    <Form
+      schema={schema}
+      fetcher={fetcher}
+      onTransition={({ transition, setFocus, reset, formState }) => {
+        const { isDirty } = formState
+
+        if (transition.submission && isDirty) {
+          setFocus('name')
+          reset()
+        }
+      }}
+    >
+      {({ Field, Errors, Button }) => (
+        <>
+          {name ? (
+            <div className="flex items-center space-x-2">
+              <input type="checkbox" id={name} />
+              <label htmlFor={name}>{name}</label>
             </div>
-            <Errors />
-          </>
-        )}
-      </Form>
-    </Example>
+          ) : null}
+          <div className="flex justify-end space-x-2">
+            <Field
+              name="name"
+              className="flex-1 flex-col space-y-2"
+              placeholder="Add to-do"
+              autoFocus
+            >
+              {({ SmartInput, Errors }) => (
+                <>
+                  <SmartInput />
+                  <Errors />
+                </>
+              )}
+            </Field>
+            <Button className="h-[38px] self-start" disabled={false} />
+          </div>
+          <Errors />
+        </>
+      )}
+    </Form>
   )
 }`
 
@@ -67,10 +76,10 @@ export const loader: LoaderFunction = () => ({
   code: hljs.highlight(code, { language: 'ts' }).value,
 })
 
-const create = makeDomainFunction(schema)(async (values) => values)
+const mutation = makeDomainFunction(schema)(async (values) => values)
 
 export const action: ActionFunction = async ({ request }) =>
-  formAction({ request, schema, mutation: create })
+  formAction({ request, schema, mutation })
 
 export default function Component() {
   const fetcher = useFetcher()
@@ -78,7 +87,18 @@ export default function Component() {
 
   return (
     <Example title={title} description={description}>
-      <Form fetcher={fetcher} schema={schema}>
+      <Form
+        schema={schema}
+        fetcher={fetcher}
+        onTransition={({ transition, setFocus, reset, formState }) => {
+          const { isDirty } = formState
+
+          if (transition.submission && isDirty) {
+            setFocus('name')
+            reset()
+          }
+        }}
+      >
         {({ Field, Errors, Button }) => (
           <>
             {name ? (
