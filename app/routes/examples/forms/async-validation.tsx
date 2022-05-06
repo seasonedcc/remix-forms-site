@@ -55,35 +55,33 @@ export default function Component() {
   const message = fetcher.data?.message
 
   return (
-    <Example title={title} description={description}>
-      <Form schema={schema}>
-        {({ Field, Errors, Button, clearErrors }) => (
-          <>
-            <Field name="username">
-              {({ Label, Input, Errors, Error }) => (
-                <>
-                  <Label />
-                  <Input
-                    onChange={(event) => {
-                      clearErrors('username')
+    <Form schema={schema}>
+      {({ Field, Errors, Button, clearErrors }) => (
+        <>
+          <Field name="username">
+            {({ Label, Input, Errors, Error }) => (
+              <>
+                <Label />
+                <Input
+                  onChange={(event) => {
+                    clearErrors('username')
 
-                      fetcher.load(
-                        \`/examples/forms/async-validation?username=\${event.target.value}\`,
-                      )
-                    }}
-                  />
-                  <Errors />
-                  {message && <Error>{message}</Error>}
-                </>
-              )}
-            </Field>
-            <Field name="password" />
-            <Errors />
-            <Button />
-          </>
-        )}
-      </Form>
-    </Example>
+                    fetcher.load(
+                      \`/examples/forms/async-validation?username=\${event.target.value}\`,
+                    )
+                  }}
+                />
+                <Errors />
+                {message && <Error>{message}</Error>}
+              </>
+            )}
+          </Field>
+          <Field name="password" />
+          <Errors />
+          <Button />
+        </>
+      )}
+    </Form>
   )
 }`
 
