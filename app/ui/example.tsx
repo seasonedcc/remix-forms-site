@@ -11,7 +11,7 @@ type Props = {
 }
 
 export default function Example({ title, description, children }: Props) {
-  const { code } = useLoaderData()
+  const code = useLoaderData()?.code
   const actionData = useActionData()
   const data = actionData?.errors ? null : actionData
 
