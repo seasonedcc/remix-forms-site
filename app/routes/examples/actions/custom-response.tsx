@@ -1,5 +1,10 @@
 import hljs from 'highlight.js/lib/common'
-import { ActionFunction, LoaderFunction, MetaFunction } from '@remix-run/node'
+import {
+  ActionFunction,
+  json,
+  LoaderFunction,
+  MetaFunction,
+} from '@remix-run/node'
 import { performMutation } from 'remix-forms'
 import { z } from 'zod'
 import Form from '~/ui/form'
@@ -25,11 +30,9 @@ const mutation = makeDomainFunction(schema)(async (values) => values)
 export const action: ActionFunction = async ({ request }) => {
   const result = await performMutation({ request, schema, mutation })
 
-  if (result.success) {
-    return { customName: result.data.firstName }
-  } else {
-    return result.errors
-  }
+  if (!result.success) return json(result, 400)
+
+  return json({ customName: result.data.firstName })
 }
 
 export default () => <Form schema={schema} />`
@@ -48,11 +51,9 @@ const mutation = makeDomainFunction(schema)(async (values) => values)
 export const action: ActionFunction = async ({ request }) => {
   const result = await performMutation({ request, schema, mutation })
 
-  if (result.success) {
-    return { customName: result.data.firstName }
-  } else {
-    return result.errors
-  }
+  if (!result.success) return json(result, 400)
+
+  return json({ customName: result.data.firstName })
 }
 
 export default function Component() {
