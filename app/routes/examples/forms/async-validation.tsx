@@ -78,7 +78,7 @@ export default function Component() {
           </Field>
           <Field name="password" />
           <Errors />
-          <Button />
+          <Button disabled={message} />
         </>
       )}
     </Form>
