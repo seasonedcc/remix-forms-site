@@ -168,7 +168,16 @@ export default function Component() {
       <Code>{formCode}</Code>
       <div className="flex flex-col space-y-2">
         <p>
-          From now on, use your <em>Form</em> component instead of Remix Forms'.
+          Check out{' '}
+          <ExternalLink href="https://github.com/SeasonedSoftware/remix-forms-site/blob/main/app/ui/form.tsx">
+            how we customized the styles
+          </ExternalLink>{' '}
+          for this website. We basically created a bunch of UI components and
+          passed them to our custom form.
+        </p>
+        <p>
+          With your custom <em>Form</em> in place, now you can use it instead of
+          Remix Forms' for all your forms.
         </p>
         <p>
           PS: you don't need to customize everything. We'll use standard html
