@@ -113,9 +113,9 @@ export default function Component() {
               <Field name="checkOut" className="flex-1" />
             </div>
             <div className="flex w-full space-x-4">
-              <Field name="adults" />
-              <Field name="children" />
-              <Field name="bedrooms" />
+              <Field name="adults" className="flex-1" />
+              <Field name="children" className="flex-1" />
+              <Field name="bedrooms" className="flex-1" />
             </div>
             <Field name="specialRequests" multiline />
             <Errors />

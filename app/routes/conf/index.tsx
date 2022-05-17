@@ -30,8 +30,10 @@ export default function Component() {
           Then, we'll show you how Remix Forms does all the work for you.
         </Feature>
         <Feature icon={GiftIcon} title="With a powerful DX">
-          Finally, we'll demonstrate our end-to-end type safety and our
-          incredibly flexible API.
+          <ExternalLink href="https://github.com/SeasonedSoftware/remix-forms-site/tree/main/app/routes/conf">
+            Play around
+          </ExternalLink>{' '}
+          to experience our end-to-end type safety and our flexible API.
         </Feature>
       </dl>
       <p className="text-lg">
