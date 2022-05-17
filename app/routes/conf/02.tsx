@@ -18,7 +18,7 @@ import { z } from 'zod'
 
 const title = 'Server validations'
 const description =
-  "Now let's add server-side validations. To make our lives easier, we'll use zod for that."
+  "Now let's add server-side validations. To make our lives easier, we'll use zod for that. (It won't work yet 🤫)"
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
@@ -31,7 +31,7 @@ const reservationSchema = z.object({
   checkIn: z.date(),
   checkOut: z.date(),
   adults: z.number().int().positive(),
-  children: z.number().int().positive(),
+  children: z.number().int(),
   bedrooms: z.number().int().positive(),
   specialRequests: z.string().optional(),
 })
@@ -49,7 +49,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (result.success) {
     await makeReservation(result.data)
-    return redirect('/success')
+    return redirect('conf/success/02')
   }
 
   return json<ActionData>({ errors: result.error.issues })
@@ -125,7 +125,7 @@ const reservationSchema = z.object({
   checkIn: z.date(),
   checkOut: z.date(),
   adults: z.number().int().positive(),
-  children: z.number().int().positive(),
+  children: z.number().int(),
   bedrooms: z.number().int().positive(),
   specialRequests: z.string().optional(),
 })
@@ -143,7 +143,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (result.success) {
     await makeReservation(result.data)
-    return redirect('/success')
+    return redirect('conf/success/02')
   }
 
   return json<ActionData>({ errors: result.error.issues })

@@ -36,7 +36,7 @@ async function makeReservation(values: Record<string, FormDataEntryValue>) {
 export const action: ActionFunction = async ({ request }) => {
   const values = Object.fromEntries(await request.formData())
   await makeReservation(values)
-  return redirect('/success')
+  return redirect('success/01')
 }
 
 export default function Component() {
@@ -96,7 +96,7 @@ async function makeReservation(values: Record<string, FormDataEntryValue>) {
 export const action: ActionFunction = async ({ request }) => {
   const values = Object.fromEntries(await request.formData())
   await makeReservation(values)
-  return redirect('/success')
+  return redirect('conf/success/01')
 }
 
 export default function Component() {

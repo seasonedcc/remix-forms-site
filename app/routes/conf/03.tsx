@@ -32,7 +32,7 @@ const reservationSchema = z.object({
   checkIn: z.preprocess(parseDate, z.date()),
   checkOut: z.preprocess(parseDate, z.date()),
   adults: z.preprocess(Number, z.number().int().positive()),
-  children: z.preprocess(Number, z.number().int().positive()),
+  children: z.preprocess(Number, z.number().int()),
   bedrooms: z.preprocess(Number, z.number().int().positive()),
   specialRequests: z.string().optional(),
 })
@@ -50,7 +50,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (result.success) {
     await makeReservation(result.data)
-    return redirect('/success')
+    return redirect('conf/success/03')
   }
 
   return json<ActionData>({ errors: result.error.issues })
@@ -131,7 +131,7 @@ const reservationSchema = z.object({
   checkIn: z.preprocess(parseDate, z.date()),
   checkOut: z.preprocess(parseDate, z.date()),
   adults: z.preprocess(Number, z.number().int().positive()),
-  children: z.preprocess(Number, z.number().int().positive()),
+  children: z.preprocess(Number, z.number().int()),
   bedrooms: z.preprocess(Number, z.number().int().positive()),
   specialRequests: z.string().optional(),
 })
@@ -149,7 +149,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (result.success) {
     await makeReservation(result.data)
-    return redirect('/success')
+    return redirect('conf/success/03')
   }
 
   return json<ActionData>({ errors: result.error.issues })

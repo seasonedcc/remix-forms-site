@@ -21,7 +21,7 @@ const reservationSchema = z.object({
   checkIn: z.date(),
   checkOut: z.date(),
   adults: z.number().int().positive(),
-  children: z.number().int().positive(),
+  children: z.number().int(),
   bedrooms: z.number().int().positive(),
   specialRequests: z.string().optional(),
 })
@@ -42,7 +42,7 @@ export const action: ActionFunction = async ({ request }) =>
     request,
     schema: reservationSchema,
     mutation: makeReservation,
-    successPath: '/success',
+    successPath: 'conf/success/08',
   })
 
 export default function Component() {
@@ -58,7 +58,7 @@ const reservationSchema = z.object({
   checkIn: z.date(),
   checkOut: z.date(),
   adults: z.number().int().positive(),
-  children: z.number().int().positive(),
+  children: z.number().int(),
   bedrooms: z.number().int().positive(),
   specialRequests: z.string().optional(),
 })
@@ -79,7 +79,7 @@ export const action: ActionFunction = async ({ request }) =>
     request,
     schema: reservationSchema,
     mutation: makeReservation,
-    successPath: '/success',
+    successPath: 'conf/success/08',
   })
 
 export default function Component() {
