@@ -24,7 +24,19 @@ const description =
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
-const code = `function parseDate(value: unknown) {
+const code = `import { Form } from '@remix-run/react'
+import { ActionFunction, redirect, json } from '@remix-run/node'
+import Label from '~/ui/label'
+import Input from '~/ui/input'
+import Select from '~/ui/select'
+import TextArea from '~/ui/text-area'
+import Button from '~/ui/button'
+import { useActionData } from '@remix-run/react'
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+function parseDate(value: unknown) {
   const [year, month, day] = String(value).split('-').map(Number)
   return new Date(year, month - 1, day)
 }
@@ -303,7 +315,7 @@ export default function Component() {
     hasErrors(name) ? `error-for-${name}` : undefined
 
   return (
-    <Example title={title} description={description}>
+    <Example title={title} description={description} countLines>
       <Form
         method="post"
         className="flex flex-col space-y-4"

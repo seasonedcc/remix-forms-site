@@ -13,7 +13,9 @@ const description =
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
-const code = `import { makeDomainFunction, InputError } from 'remix-domains'
+const code = `import { ActionFunction } from '@remix-run/node'
+import { z } from 'zod'
+import { InputError, makeDomainFunction } from 'remix-domains'
 import { Form, formAction } from 'remix-forms'
 
 const reservationSchema = z.object({
@@ -84,7 +86,7 @@ export const action: ActionFunction = async ({ request }) =>
 
 export default function Component() {
   return (
-    <Example title={title} description={description}>
+    <Example title={title} description={description} countLines>
       <Form schema={reservationSchema} />
     </Example>
   )

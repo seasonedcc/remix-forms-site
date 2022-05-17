@@ -22,8 +22,14 @@ const description =
 
 export const meta: MetaFunction = () => metaTags({ title, description })
 
-const code = `import { useActionData } from '@remix-run/react'
-import { json } from '@remix-run/node'
+const code = `import { Form } from '@remix-run/react'
+import { ActionFunction, redirect, json } from '@remix-run/node'
+import Label from '~/ui/label'
+import Input from '~/ui/input'
+import Select from '~/ui/select'
+import TextArea from '~/ui/text-area'
+import Button from '~/ui/button'
+import { useActionData } from '@remix-run/react'
 import { z } from 'zod'
 
 const reservationSchema = z.object({
@@ -160,7 +166,7 @@ function FieldError({ name }: { name: string }) {
 
 export default function Component() {
   return (
-    <Example title={title} description={description}>
+    <Example title={title} description={description} countLines>
       <Form method="post" className="flex flex-col space-y-4">
         <div>
           <Label htmlFor="city">City</Label>

@@ -101,7 +101,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Component() {
   return (
-    <Example title={title} description={description}>
+    <Example title={title} description={description} countLines>
       <Form method="post" className="flex flex-col space-y-4">
         <div>
           <Label htmlFor="city">City</Label>
