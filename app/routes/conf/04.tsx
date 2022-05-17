@@ -65,7 +65,7 @@ function Error(props: JSX.IntrinsicElements['div']) {
   return <div {...props} className="mt-1 text-red-500" />
 }
 
-function renderServerError(name: string) {
+function ServerError({ name }: { name: string }) {
   const errors = useActionData<ActionData>()?.errors
   const message = errors?.find(({ path }) => path[0] === name)?.message
 
@@ -74,20 +74,14 @@ function renderServerError(name: string) {
   return <Error>{message}</Error>
 }
 
-function renderClientError(name: string, errors: any) {
+function FieldError({ name, errors }: { name: string; errors: any }) {
   const message = errors[name]?.message
 
-  if (!message) return null
+  if (message) {
+    return <Error>{message}</Error>
+  }
 
-  return <Error>{message}</Error>
-}
-
-function renderError(name: string, errors: any) {
-  const clientError = renderClientError(name, errors)
-
-  if (clientError) return clientError
-
-  return renderServerError(name)
+  return <ServerError name={name} />
 }
 
 export default function Component() {
@@ -111,41 +105,41 @@ export default function Component() {
           <option value="lasVegas">Las Vegas</option>
           <option value="losAngeles">Los Angeles</option>
         </Select>
-        {renderError('city', errors)}
+        <FieldError name="city" errors={errors} />
       </div>
       <div className="flex w-full space-x-4">
         <div className="flex-1">
           <Label htmlFor="checkIn">Check In</Label>
           <Input {...register('checkIn')} id="checkIn" type="date" />
-          {renderError('checkIn', errors)}
+          <FieldError name="checkIn" errors={errors} />
         </div>
         <div className="flex-1">
           <Label htmlFor="checkOut">Check Out</Label>
           <Input {...register('checkOut')} id="checkOut" type="date" />
-          {renderError('checkOut', errors)}
+          <FieldError name="checkOut" errors={errors} />
         </div>
       </div>
       <div className="flex w-full space-x-4">
         <div className="flex-1">
           <Label htmlFor="adults">Adults</Label>
           <Input {...register('adults')} id="adults" />
-          {renderError('adults', errors)}
+          <FieldError name="adults" errors={errors} />
         </div>
         <div className="flex-1">
           <Label htmlFor="children">Children</Label>
           <Input {...register('children')} id="children" />
-          {renderError('children', errors)}
+          <FieldError name="children" errors={errors} />
         </div>
         <div className="flex-1">
           <Label htmlFor="bedrooms">Bedrooms</Label>
           <Input {...register('bedrooms')} id="bedrooms" />
-          {renderError('bedrooms', errors)}
+          <FieldError name="bedrooms" errors={errors} />
         </div>
       </div>
       <div>
         <Label htmlFor="specialRequests">Special Requests</Label>
         <TextArea {...register('specialRequests')} id="specialRequests" />
-        {renderError('specialRequests', errors)}
+        <FieldError name="specialRequests" errors={errors} />
       </div>
       <Button>Make reservation</Button>
     </Form>
@@ -195,7 +189,7 @@ function Error(props: JSX.IntrinsicElements['div']) {
   return <div {...props} className="mt-1 text-red-500" />
 }
 
-function renderServerError(name: string) {
+function ServerError({ name }: { name: string }) {
   const errors = useActionData<ActionData>()?.errors
   const message = errors?.find(({ path }) => path[0] === name)?.message
 
@@ -204,20 +198,14 @@ function renderServerError(name: string) {
   return <Error>{message}</Error>
 }
 
-function renderClientError(name: string, errors: any) {
+function FieldError({ name, errors }: { name: string; errors: any }) {
   const message = errors[name]?.message
 
-  if (!message) return null
+  if (message) {
+    return <Error>{message}</Error>
+  }
 
-  return <Error>{message}</Error>
-}
-
-function renderError(name: string, errors: any) {
-  const clientError = renderClientError(name, errors)
-
-  if (clientError) return clientError
-
-  return renderServerError(name)
+  return <ServerError name={name} />
 }
 
 export default function Component() {
@@ -242,41 +230,41 @@ export default function Component() {
             <option value="lasVegas">Las Vegas</option>
             <option value="losAngeles">Los Angeles</option>
           </Select>
-          {renderError('city', errors)}
+          <FieldError name="city" errors={errors} />
         </div>
         <div className="flex w-full space-x-4">
           <div className="flex-1">
             <Label htmlFor="checkIn">Check In</Label>
             <Input {...register('checkIn')} id="checkIn" type="date" />
-            {renderError('checkIn', errors)}
+            <FieldError name="checkIn" errors={errors} />
           </div>
           <div className="flex-1">
             <Label htmlFor="checkOut">Check Out</Label>
             <Input {...register('checkOut')} id="checkOut" type="date" />
-            {renderError('checkOut', errors)}
+            <FieldError name="checkOut" errors={errors} />
           </div>
         </div>
         <div className="flex w-full space-x-4">
           <div className="flex-1">
             <Label htmlFor="adults">Adults</Label>
             <Input {...register('adults')} id="adults" />
-            {renderError('adults', errors)}
+            <FieldError name="adults" errors={errors} />
           </div>
           <div className="flex-1">
             <Label htmlFor="children">Children</Label>
             <Input {...register('children')} id="children" />
-            {renderError('children', errors)}
+            <FieldError name="children" errors={errors} />
           </div>
           <div className="flex-1">
             <Label htmlFor="bedrooms">Bedrooms</Label>
             <Input {...register('bedrooms')} id="bedrooms" />
-            {renderError('bedrooms', errors)}
+            <FieldError name="bedrooms" errors={errors} />
           </div>
         </div>
         <div>
           <Label htmlFor="specialRequests">Special Requests</Label>
           <TextArea {...register('specialRequests')} id="specialRequests" />
-          {renderError('specialRequests', errors)}
+          <FieldError name="specialRequests" errors={errors} />
         </div>
         <Button>Make reservation</Button>
       </Form>

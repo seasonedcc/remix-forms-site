@@ -55,7 +55,7 @@ export const action: ActionFunction = async ({ request }) => {
   return json<ActionData>({ errors: result.error.issues })
 }
 
-function renderError(name: string) {
+function FieldError({ name }: { name: string }) {
   const errors = useActionData<ActionData>()?.errors
   const message = errors?.find(({ path }) => path[0] === name)?.message
 
@@ -74,41 +74,41 @@ export default function Component() {
           <option value="lasVegas">Las Vegas</option>
           <option value="losAngeles">Los Angeles</option>
         </Select>
-        {renderError('city')}
+        <FieldError name="city" />
       </div>
       <div className="flex w-full space-x-4">
         <div className="flex-1">
           <Label htmlFor="checkIn">Check In</Label>
           <Input name="checkIn" id="checkIn" type="date" />
-          {renderError('checkIn')}
+          <FieldError name="checkIn" />
         </div>
         <div className="flex-1">
           <Label htmlFor="checkOut">Check Out</Label>
           <Input name="checkOut" id="checkOut" type="date" />
-          {renderError('checkOut')}
+          <FieldError name="checkOut" />
         </div>
       </div>
       <div className="flex w-full space-x-4">
         <div className="flex-1">
           <Label htmlFor="adults">Adults</Label>
           <Input name="adults" id="adults" />
-          {renderError('adults')}
+          <FieldError name="adults" />
         </div>
         <div className="flex-1">
           <Label htmlFor="children">Children</Label>
           <Input name="children" id="children" />
-          {renderError('children')}
+          <FieldError name="children" />
         </div>
         <div className="flex-1">
           <Label htmlFor="bedrooms">Bedrooms</Label>
           <Input name="bedrooms" id="bedrooms" />
-          {renderError('bedrooms')}
+          <FieldError name="bedrooms" />
         </div>
       </div>
       <div>
         <Label htmlFor="specialRequests">Special Requests</Label>
         <TextArea name="specialRequests" id="specialRequests" />
-        {renderError('specialRequests')}
+        <FieldError name="specialRequests" />
       </div>
       <Button>Make reservation</Button>
     </Form>
@@ -149,7 +149,7 @@ export const action: ActionFunction = async ({ request }) => {
   return json<ActionData>({ errors: result.error.issues })
 }
 
-function renderError(name: string) {
+function FieldError({ name }: { name: string }) {
   const errors = useActionData<ActionData>()?.errors
   const message = errors?.find(({ path }) => path[0] === name)?.message
 
@@ -169,41 +169,41 @@ export default function Component() {
             <option value="lasVegas">Las Vegas</option>
             <option value="losAngeles">Los Angeles</option>
           </Select>
-          {renderError('city')}
+          <FieldError name="city" />
         </div>
         <div className="flex w-full space-x-4">
           <div className="flex-1">
             <Label htmlFor="checkIn">Check In</Label>
             <Input name="checkIn" id="checkIn" type="date" />
-            {renderError('checkIn')}
+            <FieldError name="checkIn" />
           </div>
           <div className="flex-1">
             <Label htmlFor="checkOut">Check Out</Label>
             <Input name="checkOut" id="checkOut" type="date" />
-            {renderError('checkOut')}
+            <FieldError name="checkOut" />
           </div>
         </div>
         <div className="flex w-full space-x-4">
           <div className="flex-1">
             <Label htmlFor="adults">Adults</Label>
             <Input name="adults" id="adults" />
-            {renderError('adults')}
+            <FieldError name="adults" />
           </div>
           <div className="flex-1">
             <Label htmlFor="children">Children</Label>
             <Input name="children" id="children" />
-            {renderError('children')}
+            <FieldError name="children" />
           </div>
           <div className="flex-1">
             <Label htmlFor="bedrooms">Bedrooms</Label>
             <Input name="bedrooms" id="bedrooms" />
-            {renderError('bedrooms')}
+            <FieldError name="bedrooms" />
           </div>
         </div>
         <div>
           <Label htmlFor="specialRequests">Special Requests</Label>
           <TextArea name="specialRequests" id="specialRequests" />
-          {renderError('specialRequests')}
+          <FieldError name="specialRequests" />
         </div>
         <Button>Make reservation</Button>
       </Form>

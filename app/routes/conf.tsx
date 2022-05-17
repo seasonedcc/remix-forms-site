@@ -27,6 +27,9 @@ export default function Component() {
           <SidebarLayout.NavLink to={$path('/conf/06')}>
             06. Accessibility
           </SidebarLayout.NavLink>
+          <SidebarLayout.NavLink to={$path('/conf/07')}>
+            07. Focus on error
+          </SidebarLayout.NavLink>
         </SidebarLayout.Nav>
         <SidebarLayout.Content>
           <div className="flex items-center bg-gradient-to-r from-blue-600 to-purple-600 py-2 px-4 sm:px-8">
