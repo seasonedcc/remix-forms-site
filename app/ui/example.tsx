@@ -41,7 +41,9 @@ export default function Example({
         </div>
         {countLines && (
           <div className="flex flex-col items-center justify-center space-y-2 rounded-md border-2 border-white p-4">
-            <div className="text-2xl font-bold sm:text-5xl">{lineCount}</div>
+            <div className="text-2xl font-bold text-white sm:text-5xl">
+              {lineCount}
+            </div>
             <div className="text-gray-300">lines of code</div>
           </div>
         )}
