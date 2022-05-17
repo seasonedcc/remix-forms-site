@@ -16,7 +16,7 @@ function Nav({ children, type = 'disclosure', close, ...props }: NavProps) {
   const Panel = type === 'disclosure' ? Disclosure.Panel : Popover.Panel
   const Button = type === 'disclosure' ? Disclosure.Button : Popover.Button
   const Icon = type === 'disclosure' ? MenuAlt3Icon : XIcon
-  const classes = type === 'disclosure' ? '' : 'absolute top-0'
+  const classes = type === 'disclosure' ? 'min-h-full' : 'absolute top-0'
 
   return (
     <Panel as="nav" {...props}>
