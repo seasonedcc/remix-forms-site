@@ -1,10 +1,13 @@
-import { Link, Outlet } from '@remix-run/react'
+import { Link, Outlet, useMatches } from '@remix-run/react'
 import { $path } from 'remix-routes'
 import ExternalLink from '~/ui/external-link'
 import SidebarLayout from '~/ui/sidebar-layout'
-import SecondaryButton from '~/ui/secondary-button'
+import SecondaryButtonLink from '~/ui/secondary-button-link'
 
 export default function Component() {
+  const matches = useMatches()
+  const { previous, next } = matches.filter((match) => match.handle)[0].handle
+
   return (
     <div className="relative isolate flex grow flex-col">
       <SidebarLayout>
@@ -83,9 +86,19 @@ export default function Component() {
           <div className="flex flex-col space-y-4 p-4 text-gray-200 sm:space-y-8 sm:p-8">
             <Outlet />
           </div>
-          <div className="mt-10 flex flex-row justify-between p-4 sm:p-8">
-            <SecondaryButton>Previous</SecondaryButton>
-            <SecondaryButton>Next</SecondaryButton>
+          <div className="mt-8 flex flex-row justify-between p-4 pb-8 sm:mt-0 sm:p-8">
+            {previous ? (
+              <SecondaryButtonLink to={$path(previous)}>
+                Previous
+              </SecondaryButtonLink>
+            ) : (
+              <div className="invisible" />
+            )}
+            {next ? (
+              <SecondaryButtonLink to={$path(next)}>Next</SecondaryButtonLink>
+            ) : (
+              <div className="invisible" />
+            )}
           </div>
         </SidebarLayout.Content>
       </SidebarLayout>

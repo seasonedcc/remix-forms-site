@@ -84,6 +84,11 @@ export const action: ActionFunction = async ({ request }) =>
     successPath: 'conf/success/08',
   })
 
+export const handle = {
+  previous: '07',
+  next: '09',
+}
+
 export default function Component() {
   return (
     <Example title={title} description={description} countLines>

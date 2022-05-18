@@ -164,6 +164,11 @@ function FieldError({ name }: { name: string }) {
   return <div className="mt-1 text-red-500">{message}</div>
 }
 
+export const handle = {
+  previous: '01',
+  next: '03',
+}
+
 export default function Component() {
   return (
     <Example title={title} description={description} countLines>
