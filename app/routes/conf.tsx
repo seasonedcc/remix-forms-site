@@ -66,10 +66,17 @@ export default function Component() {
                 interactive counterpart
               </Link>{' '}
               to our talk at Remix Conf 2022. Get the full slides{' '}
-              <ExternalLink>here</ExternalLink>.
+              <ExternalLink href="https://docs.google.com/presentation/d/1Mp961HsJD9qVElS5VD-szYJ9CkZhnVjJBwMfUahwwek/edit#slide=id.p">
+                here
+              </ExternalLink>
+              .
             </div>
             <div className="flex-1 text-center text-white lg:hidden">
-              Get the full slides <ExternalLink>here</ExternalLink>.
+              Get the full slides{' '}
+              <ExternalLink href="https://docs.google.com/presentation/d/1Mp961HsJD9qVElS5VD-szYJ9CkZhnVjJBwMfUahwwek/edit#slide=id.p">
+                here
+              </ExternalLink>
+              .
             </div>
           </div>
           <div className="flex flex-col space-y-4 p-4 text-gray-200 sm:space-y-8 sm:p-8">
