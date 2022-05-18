@@ -88,14 +88,12 @@ export default function Component() {
           </div>
           <div className="mt-8 flex flex-row justify-between p-4 pb-8 sm:mt-0 sm:p-8">
             {previous ? (
-              <SecondaryButtonLink to={$path(previous)}>
-                Previous
-              </SecondaryButtonLink>
+              <SecondaryButtonLink to={previous}>Previous</SecondaryButtonLink>
             ) : (
               <div className="invisible" />
             )}
             {next ? (
-              <SecondaryButtonLink to={$path(next)}>Next</SecondaryButtonLink>
+              <SecondaryButtonLink to={next}>Next</SecondaryButtonLink>
             ) : (
               <div className="invisible" />
             )}
