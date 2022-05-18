@@ -2,6 +2,7 @@ import { Link, Outlet } from '@remix-run/react'
 import { $path } from 'remix-routes'
 import ExternalLink from '~/ui/external-link'
 import SidebarLayout from '~/ui/sidebar-layout'
+import SecondaryButton from '~/ui/secondary-button'
 
 export default function Component() {
   return (
@@ -81,6 +82,10 @@ export default function Component() {
           </div>
           <div className="flex flex-col space-y-4 p-4 text-gray-200 sm:space-y-8 sm:p-8">
             <Outlet />
+          </div>
+          <div className="mt-10 flex flex-row justify-between p-4 sm:p-8">
+            <SecondaryButton>Previous</SecondaryButton>
+            <SecondaryButton>Next</SecondaryButton>
           </div>
         </SidebarLayout.Content>
       </SidebarLayout>
