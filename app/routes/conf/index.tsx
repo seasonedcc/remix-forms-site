@@ -37,9 +37,9 @@ export default function Component() {
         </Feature>
       </dl>
       <p className="text-lg">
-        Check out the complete code for the examples{' '}
+        Check out the{' '}
         <ExternalLink href="https://github.com/SeasonedSoftware/remix-forms-site/tree/main/app/routes/conf">
-          here
+          complete code for the examples
         </ExternalLink>
         .
       </p>

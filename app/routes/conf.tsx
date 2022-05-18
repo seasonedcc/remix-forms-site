@@ -70,16 +70,16 @@ export default function Component() {
               <Link to={$path('/conf')} className="underline">
                 interactive counterpart
               </Link>{' '}
-              to our talk at Remix Conf 2022. Get the full slides{' '}
+              to our talk at Remix Conf 2022.{' '}
               <ExternalLink href="https://docs.google.com/presentation/d/1Mp961HsJD9qVElS5VD-szYJ9CkZhnVjJBwMfUahwwek/edit#slide=id.p">
-                here
+                Get the full slides
               </ExternalLink>
               .
             </div>
             <div className="flex-1 text-center text-white lg:hidden">
-              Get the full slides{' '}
+              {' '}
               <ExternalLink href="https://docs.google.com/presentation/d/1Mp961HsJD9qVElS5VD-szYJ9CkZhnVjJBwMfUahwwek/edit#slide=id.p">
-                here
+                Get the full slides
               </ExternalLink>
               .
             </div>
