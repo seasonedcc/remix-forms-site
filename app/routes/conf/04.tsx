@@ -52,7 +52,7 @@ const reservationSchema = z.object({
 })
 
 async function makeReservation(values: z.infer<typeof reservationSchema>) {
-  // Here you would store data istead
+  // Here you would store data instead
   console.log(values)
 }
 
@@ -176,7 +176,7 @@ const reservationSchema = z.object({
 })
 
 async function makeReservation(values: z.infer<typeof reservationSchema>) {
-  // Here you would store data istead
+  // Here you would store data instead
   console.log(values)
 }
 

@@ -29,7 +29,7 @@ import TextArea from '~/ui/text-area'
 import Button from '~/ui/button'
 
 async function makeReservation(values: Record<string, FormDataEntryValue>) {
-  // Here you would store data istead
+  // Here you would store data instead
   console.log(values)
 }
 
@@ -89,7 +89,7 @@ export const loader: LoaderFunction = () => ({
 })
 
 async function makeReservation(values: Record<string, FormDataEntryValue>) {
-  // Here you would store data istead
+  // Here you would store data instead
   console.log(values)
 }
 

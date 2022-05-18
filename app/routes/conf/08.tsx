@@ -34,7 +34,7 @@ const makeReservation = makeDomainFunction(reservationSchema)(
       throw new InputError("Don't be such a diva!", 'specialRequests')
     }
 
-    // Here you would store data istead
+    // Here you would store data instead
     console.log(values)
   },
 )
@@ -71,7 +71,7 @@ const makeReservation = makeDomainFunction(reservationSchema)(
       throw new InputError("Don't be such a diva!", 'specialRequests')
     }
 
-    // Here you would store data istead
+    // Here you would store data instead
     console.log(values)
   },
 )
