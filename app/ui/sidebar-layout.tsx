@@ -22,7 +22,7 @@ function Nav({ children, type = 'disclosure', close, ...props }: NavProps) {
     <Panel as="nav" {...props}>
       <div className={cx('w-[14rem] bg-pink-600 p-2 pb-4', classes)}>
         <div className="flex justify-end p-1">
-          <Button className="inline-flex items-center justify-center rounded-md p-1 text-gray-900 hover:bg-pink-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+          <Button className="inline-flex items-center justify-center rounded-md p-1 text-[#480803] hover:bg-pink-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
             <Icon className="block h-6 w-6" />
           </Button>
         </div>
@@ -44,7 +44,7 @@ function Nav({ children, type = 'disclosure', close, ...props }: NavProps) {
 
 function NavTitle({ className, ...props }: JSX.IntrinsicElements['h4']) {
   return (
-    <h4 className={cx('font-medium text-gray-900', className)} {...props} />
+    <h4 className={cx('font-medium text-[#480803]', className)} {...props} />
   )
 }
 
@@ -92,7 +92,7 @@ function Closed({ type }: { type: SidebarType }) {
   return (
     <div className={cx('absolute inset-y-0 w-10 bg-pink-600 p-1 md:relative')}>
       <div className="relative h-full">
-        <Button className="sticky top-0 inline-flex items-center justify-center rounded-md p-1 text-gray-900 hover:bg-pink-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+        <Button className="sticky top-0 inline-flex items-center justify-center rounded-md p-1 text-[#480803] hover:bg-pink-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
           <MenuAlt2Icon className="block h-6 w-6" />
         </Button>
       </div>
