@@ -6,7 +6,8 @@ import SecondaryButtonLink from '~/ui/secondary-button-link'
 
 export default function Component() {
   const matches = useMatches()
-  const { previous, next } = matches.filter((match) => match.handle)[0].handle
+  const { previous, next } =
+    matches.filter((match) => match.handle)[0]?.handle || {}
 
   return (
     <div className="relative isolate flex grow flex-col">
