@@ -1,9 +1,14 @@
-import { Link, Outlet } from '@remix-run/react'
+import { Link, Outlet, useMatches } from '@remix-run/react'
 import { $path } from 'remix-routes'
 import ExternalLink from '~/ui/external-link'
 import SidebarLayout from '~/ui/sidebar-layout'
+import SecondaryButtonLink from '~/ui/secondary-button-link'
 
 export default function Component() {
+  const matches = useMatches()
+  const { previous, next } =
+    matches.filter((match) => match.handle)[0]?.handle || {}
+
   return (
     <div className="relative isolate flex grow flex-col">
       <SidebarLayout>
@@ -65,22 +70,34 @@ export default function Component() {
               <Link to={$path('/conf')} className="underline">
                 interactive counterpart
               </Link>{' '}
-              to our talk at Remix Conf 2022. Get the full slides{' '}
+              to our talk at Remix Conf 2022.{' '}
               <ExternalLink href="https://docs.google.com/presentation/d/1Mp961HsJD9qVElS5VD-szYJ9CkZhnVjJBwMfUahwwek/edit#slide=id.p">
-                here
+                Get the full slides
               </ExternalLink>
               .
             </div>
             <div className="flex-1 text-center text-white lg:hidden">
-              Get the full slides{' '}
+              {' '}
               <ExternalLink href="https://docs.google.com/presentation/d/1Mp961HsJD9qVElS5VD-szYJ9CkZhnVjJBwMfUahwwek/edit#slide=id.p">
-                here
+                Get the full slides
               </ExternalLink>
               .
             </div>
           </div>
           <div className="flex flex-col space-y-4 p-4 text-gray-200 sm:space-y-8 sm:p-8">
             <Outlet />
+          </div>
+          <div className="mt-8 flex flex-row justify-between p-4 pb-8 sm:mt-0 sm:p-8">
+            {previous ? (
+              <SecondaryButtonLink to={previous}>Previous</SecondaryButtonLink>
+            ) : (
+              <div className="invisible" />
+            )}
+            {next ? (
+              <SecondaryButtonLink to={next}>Next</SecondaryButtonLink>
+            ) : (
+              <div className="invisible" />
+            )}
           </div>
         </SidebarLayout.Content>
       </SidebarLayout>

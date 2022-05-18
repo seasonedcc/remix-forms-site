@@ -99,6 +99,10 @@ export const action: ActionFunction = async ({ request }) => {
   return redirect('conf/success/01')
 }
 
+export const handle = {
+  next: '02',
+}
+
 export default function Component() {
   return (
     <Example title={title} description={description} countLines>

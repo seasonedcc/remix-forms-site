@@ -103,6 +103,10 @@ export const action: ActionFunction = async ({ request }) =>
     successPath: 'conf/success/09',
   })
 
+export const handle = {
+  previous: '08',
+}
+
 export default function Component() {
   return (
     <Example title={title} description={description} countLines>

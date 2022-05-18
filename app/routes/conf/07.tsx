@@ -337,6 +337,11 @@ function FieldError({ name, errors }: { name: string; errors: any }) {
   return <ServerError name={name} />
 }
 
+export const handle = {
+  previous: '06',
+  next: '08',
+}
+
 export default function Component() {
   const resolver = zodResolver(reservationSchema)
   const { register, handleSubmit, formState, setFocus } = useForm({ resolver })
