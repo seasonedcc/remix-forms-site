@@ -32,7 +32,7 @@ export default function Component() {
           </SidebarLayout.NavLink>
           <SidebarLayout.NavTitle>Remix Forms</SidebarLayout.NavTitle>
           <SidebarLayout.NavLink to={$path('/conf/08')}>
-            08. Basic layout
+            08. Default layout
           </SidebarLayout.NavLink>
           <SidebarLayout.NavLink to={$path('/conf/09')}>
             09. Custom layout
