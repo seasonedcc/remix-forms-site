@@ -20,7 +20,7 @@ function Nav({ children, type = 'disclosure', close, ...props }: NavProps) {
 
   return (
     <Panel as="nav" {...props}>
-      <div className={cx('w-[14rem] bg-pink-600 p-2 pb-4', classes)}>
+      <div className={cx('z-10 w-[14rem] bg-pink-600 p-2 pb-4', classes)}>
         <div className="flex justify-end p-1">
           <Button className="inline-flex items-center justify-center rounded-md p-1 text-[#480803] hover:bg-pink-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
             <Icon className="block h-6 w-6" />
