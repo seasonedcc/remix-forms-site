@@ -36,11 +36,11 @@ test.describe('Home page form', () => {
     })
   })
 
-  test.describe('when empty', () => {
+  test.describe('Client-side validation', () => {
     test('shows the correct errors', async ({ page }) => {
       await page.goto('/')
 
-      await page.locator('text=OK').click()
+      await page.locator('button:has-text("OK")').click()
 
       await expect(page.locator('input[name="firstName"] ~div')).toHaveText(
         'String must contain at least 1 character(s)',
@@ -49,6 +49,28 @@ test.describe('Home page form', () => {
       await expect(page.locator('input[name="email"] ~div')).toHaveText(
         'String must contain at least 1 character(s)',
       )
+
+      await page.locator('input[name="firstName"]').type('John')
+      await page.locator('button:has-text("OK")').click()
+      await expect(page.locator('input[name="email"]')).toBeFocused()
+
+      await page.locator('input[name="email"]').type('john')
+      await expect(page.locator('input[name="email"] ~div')).toHaveText(
+        'Invalid email',
+      )
+    })
+  })
+
+  test.describe('Submit', () => {
+    test('submits the form and redirects', async ({ page }) => {
+      await page.goto('/')
+
+      await page.locator('input[name="firstName"]').type('John')
+      await page.locator('input[name="email"]').type('john@doe.com')
+
+      await page.locator('button:has-text("OK")').click()
+
+      await expect(page).toHaveURL('/success')
     })
   })
 })
