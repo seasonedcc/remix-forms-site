@@ -118,6 +118,7 @@ test.describe('Home page form', () => {
       await page.locator('input[name="email"]').type('john@doe.com')
 
       await page.locator('form button:has-text("OK")').click()
+      await expect(page.locator('form button:has-text("OK")')).toBeDisabled()
 
       await expect(page).toHaveURL('/success')
     })
