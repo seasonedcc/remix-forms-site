@@ -2,10 +2,22 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Home page form', () => {
   test.describe('Render', () => {
-    test('renders the correct input types', async ({ page }) => {
+    test('renders the correct input names, types, labels and values', async ({
+      page,
+    }) => {
       await page.goto('/')
 
       const firstNameInput = page.locator('input[name="firstName"]')
+      const firstNameLabel = page.locator('label[for="firstName"]')
+      const emailInput = page.locator('input[name="email"]')
+      const emailLabel = page.locator('label[for="email"]')
+      const selectInput = page.locator('select[name="howYouFoundOutAboutUs"]')
+      const selectLabel = page.locator('label[for="howYouFoundOutAboutUs"]')
+      const options = page.locator(
+        'select[name="howYouFoundOutAboutUs"] > option',
+      )
+      const submitButton = page.locator('form button:has-text("OK")')
+
       await expect(firstNameInput).toHaveAttribute('type', 'text')
       await expect(firstNameInput).toHaveValue('')
       await expect(firstNameInput).toHaveAttribute(
@@ -15,11 +27,9 @@ test.describe('Home page form', () => {
       await expect(firstNameInput).toHaveAttribute('aria-required', 'true')
       await expect(firstNameInput).toHaveAttribute('aria-invalid', 'false')
 
-      const firstNameLabel = page.locator('label[for="firstName"]')
       await expect(firstNameLabel).toHaveText('First Name')
       await expect(firstNameLabel).toHaveId('label-for-firstName')
 
-      const emailInput = page.locator('input[name="email"]')
       await expect(emailInput).toHaveAttribute('type', 'text')
       await expect(emailInput).toHaveValue('')
       await expect(emailInput).toHaveAttribute(
@@ -29,11 +39,9 @@ test.describe('Home page form', () => {
       await expect(emailInput).toHaveAttribute('aria-required', 'true')
       await expect(emailInput).toHaveAttribute('aria-invalid', 'false')
 
-      const emailLabel = page.locator('label[for="email"]')
       await expect(emailLabel).toHaveText('Email')
       await expect(emailLabel).toHaveId('label-for-email')
 
-      const selectInput = page.locator('select[name="howYouFoundOutAboutUs"]')
       await expect(selectInput).toHaveValue('fromAFriend')
       await expect(selectInput).toHaveAttribute(
         'aria-labelledby',
@@ -42,15 +50,13 @@ test.describe('Home page form', () => {
       await expect(selectInput).toHaveAttribute('aria-required', 'true')
       await expect(selectInput).toHaveAttribute('aria-invalid', 'false')
 
-      const selectLabel = page.locator('label[for="howYouFoundOutAboutUs"]')
       await expect(selectLabel).toHaveText('How You Found Out About Us')
       await expect(selectLabel).toHaveId('label-for-howYouFoundOutAboutUs')
 
-      const options = page.locator(
-        'select[name="howYouFoundOutAboutUs"] > option',
-      )
       await expect(options.nth(0)).toHaveText('From A Friend')
       await expect(options.nth(1)).toHaveText('Google')
+
+      await expect(submitButton).toBeEnabled()
     })
   })
 
@@ -59,10 +65,11 @@ test.describe('Home page form', () => {
       await page.goto('/')
 
       // Validate form
-      await page.locator('form button:has-text("OK")').click()
-
+      const submitButton = page.locator('form button:has-text("OK")')
       const firstNameInput = page.locator('input[name="firstName"]')
       const emailInput = page.locator('input[name="email"]')
+
+      await submitButton.click()
 
       // Show field errors and focus on the first field
       await expect(page.locator('#errors-for-firstName')).toHaveText(
@@ -93,7 +100,7 @@ test.describe('Home page form', () => {
 
       // Make first field be valid, focus goes to the second field
       await firstNameInput.type('John')
-      await page.locator('form button:has-text("OK")').click()
+      await submitButton.click()
       await expect(firstNameInput).toHaveAttribute('aria-invalid', 'false')
       await expect(emailInput).toBeFocused()
 
@@ -111,14 +118,19 @@ test.describe('Home page form', () => {
   })
 
   test.describe('Submit', () => {
-    test('submits the form and redirects', async ({ page }) => {
+    test.only('submits the form and redirects', async ({ page }) => {
       await page.goto('/')
 
-      await page.locator('input[name="firstName"]').type('John')
-      await page.locator('input[name="email"]').type('john@doe.com')
+      const submitButton = page.locator('form button:has-text("OK")')
+      const firstNameInput = page.locator('input[name="firstName"]')
+      const emailInput = page.locator('input[name="email"]')
 
-      await page.locator('form button:has-text("OK")').click()
-      await expect(page.locator('form button:has-text("OK")')).toBeDisabled()
+      await firstNameInput.type('John')
+      await emailInput.type('john@doe.com')
+      await page.selectOption('select[name="howYouFoundOutAboutUs"]', 'google')
+
+      await submitButton.click()
+      await expect(submitButton).toBeDisabled()
 
       await expect(page).toHaveURL('/success')
     })
