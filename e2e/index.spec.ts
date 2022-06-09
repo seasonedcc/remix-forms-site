@@ -118,7 +118,7 @@ test.describe('Home page form', () => {
   })
 
   test.describe('Submit', () => {
-    test.only('submits the form and redirects', async ({ page }) => {
+    test('submits the form and redirects', async ({ page }) => {
       await page.goto('/')
 
       const submitButton = page.locator('form button:has-text("OK")')
