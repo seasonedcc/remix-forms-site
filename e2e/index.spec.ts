@@ -13,9 +13,6 @@ test.describe('Home page form', () => {
       const emailLabel = page.locator('label[for="email"]')
       const selectInput = page.locator('select[name="howYouFoundOutAboutUs"]')
       const selectLabel = page.locator('label[for="howYouFoundOutAboutUs"]')
-      const options = page.locator(
-        'select[name="howYouFoundOutAboutUs"] > option',
-      )
       const submitButton = page.locator('form button:has-text("OK")')
 
       await expect(firstNameInput).toHaveAttribute('type', 'text')
@@ -53,8 +50,10 @@ test.describe('Home page form', () => {
       await expect(selectLabel).toHaveText('How You Found Out About Us')
       await expect(selectLabel).toHaveId('label-for-howYouFoundOutAboutUs')
 
-      await expect(options.nth(0)).toHaveText('From A Friend')
-      await expect(options.nth(1)).toHaveText('Google')
+      await expect(selectInput.locator('option').first()).toHaveText(
+        'From A Friend',
+      )
+      await expect(selectInput.locator('option').last()).toHaveText('Google')
 
       await expect(submitButton).toBeEnabled()
     })
@@ -124,10 +123,11 @@ test.describe('Home page form', () => {
       const submitButton = page.locator('form button:has-text("OK")')
       const firstNameInput = page.locator('input[name="firstName"]')
       const emailInput = page.locator('input[name="email"]')
+      const selectInput = page.locator('select[name="howYouFoundOutAboutUs"]')
 
       await firstNameInput.type('John')
       await emailInput.type('john@doe.com')
-      await page.selectOption('select[name="howYouFoundOutAboutUs"]', 'google')
+      await selectInput.selectOption('google')
 
       await submitButton.click()
       await expect(submitButton).toBeDisabled()
