@@ -1,9 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Home page form', () => {
-  test('renders the correct input names, types, labels and values', async ({
-    page,
-  }) => {
+  test('with JS enabled', async ({ page }) => {
     await page.goto('/')
 
     // Render
@@ -102,22 +100,16 @@ test.describe('Home page form', () => {
     await emailInput.fill('john@doe.com')
     await expect(emailInput).toHaveAttribute('aria-invalid', 'false')
 
+    await selectInput.selectOption('google')
+
     // Submit form
     await page.route('**/*', async (route) => {
       await new Promise((f) => setTimeout(f, 50))
       await route.continue()
     })
 
-    await firstNameInput.fill('')
-    await emailInput.fill('')
-
-    await firstNameInput.type('John')
-    await emailInput.type('john@doe.com')
-    await selectInput.selectOption('google')
-
     submitButton.click()
     await expect(submitButton).toBeDisabled()
-
     await expect(page).toHaveURL('/success')
   })
 })
