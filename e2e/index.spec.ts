@@ -113,3 +113,72 @@ test.describe('Home page form', () => {
     await expect(page).toHaveURL('/success')
   })
 })
+
+test.describe('With JS disabled', () => {
+  test('renders the correct input names, types, labels and values', async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false })
+    const page = await context.newPage()
+
+    await page.goto('/')
+
+    const firstNameInput = page.locator('input[name="firstName"]')
+    const emailInput = page.locator('input[name="email"]')
+    const selectInput = page.locator('select[name="howYouFoundOutAboutUs"]')
+    const submitButton = page.locator('form button:has-text("OK")')
+
+    // Server-side validation
+    await submitButton.click()
+
+    // Show field errors and focus on the first field
+    await expect(page.locator('#errors-for-firstName')).toHaveText(
+      'String must contain at least 1 character(s)',
+    )
+    await expect(page.locator('#errors-for-firstName')).toHaveAttribute(
+      'role',
+      'alert',
+    )
+    await expect(firstNameInput).toHaveAttribute('aria-invalid', 'true')
+    await expect(firstNameInput).toHaveAttribute(
+      'aria-describedBy',
+      'errors-for-firstName',
+    )
+
+    await expect(page.locator('#errors-for-email')).toHaveText(
+      'String must contain at least 1 character(s)Invalid email',
+    )
+    await expect(page.locator('#errors-for-email')).toHaveAttribute(
+      'role',
+      'alert',
+    )
+    await expect(emailInput).toHaveAttribute('aria-invalid', 'true')
+    await expect(emailInput).toHaveAttribute(
+      'aria-describedBy',
+      'errors-for-email',
+    )
+    await expect(firstNameInput).toBeFocused()
+
+    // Make first field be valid, focus goes to the second field
+    await firstNameInput.fill('John')
+    await submitButton.click()
+
+    await expect(firstNameInput).toHaveAttribute('aria-invalid', 'false')
+    await expect(emailInput).toBeFocused()
+
+    // Try another invalid message
+    await emailInput.fill('john')
+    await submitButton.click()
+
+    await expect(page.locator('#errors-for-email')).toHaveText('Invalid email')
+    await expect(emailInput).toHaveAttribute('aria-invalid', 'true')
+
+    // Make form be valid and test selecting an option
+    await emailInput.fill('john@doe.com')
+    await selectInput.selectOption('google')
+
+    // Submit form
+    submitButton.click()
+    await expect(page).toHaveURL('/success')
+  })
+})
