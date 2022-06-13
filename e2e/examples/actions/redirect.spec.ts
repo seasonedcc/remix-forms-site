@@ -1,16 +1,14 @@
 import { test, expect } from '@playwright/test'
 
 test('With JS enabled', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/examples/actions/redirect')
 
   // Render
-  const firstNameInput = page.locator('input[name="firstName"]')
-  const firstNameLabel = page.locator('label[for="firstName"]')
-  const emailInput = page.locator('input[name="email"]')
-  const emailLabel = page.locator('label[for="email"]')
-  const selectInput = page.locator('select[name="howYouFoundOutAboutUs"]')
-  const selectLabel = page.locator('label[for="howYouFoundOutAboutUs"]')
-  const submitButton = page.locator('form button:has-text("OK")')
+  const firstNameInput = page.locator('input[name="firstName"]').first()
+  const firstNameLabel = page.locator('label[for="firstName"]').first()
+  const emailInput = page.locator('input[name="email"]').first()
+  const emailLabel = page.locator('label[for="email"]').first()
+  const submitButton = page.locator('form button:has-text("OK")').first()
 
   await expect(firstNameInput).toHaveAttribute('type', 'text')
   await expect(firstNameInput).toHaveValue('')
@@ -33,47 +31,28 @@ test('With JS enabled', async ({ page }) => {
   await expect(emailLabel).toHaveText('Email')
   await expect(emailLabel).toHaveId('label-for-email')
 
-  await expect(selectInput).toHaveValue('fromAFriend')
-  await expect(selectInput).toHaveAttribute(
-    'aria-labelledby',
-    'label-for-howYouFoundOutAboutUs',
-  )
-  await expect(selectInput).toHaveAttribute('aria-required', 'true')
-  await expect(selectInput).toHaveAttribute('aria-invalid', 'false')
-
-  await expect(selectLabel).toHaveText('How You Found Out About Us')
-  await expect(selectLabel).toHaveId('label-for-howYouFoundOutAboutUs')
-
-  await expect(selectInput.locator('option').first()).toHaveText(
-    'From A Friend',
-  )
-  await expect(selectInput.locator('option').last()).toHaveText('Google')
-
   await expect(submitButton).toBeEnabled()
 
   // Client-side validation
   await submitButton.click()
 
+  const firstNameErrors = page.locator('#errors-for-firstName').first()
+  const emailErrors = page.locator('#errors-for-email').first()
+
   // Show field errors and focus on the first field
-  await expect(page.locator('#errors-for-firstName')).toHaveText(
+  await expect(firstNameErrors).toHaveText(
     'String must contain at least 1 character(s)',
   )
-  await expect(page.locator('#errors-for-firstName')).toHaveAttribute(
-    'role',
-    'alert',
-  )
+  await expect(firstNameErrors).toHaveAttribute('role', 'alert')
   await expect(firstNameInput).toHaveAttribute('aria-invalid', 'true')
   await expect(firstNameInput).toHaveAttribute(
     'aria-describedBy',
     'errors-for-firstName',
   )
-  await expect(page.locator('#errors-for-email')).toHaveText(
+  await expect(emailErrors).toHaveText(
     'String must contain at least 1 character(s)',
   )
-  await expect(page.locator('#errors-for-email')).toHaveAttribute(
-    'role',
-    'alert',
-  )
+  await expect(emailErrors).toHaveAttribute('role', 'alert')
   await expect(emailInput).toHaveAttribute('aria-invalid', 'true')
   await expect(emailInput).toHaveAttribute(
     'aria-describedBy',
@@ -96,8 +75,6 @@ test('With JS enabled', async ({ page }) => {
   await emailInput.fill('john@doe.com')
   await expect(emailInput).toHaveAttribute('aria-invalid', 'false')
 
-  await selectInput.selectOption('google')
-
   // Submit form
   await page.route('**/*', async (route) => {
     await new Promise((f) => setTimeout(f, 100))
@@ -113,41 +90,37 @@ test('With JS disabled', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false })
   const page = await context.newPage()
 
-  await page.goto('/')
+  await page.goto('/examples/actions/redirect')
 
-  const firstNameInput = page.locator('input[name="firstName"]')
-  const emailInput = page.locator('input[name="email"]')
-  const selectInput = page.locator('select[name="howYouFoundOutAboutUs"]')
-  const submitButton = page.locator('form button:has-text("OK")')
+  const firstNameInput = page.locator('input[name="firstName"]').first()
+  const emailInput = page.locator('input[name="email"]').first()
+  const submitButton = page.locator('form button:has-text("OK")').first()
 
   // Server-side validation
   await submitButton.click()
 
   await page.reload()
 
+  const firstNameErrors = page.locator('#errors-for-firstName').first()
+
   // Show field errors and focus on the first field
-  await expect(page.locator('#errors-for-firstName')).toHaveText(
+  await expect(firstNameErrors).toHaveText(
     'String must contain at least 1 character(s)',
   )
-  await expect(page.locator('#errors-for-firstName')).toHaveAttribute(
-    'role',
-    'alert',
-  )
+  await expect(firstNameErrors).toHaveAttribute('role', 'alert')
   await expect(firstNameInput).toHaveAttribute('aria-invalid', 'true')
   await expect(firstNameInput).toHaveAttribute(
     'aria-describedBy',
     'errors-for-firstName',
   )
 
-  const emailErrors = await page.locator('#errors-for-email > div')
-  await expect(emailErrors.first()).toHaveText(
+  const emailErrors = page.locator('#errors-for-email').first()
+  const emailErrorDivs = await emailErrors.locator('div')
+  await expect(emailErrorDivs.first()).toHaveText(
     'String must contain at least 1 character(s)',
   )
-  await expect(emailErrors.last()).toHaveText('Invalid email')
-  await expect(page.locator('#errors-for-email')).toHaveAttribute(
-    'role',
-    'alert',
-  )
+  await expect(emailErrorDivs.last()).toHaveText('Invalid email')
+  await expect(emailErrors).toHaveAttribute('role', 'alert')
   await expect(emailInput).toHaveAttribute('aria-invalid', 'true')
   await expect(emailInput).toHaveAttribute(
     'aria-describedBy',
@@ -174,12 +147,11 @@ test('With JS disabled', async ({ browser }) => {
 
   await page.reload()
 
-  await expect(page.locator('#errors-for-email')).toHaveText('Invalid email')
+  await expect(emailErrors).toHaveText('Invalid email')
   await expect(emailInput).toHaveAttribute('aria-invalid', 'true')
 
   // Make form be valid and test selecting an option
   await emailInput.fill('john@doe.com')
-  await selectInput.selectOption('google')
 
   // Submit form
   await submitButton.click()
