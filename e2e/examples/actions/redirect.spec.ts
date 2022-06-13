@@ -77,7 +77,7 @@ test('With JS enabled', async ({ page }) => {
 
   // Submit form
   await page.route('**/*', async (route) => {
-    await new Promise((f) => setTimeout(f, 50))
+    await new Promise((f) => setTimeout(f, 100))
     await route.continue()
   })
 
@@ -144,6 +144,6 @@ test('With JS disabled', async ({ browser }) => {
   await emailInput.fill('john@doe.com')
 
   // Submit form
-  submitButton.click()
+  await submitButton.click()
   await expect(page).toHaveURL('/success')
 })
