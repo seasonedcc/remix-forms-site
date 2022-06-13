@@ -115,7 +115,7 @@ test('With JS disabled', async ({ browser }) => {
   )
 
   const emailErrors = page.locator('#errors-for-email').first()
-  const emailErrorDivs = await page.locator('#errors-for-email > div')
+  const emailErrorDivs = await emailErrors.locator('div')
   await expect(emailErrorDivs.first()).toHaveText(
     'String must contain at least 1 character(s)',
   )
