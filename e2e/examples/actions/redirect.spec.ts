@@ -99,6 +99,8 @@ test('With JS disabled', async ({ browser }) => {
   // Server-side validation
   await submitButton.click()
 
+  await page.reload()
+
   const firstNameErrors = page.locator('#errors-for-firstName').first()
 
   // Show field errors and focus on the first field
@@ -124,18 +126,26 @@ test('With JS disabled', async ({ browser }) => {
     'aria-describedBy',
     'errors-for-email',
   )
-  await expect(firstNameInput).toBeFocused()
+
+  await expect(await firstNameInput.getAttribute('autofocus')).not.toBeNull()
+  await expect(await emailInput.getAttribute('autofocus')).toBeNull()
 
   // Make first field be valid, focus goes to the second field
   await firstNameInput.fill('John')
   await submitButton.click()
 
+  await page.reload()
+
   await expect(firstNameInput).toHaveAttribute('aria-invalid', 'false')
-  await expect(emailInput).toBeFocused()
+
+  await expect(await firstNameInput.getAttribute('autofocus')).toBeNull()
+  await expect(await emailInput.getAttribute('autofocus')).not.toBeNull()
 
   // Try another invalid message
   await emailInput.fill('john')
   await submitButton.click()
+
+  await page.reload()
 
   await expect(emailErrors).toHaveText('Invalid email')
   await expect(emailInput).toHaveAttribute('aria-invalid', 'true')
@@ -145,5 +155,8 @@ test('With JS disabled', async ({ browser }) => {
 
   // Submit form
   await submitButton.click()
+
+  await page.reload()
+
   await expect(page).toHaveURL('/success')
 })
