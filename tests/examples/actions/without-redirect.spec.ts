@@ -45,8 +45,7 @@ test('With JS enabled', async ({ example }) => {
   await expect(button).toBeDisabled()
 
   const actionResult = await page
-    .locator('#action-data > pre')
-    .first()
+    .locator('#action-data > pre:visible')
     .innerText()
 
   await expect(actionResult).toContain('"firstName": "John"')
@@ -89,10 +88,7 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await email.input.fill('john')
   await button.click()
   await page.reload()
-  await expect(page.locator('#errors-for-email').first()).toHaveText(
-    'Invalid email',
-  )
-  await expect(email.input).toHaveAttribute('aria-invalid', 'true')
+  await example.expectError(email, 'Invalid email')
 
   // Make form be valid and test selecting an option
   await email.input.fill('john@doe.com')
@@ -101,8 +97,7 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await button.click()
   await page.reload()
   const actionResult = await page
-    .locator('#action-data > pre')
-    .first()
+    .locator('#action-data > pre:visible')
     .innerText()
 
   await expect(actionResult).toContain('"firstName": "John"')

@@ -56,14 +56,11 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await button.click()
   await page.reload()
 
-  await page.pause()
   // Show field errors and focus on the first field
   await example.expectError(
     firstName,
     'String must contain at least 1 character(s)',
   )
-
-  await page.pause()
 
   await example.expectErrors(
     email,
@@ -86,10 +83,7 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await email.input.fill('john')
   await button.click()
   await page.reload()
-  await expect(page.locator('#errors-for-email').first()).toHaveText(
-    'Invalid email',
-  )
-  await expect(email.input).toHaveAttribute('aria-invalid', 'true')
+  await example.expectError(email, 'Invalid email')
 
   // Make form be valid and test selecting an option
   await email.input.fill('john@doe.com')
