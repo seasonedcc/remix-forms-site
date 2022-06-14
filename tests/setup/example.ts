@@ -77,7 +77,7 @@ class Example {
 
   async expectInvalid(field: Field) {
     await expect(
-      this.page.locator(`#errors-for-${field.name}`),
+      this.page.locator(`#errors-for-${field.name}`).first(),
     ).toHaveAttribute('role', 'alert')
 
     await expect(field.input).toHaveAttribute('aria-invalid', 'true')
@@ -91,9 +91,9 @@ class Example {
   async expectError(field: Field, message: string) {
     await this.expectInvalid(field)
 
-    await expect(this.page.locator(`#errors-for-${field.name}`)).toHaveText(
-      message,
-    )
+    await expect(
+      this.page.locator(`#errors-for-${field.name}`).first(),
+    ).toHaveText(message)
   }
 
   async expectErrors(field: Field, ...messages: string[]) {

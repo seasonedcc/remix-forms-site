@@ -1,10 +1,12 @@
 //import { test, expect } from '@playwright/test'
 import { test, testWithoutJS, expect } from 'tests/setup/tests'
 
+const route = '/examples/actions/redirect'
+
 test('With JS enabled', async ({ example }) => {
   const { firstName, email, button, page } = example
 
-  await page.goto('/examples/actions/redirect')
+  await page.goto(route)
 
   // Render
   await example.expectField(firstName)
@@ -15,7 +17,6 @@ test('With JS enabled', async ({ example }) => {
   await button.click()
 
   // Show field errors and focus on the first field
-
   await example.expectError(
     firstName,
     'String must contain at least 1 character(s)',
@@ -49,17 +50,20 @@ test('With JS enabled', async ({ example }) => {
 testWithoutJS('With JS disabled', async ({ example }) => {
   const { firstName, email, button, page } = example
 
-  await page.goto('/')
+  await page.goto(route)
 
   // Server-side validation
   await button.click()
   await page.reload()
 
+  await page.pause()
   // Show field errors and focus on the first field
   await example.expectError(
     firstName,
     'String must contain at least 1 character(s)',
   )
+
+  await page.pause()
 
   await example.expectErrors(
     email,
@@ -82,7 +86,9 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await email.input.fill('john')
   await button.click()
   await page.reload()
-  await expect(page.locator('#errors-for-email')).toHaveText('Invalid email')
+  await expect(page.locator('#errors-for-email').first()).toHaveText(
+    'Invalid email',
+  )
   await expect(email.input).toHaveAttribute('aria-invalid', 'true')
 
   // Make form be valid and test selecting an option
