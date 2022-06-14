@@ -12,9 +12,9 @@
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
     "deploy": "fly deploy --remote-only",
     "start": "cross-env NODE_ENV=production remix-serve build",
-    "test:e2e": "playwright test",
-    "pretest:e2e:ci": "npm run build",
-    "test:e2e:ci": "playwright test"
+    "test": "playwright test",
+    "pretest:ci": "npm run build",
+    "test:ci": "playwright test"
   },
   "dependencies": {
     "@headlessui/react": "^1.5.0",
