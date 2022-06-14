@@ -7,9 +7,9 @@ test('With JS enabled', async ({ example }) => {
   await page.goto('/')
 
   // Render
-  example.expectField(firstName)
-  example.expectField(email)
-  example.expectSelect(howYouFoundOutAboutUs, { value: 'fromAFriend' })
+  await example.expectField(firstName)
+  await example.expectField(email)
+  await example.expectSelect(howYouFoundOutAboutUs, { value: 'fromAFriend' })
   const options = howYouFoundOutAboutUs.input.locator('option')
   await expect(options.first()).toHaveText('From A Friend')
   await expect(options.last()).toHaveText('Google')
