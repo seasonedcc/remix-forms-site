@@ -1,6 +1,6 @@
 import { test, testWithoutJS, expect } from 'tests/setup/tests'
 
-const route = '/examples/actions/global-error'
+const route = '/examples/actions/field-error'
 
 test('With JS enabled', async ({ example }) => {
   const { email, password, button, page } = example
@@ -9,7 +9,7 @@ test('With JS enabled', async ({ example }) => {
 
   // Render
   await example.expectField(email)
-  await example.expectField(password, { type: 'password' })
+  await example.expectField(password)
   await expect(button).toBeEnabled()
 
   // Client-side validation
@@ -36,7 +36,7 @@ test('With JS enabled', async ({ example }) => {
   await example.expectError(email, 'Invalid email')
 
   // Make form be valid
-  await email.input.fill('john@doe.com')
+  await email.input.fill('foo@bar.com')
   await example.expectValid(email)
   await password.input.fill('123456')
   await example.expectValid(password)
@@ -45,13 +45,11 @@ test('With JS enabled', async ({ example }) => {
   button.click()
   await expect(button).toBeDisabled()
 
-  // Show global error
-  await expect(page.locator('form > div[role="alert"]:visible')).toHaveText(
-    'Wrong email or password',
-  )
+  // Show field error
+  await example.expectError(email, 'Email already taken')
 
   // Submit valid form
-  await password.input.fill('supersafe')
+  await email.input.fill('john@doe.com')
   button.click()
 
   const actionResult = await page
@@ -59,7 +57,7 @@ test('With JS enabled', async ({ example }) => {
     .innerText()
 
   await expect(actionResult).toContain('"email": "john@doe.com"')
-  await expect(actionResult).toContain('"password": "supersafe"')
+  await expect(actionResult).toContain('"password": "123456"')
 })
 
 testWithoutJS('With JS disabled', async ({ example }) => {
@@ -101,20 +99,18 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await example.expectError(email, 'Invalid email')
 
   // Make form be valid
-  await email.input.fill('john@doe.com')
+  await email.input.fill('foo@bar.com')
   await password.input.fill('123456')
 
   // Submit form
   await button.click()
   await page.reload()
 
-  // Show global error
-  await expect(page.locator('form > div[role="alert"]:visible')).toHaveText(
-    'Wrong email or password',
-  )
+  // Show field error
+  await example.expectError(email, 'Email already taken')
 
   // Submit valid form
-  await password.input.fill('supersafe')
+  await email.input.fill('john@doe.com')
   await button.click()
   await page.reload()
 
@@ -123,5 +119,5 @@ testWithoutJS('With JS disabled', async ({ example }) => {
     .innerText()
 
   await expect(actionResult).toContain('"email": "john@doe.com"')
-  await expect(actionResult).toContain('"password": "supersafe"')
+  await expect(actionResult).toContain('"password": "123456"')
 })
