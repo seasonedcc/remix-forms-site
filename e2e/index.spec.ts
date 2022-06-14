@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test'
-import { test, testWithoutJS } from './tests'
+import { test, testWithoutJS, expect } from './tests'
 
 test('With JS enabled', async ({ example }) => {
   const { firstName, email, button, page } = example

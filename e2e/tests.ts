@@ -22,3 +22,4 @@ const testWithoutJS = base.extend<{ example: Example }>({
 })
 
 export { test, testWithoutJS }
+export { expect } from '@playwright/test'
