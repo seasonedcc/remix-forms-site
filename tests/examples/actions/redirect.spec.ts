@@ -1,162 +1,95 @@
-import { test, expect } from '@playwright/test'
+//import { test, expect } from '@playwright/test'
+import { test, testWithoutJS, expect } from 'tests/setup/tests'
 
-test('With JS enabled', async ({ page }) => {
-  await page.goto('/examples/actions/redirect')
+const route = '/examples/actions/redirect'
+
+test('With JS enabled', async ({ example }) => {
+  const { firstName, email, button, page } = example
+
+  await page.goto(route)
 
   // Render
-  const firstNameInput = page.locator('input[name="firstName"]').first()
-  const firstNameLabel = page.locator('label[for="firstName"]').first()
-  const emailInput = page.locator('input[name="email"]').first()
-  const emailLabel = page.locator('label[for="email"]').first()
-  const submitButton = page.locator('form button:has-text("OK")').first()
-
-  await expect(firstNameInput).toHaveAttribute('type', 'text')
-  await expect(firstNameInput).toHaveValue('')
-  await expect(firstNameInput).toHaveAttribute(
-    'aria-labelledby',
-    'label-for-firstName',
-  )
-  await expect(firstNameInput).toHaveAttribute('aria-required', 'true')
-  await expect(firstNameInput).toHaveAttribute('aria-invalid', 'false')
-
-  await expect(firstNameLabel).toHaveText('First Name')
-  await expect(firstNameLabel).toHaveId('label-for-firstName')
-
-  await expect(emailInput).toHaveAttribute('type', 'text')
-  await expect(emailInput).toHaveValue('')
-  await expect(emailInput).toHaveAttribute('aria-labelledby', 'label-for-email')
-  await expect(emailInput).toHaveAttribute('aria-required', 'true')
-  await expect(emailInput).toHaveAttribute('aria-invalid', 'false')
-
-  await expect(emailLabel).toHaveText('Email')
-  await expect(emailLabel).toHaveId('label-for-email')
-
-  await expect(submitButton).toBeEnabled()
+  await example.expectField(firstName)
+  await example.expectField(email)
+  await expect(button).toBeEnabled()
 
   // Client-side validation
-  await submitButton.click()
-
-  const firstNameErrors = page.locator('#errors-for-firstName').first()
-  const emailErrors = page.locator('#errors-for-email').first()
+  await button.click()
 
   // Show field errors and focus on the first field
-  await expect(firstNameErrors).toHaveText(
+  await example.expectError(
+    firstName,
     'String must contain at least 1 character(s)',
   )
-  await expect(firstNameErrors).toHaveAttribute('role', 'alert')
-  await expect(firstNameInput).toHaveAttribute('aria-invalid', 'true')
-  await expect(firstNameInput).toHaveAttribute(
-    'aria-describedBy',
-    'errors-for-firstName',
-  )
-  await expect(emailErrors).toHaveText(
+  await example.expectError(
+    email,
     'String must contain at least 1 character(s)',
   )
-  await expect(emailErrors).toHaveAttribute('role', 'alert')
-  await expect(emailInput).toHaveAttribute('aria-invalid', 'true')
-  await expect(emailInput).toHaveAttribute(
-    'aria-describedBy',
-    'errors-for-email',
-  )
-  await expect(firstNameInput).toBeFocused()
+  await expect(firstName.input).toBeFocused()
 
   // Make first field be valid, focus goes to the second field
-  await firstNameInput.fill('John')
-  await submitButton.click()
-  await expect(firstNameInput).toHaveAttribute('aria-invalid', 'false')
-  await expect(emailInput).toBeFocused()
+  await firstName.input.fill('John')
+  await button.click()
+  await example.expectValid(firstName)
+  await expect(email.input).toBeFocused()
 
   // Try another invalid message
-  await emailInput.fill('john')
-  await expect(page.locator('#errors-for-email')).toHaveText('Invalid email')
-  await expect(emailInput).toHaveAttribute('aria-invalid', 'true')
+  await email.input.fill('john')
+  await example.expectError(email, 'Invalid email')
 
   // Make form be valid
-  await emailInput.fill('john@doe.com')
-  await expect(emailInput).toHaveAttribute('aria-invalid', 'false')
+  await email.input.fill('john@doe.com')
+  await example.expectValid(email)
 
   // Submit form
-  await page.route('**/*', async (route) => {
-    await new Promise((f) => setTimeout(f, 100))
-    await route.continue()
-  })
-
-  submitButton.click()
-  await expect(submitButton).toBeDisabled()
+  button.click()
+  await expect(button).toBeDisabled()
   await expect(page).toHaveURL('/success')
 })
 
-test('With JS disabled', async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false })
-  const page = await context.newPage()
+testWithoutJS('With JS disabled', async ({ example }) => {
+  const { firstName, email, button, page } = example
 
-  await page.goto('/examples/actions/redirect')
-
-  const firstNameInput = page.locator('input[name="firstName"]').first()
-  const emailInput = page.locator('input[name="email"]').first()
-  const submitButton = page.locator('form button:has-text("OK")').first()
+  await page.goto(route)
 
   // Server-side validation
-  await submitButton.click()
-
+  await button.click()
   await page.reload()
-
-  const firstNameErrors = page.locator('#errors-for-firstName').first()
 
   // Show field errors and focus on the first field
-  await expect(firstNameErrors).toHaveText(
+  await example.expectError(
+    firstName,
     'String must contain at least 1 character(s)',
   )
-  await expect(firstNameErrors).toHaveAttribute('role', 'alert')
-  await expect(firstNameInput).toHaveAttribute('aria-invalid', 'true')
-  await expect(firstNameInput).toHaveAttribute(
-    'aria-describedBy',
-    'errors-for-firstName',
-  )
 
-  const emailErrors = page.locator('#errors-for-email').first()
-  const emailErrorDivs = await emailErrors.locator('div')
-  await expect(emailErrorDivs.first()).toHaveText(
+  await example.expectErrors(
+    email,
     'String must contain at least 1 character(s)',
-  )
-  await expect(emailErrorDivs.last()).toHaveText('Invalid email')
-  await expect(emailErrors).toHaveAttribute('role', 'alert')
-  await expect(emailInput).toHaveAttribute('aria-invalid', 'true')
-  await expect(emailInput).toHaveAttribute(
-    'aria-describedBy',
-    'errors-for-email',
+    'Invalid email',
   )
 
-  await expect(await firstNameInput.getAttribute('autofocus')).not.toBeNull()
-  await expect(await emailInput.getAttribute('autofocus')).toBeNull()
+  await example.expectAutoFocus(firstName)
+  await example.expectNoAutoFocus(email)
 
   // Make first field be valid, focus goes to the second field
-  await firstNameInput.fill('John')
-  await submitButton.click()
-
+  await firstName.input.fill('John')
+  await button.click()
   await page.reload()
-
-  await expect(firstNameInput).toHaveAttribute('aria-invalid', 'false')
-
-  await expect(await firstNameInput.getAttribute('autofocus')).toBeNull()
-  await expect(await emailInput.getAttribute('autofocus')).not.toBeNull()
+  await example.expectValid(firstName)
+  await example.expectNoAutoFocus(firstName)
+  await example.expectAutoFocus(email)
 
   // Try another invalid message
-  await emailInput.fill('john')
-  await submitButton.click()
-
+  await email.input.fill('john')
+  await button.click()
   await page.reload()
-
-  await expect(emailErrors).toHaveText('Invalid email')
-  await expect(emailInput).toHaveAttribute('aria-invalid', 'true')
+  await example.expectError(email, 'Invalid email')
 
   // Make form be valid and test selecting an option
-  await emailInput.fill('john@doe.com')
+  await email.input.fill('john@doe.com')
 
   // Submit form
-  await submitButton.click()
-
+  await button.click()
   await page.reload()
-
   await expect(page).toHaveURL('/success')
 })

@@ -1,15 +1,15 @@
 import { test, testWithoutJS, expect } from 'tests/setup/tests'
 
-const route = '/examples/actions/custom-response'
+const route = '/examples/actions/global-error'
 
 test('With JS enabled', async ({ example }) => {
-  const { firstName, email, button, page } = example
+  const { email, password, button, page } = example
 
   await page.goto(route)
 
   // Render
-  await example.expectField(firstName)
   await example.expectField(email)
+  await example.expectField(password, { type: 'password' })
   await expect(button).toBeEnabled()
 
   // Client-side validation
@@ -17,20 +17,19 @@ test('With JS enabled', async ({ example }) => {
 
   // Show field errors and focus on the first field
   await example.expectError(
-    firstName,
-    'String must contain at least 1 character(s)',
-  )
-  await example.expectError(
     email,
     'String must contain at least 1 character(s)',
   )
-  await expect(firstName.input).toBeFocused()
+  await example.expectError(
+    password,
+    'String must contain at least 1 character(s)',
+  )
 
   // Make first field be valid, focus goes to the second field
-  await firstName.input.fill('John')
+  await email.input.fill('john@doe.com')
   await button.click()
-  await example.expectValid(firstName)
-  await expect(email.input).toBeFocused()
+  await example.expectValid(email)
+  await expect(password.input).toBeFocused()
 
   // Try another invalid message
   await email.input.fill('john')
@@ -39,20 +38,31 @@ test('With JS enabled', async ({ example }) => {
   // Make form be valid
   await email.input.fill('john@doe.com')
   await example.expectValid(email)
+  await password.input.fill('123456')
 
   // Submit form
   button.click()
   await expect(button).toBeDisabled()
 
+  // Show global error
+  await expect(page.locator('form > div[role="alert"]:visible')).toHaveText(
+    'Wrong email or password',
+  )
+
+  // Submit valid form
+  await password.input.fill('supersafe')
+  button.click()
+
   const actionResult = await page
     .locator('#action-data > pre:visible')
     .innerText()
 
-  await expect(actionResult).toContain('"customName": "John"')
+  await expect(actionResult).toContain('"email": "john@doe.com"')
+  await expect(actionResult).toContain('"password": "supersafe"')
 })
 
 testWithoutJS('With JS disabled', async ({ example }) => {
-  const { firstName, email, button, page } = example
+  const { email, password, button, page } = example
 
   await page.goto(route)
 
@@ -61,27 +71,27 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await page.reload()
 
   // Show field errors and focus on the first field
-  await example.expectError(
-    firstName,
-    'String must contain at least 1 character(s)',
-  )
-
   await example.expectErrors(
     email,
     'String must contain at least 1 character(s)',
     'Invalid email',
   )
 
-  await example.expectAutoFocus(firstName)
-  await example.expectNoAutoFocus(email)
+  await example.expectError(
+    password,
+    'String must contain at least 1 character(s)',
+  )
+
+  await example.expectAutoFocus(email)
+  await example.expectNoAutoFocus(password)
 
   // Make first field be valid, focus goes to the second field
-  await firstName.input.fill('John')
+  await email.input.fill('john@doe.com')
   await button.click()
   await page.reload()
-  await example.expectValid(firstName)
-  await example.expectNoAutoFocus(firstName)
-  await example.expectAutoFocus(email)
+  await example.expectValid(email)
+  await example.expectAutoFocus(password)
+  await example.expectNoAutoFocus(email)
 
   // Try another invalid message
   await email.input.fill('john')
@@ -89,15 +99,28 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await page.reload()
   await example.expectError(email, 'Invalid email')
 
-  // Make form be valid and test selecting an option
+  // Make form be valid
   await email.input.fill('john@doe.com')
+  await password.input.fill('123456')
 
   // Submit form
   await button.click()
   await page.reload()
+
+  // Show global error
+  await expect(page.locator('form > div[role="alert"]:visible')).toHaveText(
+    'Wrong email or password',
+  )
+
+  // Submit valid form
+  await password.input.fill('supersafe')
+  await button.click()
+  await page.reload()
+
   const actionResult = await page
     .locator('#action-data > pre:visible')
     .innerText()
 
-  await expect(actionResult).toContain('"customName": "John"')
+  await expect(actionResult).toContain('"email": "john@doe.com"')
+  await expect(actionResult).toContain('"password": "supersafe"')
 })

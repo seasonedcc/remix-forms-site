@@ -28,14 +28,14 @@ class Example {
     this.firstName = this.field('firstName')
     this.email = this.field('email')
     this.password = this.field('password')
-    this.button = page.locator('form button:has-text("OK")')
+    this.button = page.locator('form button:has-text("OK"):visible')
   }
 
   field(name: string) {
     return {
       name,
-      label: this.page.locator(`label[for="${name}"]`).first(),
-      input: this.page.locator(`[name="${name}"]`).first(),
+      label: this.page.locator(`label[for="${name}"]:visible`),
+      input: this.page.locator(`[name="${name}"]:visible`),
     }
   }
 
@@ -77,7 +77,7 @@ class Example {
 
   async expectInvalid(field: Field) {
     await expect(
-      this.page.locator(`#errors-for-${field.name}`),
+      this.page.locator(`#errors-for-${field.name}:visible`),
     ).toHaveAttribute('role', 'alert')
 
     await expect(field.input).toHaveAttribute('aria-invalid', 'true')
@@ -91,9 +91,9 @@ class Example {
   async expectError(field: Field, message: string) {
     await this.expectInvalid(field)
 
-    await expect(this.page.locator(`#errors-for-${field.name}`)).toHaveText(
-      message,
-    )
+    await expect(
+      this.page.locator(`#errors-for-${field.name}:visible`),
+    ).toHaveText(message)
   }
 
   async expectErrors(field: Field, ...messages: string[]) {

@@ -1,10 +1,12 @@
-import { test, testWithoutJS, expect } from './setup/tests'
+import { test, testWithoutJS, expect } from 'tests/setup/tests'
+
+const route = '/'
 
 test('With JS enabled', async ({ example }) => {
   const { firstName, email, button, page } = example
   const howYouFoundOutAboutUs = example.field('howYouFoundOutAboutUs')
 
-  await page.goto('/')
+  await page.goto(route)
 
   // Render
   await example.expectField(firstName)
@@ -56,7 +58,7 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   const { firstName, email, button, page } = example
   const howYouFoundOutAboutUs = example.field('howYouFoundOutAboutUs')
 
-  await page.goto('/')
+  await page.goto(route)
 
   // Server-side validation
   await button.click()
