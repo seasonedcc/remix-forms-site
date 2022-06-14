@@ -1,4 +1,4 @@
-import { test, testWithoutJS, expect } from './setup/tests'
+import { test, testWithoutJS, expect } from 'tests/setup/tests'
 
 test('With JS enabled', async ({ example }) => {
   const { firstName, email, button, page } = example

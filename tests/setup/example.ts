@@ -28,7 +28,7 @@ class Example {
     this.firstName = this.field('firstName')
     this.email = this.field('email')
     this.password = this.field('password')
-    this.button = page.locator('form button:has-text("OK")')
+    this.button = page.locator('form button:has-text("OK")').first()
   }
 
   field(name: string) {
