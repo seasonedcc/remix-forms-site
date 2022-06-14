@@ -30,7 +30,7 @@ export const action: ActionFunction = async ({ request }) => {
     request,
     schema,
     mutation,
-    environment: { customHeader: request.headers.get('customHeader') || '' },
+    environment: { customHeader: request.headers.get('customHeader') },
   })
 }
 
