@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => metaTags({ title, description })
 const code = `const schema = z.object({ email: z.string().nonempty().email() })
 
 const environmentSchema = z.object({
-  customHeader: z.string().regex(/foo/, 'Missing custom header'),
+  customHeader: z.string({ invalid_type_error: 'Missing custom header' }),
 })
 
 const mutation = makeDomainFunction(
@@ -39,7 +39,7 @@ export default () => <Form schema={schema} />`
 const schema = z.object({ email: z.string().nonempty().email() })
 
 const environmentSchema = z.object({
-  customHeader: z.string().regex(/foo/, 'Missing custom header'),
+  customHeader: z.string({ invalid_type_error: 'Missing custom header' }),
 })
 
 export const loader: LoaderFunction = () => ({
@@ -56,7 +56,7 @@ export const action: ActionFunction = async ({ request }) => {
     request,
     schema,
     mutation,
-    environment: { customHeader: request.headers.get('customHeader') || '' },
+    environment: { customHeader: request.headers.get('customHeader') },
   })
 }
 
