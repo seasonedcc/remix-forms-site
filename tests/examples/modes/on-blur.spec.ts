@@ -2,7 +2,7 @@ import { test, testWithoutJS, expect } from 'tests/setup/tests'
 
 const route = '/examples/modes/on-blur'
 
-test.only('With JS enabled', async ({ example }) => {
+test('With JS enabled', async ({ example }) => {
   const { firstName, email, button, page } = example
 
   await page.goto(route)
