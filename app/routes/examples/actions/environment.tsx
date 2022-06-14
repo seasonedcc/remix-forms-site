@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => metaTags({ title, description })
 const code = `const schema = z.object({ email: z.string().nonempty().email() })
 
 const environmentSchema = z.object({
-  origin: z.string().regex(/foo.bar/, 'Unauthorized origin'),
+  customHeader: z.string({ invalid_type_error: 'Missing custom header' }),
 })
 
 const mutation = makeDomainFunction(
@@ -25,20 +25,21 @@ const mutation = makeDomainFunction(
   environmentSchema,
 )(async (values) => values)
 
-export const action: ActionFunction = async ({ request }) =>
-  formAction({
+export const action: ActionFunction = async ({ request }) => {
+  return formAction({
     request,
     schema,
     mutation,
-    environment: { origin: request.headers.get('Origin') },
+    environment: { customHeader: request.headers.get('customHeader') },
   })
+}
 
 export default () => <Form schema={schema} />`
 
 const schema = z.object({ email: z.string().nonempty().email() })
 
 const environmentSchema = z.object({
-  origin: z.string().regex(/foo.bar/, 'Unauthorized origin'),
+  customHeader: z.string({ invalid_type_error: 'Missing custom header' }),
 })
 
 export const loader: LoaderFunction = () => ({
@@ -50,13 +51,14 @@ const mutation = makeDomainFunction(
   environmentSchema,
 )(async (values) => values)
 
-export const action: ActionFunction = async ({ request }) =>
-  formAction({
+export const action: ActionFunction = async ({ request }) => {
+  return formAction({
     request,
     schema,
     mutation,
-    environment: { origin: request.headers.get('Origin') },
+    environment: { customHeader: request.headers.get('customHeader') },
   })
+}
 
 export default function Component() {
   return (
@@ -68,7 +70,7 @@ export default function Component() {
           <ExternalLink href="https://github.com/SeasonedSoftware/remix-domains#taking-parameters-that-are-not-user-input">
             environment
           </ExternalLink>{' '}
-          to authorize a specific origin.
+          to authorize a specific header.
         </>
       }
     >
