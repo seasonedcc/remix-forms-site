@@ -37,6 +37,8 @@ test('With JS enabled', async ({ example }) => {
     nonEmpty,
     'String must contain at least 1 character(s)',
   )
+  await example.expectValid(optional)
+  await example.expectValid(nullable)
   await example.expectError(
     minLength,
     'String must contain at least 5 character(s)',
