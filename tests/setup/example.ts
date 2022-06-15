@@ -9,7 +9,7 @@ type Field = {
 
 type FieldOptions = {
   label?: string
-  value?: string
+  value?: string | RegExp
   type?: string
   required?: boolean
   invalid?: boolean
