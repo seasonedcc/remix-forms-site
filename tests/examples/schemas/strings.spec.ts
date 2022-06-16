@@ -130,39 +130,38 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await example.expectError(email, 'Invalid email')
   await example.expectError(url, 'Invalid url')
   await example.expectError(phoneNumber, 'Invalid phone number')
-
-  await expect(nonEmpty.input).toBeFocused()
+  await example.expectAutoFocus(nonEmpty)
 
   // Make first field be valid, focus goes to the second field
   await nonEmpty.input.fill('John')
   await button.click()
   await page.reload()
   await example.expectValid(nonEmpty)
-  await expect(minLength.input).toBeFocused()
+  await example.expectAutoFocus(minLength)
 
   await minLength.input.fill('abcde')
   await button.click()
   await page.reload()
   await example.expectValid(minLength)
-  await expect(maxLength.input).toBeFocused()
+  await example.expectAutoFocus(maxLength)
 
   await maxLength.input.fill('abcde')
   await button.click()
   await page.reload()
   await example.expectValid(maxLength)
-  await expect(email.input).toBeFocused()
+  await example.expectAutoFocus(email)
 
   await email.input.fill('john@doe.com')
   await button.click()
   await page.reload()
   await example.expectValid(email)
-  await expect(url.input).toBeFocused()
+  await example.expectAutoFocus(url)
 
   await url.input.fill('http://example.com')
   await button.click()
   await page.reload()
   await example.expectValid(url)
-  await expect(phoneNumber.input).toBeFocused()
+  await example.expectAutoFocus(phoneNumber)
 
   // Make form be valid
   await phoneNumber.input.fill('5551234567')
