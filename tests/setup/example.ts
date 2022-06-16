@@ -13,6 +13,7 @@ type FieldOptions = {
   type?: string
   required?: boolean
   invalid?: boolean
+  multiline?: boolean
   options?: { name: string; value: string }[]
 }
 
@@ -44,18 +45,25 @@ class Example {
     {
       label: rawLabel,
       value = '',
-      type = 'text',
+      type: rawType = 'text',
       required = true,
       invalid = false,
+      multiline = false,
     }: FieldOptions = {},
   ) {
     const label = rawLabel || startCase(field.name)
+    const type = multiline ? '' : rawType
 
     await expect(field.label).toHaveText(label)
     await expect(field.label).toHaveId(`label-for-${field.name}`)
     await expect(field.input).toHaveValue(value)
     await expect(field.input).toHaveAttribute('type', type)
     await expect(field.input).toHaveAttribute('aria-invalid', String(invalid))
+
+    multiline &&
+      (await expect(
+        this.page.locator(`textarea[name=${field.name}]:visible`),
+      ).toBeVisible())
 
     await expect(field.input).toHaveAttribute(
       'aria-labelledby',
