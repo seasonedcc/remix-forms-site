@@ -150,8 +150,7 @@ testWithoutJS('With JS disabled', async ({ example }) => {
     'Expected number, received null',
   )
   await example.expectError(integer, 'Expected number, received null')
-
-  await expect(mandatory.input).toBeFocused()
+  await example.expectAutoFocus(mandatory)
 
   // Test other errors
   await greaterThan.input.fill('4')
@@ -177,31 +176,31 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await button.click()
   await page.reload()
   await example.expectValid(mandatory)
-  await expect(greaterThan.input).toBeFocused()
+  await example.expectAutoFocus(greaterThan)
 
   await greaterThan.input.fill('6')
   await button.click()
   await page.reload()
   await example.expectValid(greaterThan)
-  await expect(greaterThanOrEqualTo.input).toBeFocused()
+  await example.expectAutoFocus(greaterThanOrEqualTo)
 
   await greaterThanOrEqualTo.input.fill('10')
   await button.click()
   await page.reload()
   await example.expectValid(greaterThanOrEqualTo)
-  await expect(lowerThan.input).toBeFocused()
+  await example.expectAutoFocus(lowerThan)
 
   await lowerThan.input.fill('4')
   await button.click()
   await page.reload()
   await example.expectValid(lowerThan)
-  await expect(lowerThanOrEqualTo.input).toBeFocused()
+  await example.expectAutoFocus(lowerThanOrEqualTo)
 
   await lowerThanOrEqualTo.input.fill('10')
   await button.click()
   await page.reload()
   await example.expectValid(lowerThanOrEqualTo)
-  await expect(integer.input).toBeFocused()
+  await example.expectAutoFocus(integer)
 
   await integer.input.fill('4')
 
