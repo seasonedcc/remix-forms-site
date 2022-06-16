@@ -7,7 +7,7 @@ import { InputError, makeDomainFunction } from 'remix-domains'
 import { formAction } from 'remix-forms'
 import Form from '~/ui/form'
 
-const title = 'Default layout'
+const title = 'Auto-generated'
 const description =
   "Now let's have Remix Forms do it all for us. We'll still have to customize the layout, but the UX is there. Like magic! 🪄"
 
