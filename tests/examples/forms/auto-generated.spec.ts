@@ -1,6 +1,6 @@
 import { test, testWithoutJS, expect } from 'tests/setup/tests'
 
-const route = '/'
+const route = '/examples/forms/auto-generated'
 
 test('With JS enabled', async ({ example }) => {
   const { firstName, email, button, page } = example
@@ -46,12 +46,18 @@ test('With JS enabled', async ({ example }) => {
 
   // Make form be valid
   await email.input.fill('john@doe.com')
+  await howYouFoundOutAboutUs.input.selectOption('google')
   await example.expectValid(email)
+  await example.expectValid(howYouFoundOutAboutUs)
 
   // Submit form
   button.click()
   await expect(button).toBeDisabled()
-  await expect(page).toHaveURL('/success')
+  await example.expectData({
+    firstName: 'John',
+    email: 'john@doe.com',
+    howYouFoundOutAboutUs: 'google',
+  })
 })
 
 testWithoutJS('With JS disabled', async ({ example }) => {
@@ -100,5 +106,9 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   // Submit form
   await button.click()
   await page.reload()
-  await expect(page).toHaveURL('/success')
+  await example.expectData({
+    firstName: 'John',
+    email: 'john@doe.com',
+    howYouFoundOutAboutUs: 'google',
+  })
 })
