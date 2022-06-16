@@ -25,7 +25,6 @@ test('With JS enabled', async ({ example }) => {
   await example.expectField(email)
   await example.expectField(url, { label: 'URL' })
   await example.expectField(phoneNumber)
-  // await example.expectField(email)
   await expect(button).toBeEnabled()
 
   // Client-side validation
