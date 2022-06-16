@@ -21,6 +21,14 @@ export default function Component() {
     <div className="flex flex-col space-y-8">
       <Heading>Remix Forms at Remix Conf</Heading>
       <SubHeading>{description}</SubHeading>
+      <iframe
+        className="aspect-video w-full"
+        src="https://www.youtube.com/embed/IN-TElTkVmU"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
       <dl className="auto-rows-min space-y-8 md:grid md:gap-x-8 md:gap-y-8 md:space-y-0 xl:grid-cols-3">
         <Feature icon={ClipboardListIcon} title="A great form UI takes work">
           First, we'll walk you through the creation of a great form UI from
