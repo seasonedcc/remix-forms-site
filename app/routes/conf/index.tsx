@@ -21,29 +21,33 @@ export default function Component() {
     <div className="flex flex-col space-y-8">
       <Heading>Remix Forms at Remix Conf</Heading>
       <SubHeading>{description}</SubHeading>
-      <iframe
-        className="aspect-video w-full"
-        src="https://www.youtube.com/embed/IN-TElTkVmU"
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
-      <dl className="auto-rows-min space-y-8 md:grid md:gap-x-8 md:gap-y-8 md:space-y-0 xl:grid-cols-3">
-        <Feature icon={ClipboardListIcon} title="A great form UI takes work">
-          First, we'll walk you through the creation of a great form UI from
-          scratch.
-        </Feature>
-        <Feature icon={SparklesIcon} title="We do the work for you">
-          Then, we'll show you how Remix Forms does all the work for you.
-        </Feature>
-        <Feature icon={GiftIcon} title="With a powerful DX">
-          <ExternalLink href="https://github.com/SeasonedSoftware/remix-forms-site/tree/main/app/routes/conf">
-            Play around
-          </ExternalLink>{' '}
-          to experience our end-to-end type safety and our flexible API.
-        </Feature>
-      </dl>
+      <div className="flex flex-col space-y-8 xl:flex-row xl:space-y-0 xl:space-x-8">
+        <div className="flex-[3]">
+          <iframe
+            className="aspect-video w-full"
+            src="https://www.youtube.com/embed/IN-TElTkVmU"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+        <dl className="flex flex-[2] flex-col space-y-8">
+          <Feature icon={ClipboardListIcon} title="A great form UI takes work">
+            First, we'll walk you through the creation of a great form UI from
+            scratch.
+          </Feature>
+          <Feature icon={SparklesIcon} title="We do the work for you">
+            Then, we'll show you how Remix Forms does all the work for you.
+          </Feature>
+          <Feature icon={GiftIcon} title="With a powerful DX">
+            <ExternalLink href="https://github.com/SeasonedSoftware/remix-forms-site/tree/main/app/routes/conf">
+              Play around
+            </ExternalLink>{' '}
+            to experience our end-to-end type safety and our flexible API.
+          </Feature>
+        </dl>
+      </div>
       <p className="text-lg">
         Check out the{' '}
         <ExternalLink href="https://github.com/SeasonedSoftware/remix-forms-site/tree/main/app/routes/conf">
