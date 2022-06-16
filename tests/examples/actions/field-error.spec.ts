@@ -51,13 +51,7 @@ test('With JS enabled', async ({ example }) => {
   // Submit valid form
   await email.input.fill('john@doe.com')
   button.click()
-
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"email": "john@doe.com"')
-  await expect(actionResult).toContain('"password": "123456"')
+  await example.expectData({ email: 'john@doe.com', password: '123456' })
 })
 
 testWithoutJS('With JS disabled', async ({ example }) => {
@@ -113,11 +107,5 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await email.input.fill('john@doe.com')
   await button.click()
   await page.reload()
-
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"email": "john@doe.com"')
-  await expect(actionResult).toContain('"password": "123456"')
+  await example.expectData({ email: 'john@doe.com', password: '123456' })
 })

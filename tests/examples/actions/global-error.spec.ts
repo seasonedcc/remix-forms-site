@@ -53,13 +53,7 @@ test('With JS enabled', async ({ example }) => {
   // Submit valid form
   await password.input.fill('supersafe')
   button.click()
-
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"email": "john@doe.com"')
-  await expect(actionResult).toContain('"password": "supersafe"')
+  await example.expectData({ email: 'john@doe.com', password: 'supersafe' })
 })
 
 testWithoutJS('With JS disabled', async ({ example }) => {
@@ -117,11 +111,5 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await password.input.fill('supersafe')
   await button.click()
   await page.reload()
-
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"email": "john@doe.com"')
-  await expect(actionResult).toContain('"password": "supersafe"')
+  await example.expectData({ email: 'john@doe.com', password: 'supersafe' })
 })

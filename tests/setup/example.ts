@@ -107,11 +107,19 @@ class Example {
   }
 
   async expectAutoFocus(field: Field) {
-    await expect(await field.input.getAttribute('autofocus')).not.toBeNull()
+    expect(await field.input.getAttribute('autofocus')).not.toBeNull()
   }
 
   async expectNoAutoFocus(field: Field) {
-    await expect(await field.input.getAttribute('autofocus')).toBeNull()
+    expect(await field.input.getAttribute('autofocus')).toBeNull()
+  }
+
+  async expectData(data: any) {
+    const actionData = JSON.parse(
+      await this.page.locator('#action-data > pre:visible').innerText(),
+    )
+
+    expect(actionData).toEqual(data)
   }
 }
 

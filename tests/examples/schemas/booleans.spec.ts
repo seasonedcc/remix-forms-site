@@ -31,14 +31,12 @@ test('With JS enabled', async ({ example }) => {
   await expect(button).toBeEnabled()
   await button.click()
 
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"mandatory": false')
-  await expect(actionResult).toContain('"nullable": null')
-  await expect(actionResult).toContain('"defaultFalse": false')
-  await expect(actionResult).toContain('"defaultTrue": true')
+  await example.expectData({
+    mandatory: false,
+    nullable: null,
+    defaultFalse: false,
+    defaultTrue: true,
+  })
 
   await page.reload()
 
@@ -50,15 +48,13 @@ test('With JS enabled', async ({ example }) => {
 
   await button.click()
 
-  const secondActionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(secondActionResult).toContain('"mandatory": true')
-  await expect(secondActionResult).toContain('"optional": true')
-  await expect(secondActionResult).toContain('"nullable": true')
-  await expect(secondActionResult).toContain('"defaultFalse": true')
-  await expect(secondActionResult).toContain('"defaultTrue": false')
+  await example.expectData({
+    mandatory: true,
+    optional: true,
+    nullable: true,
+    defaultFalse: true,
+    defaultTrue: false,
+  })
 })
 
 testWithoutJS('With JS disabled', async ({ example }) => {
@@ -75,14 +71,12 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await expect(button).toBeEnabled()
   await button.click()
 
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"mandatory": false')
-  await expect(actionResult).toContain('"nullable": null')
-  await expect(actionResult).toContain('"defaultFalse": false')
-  await expect(actionResult).toContain('"defaultTrue": true')
+  await example.expectData({
+    mandatory: false,
+    nullable: null,
+    defaultFalse: false,
+    defaultTrue: true,
+  })
 
   await page.reload()
 
@@ -94,13 +88,11 @@ testWithoutJS('With JS disabled', async ({ example }) => {
 
   await button.click()
 
-  const secondActionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(secondActionResult).toContain('"mandatory": true')
-  await expect(secondActionResult).toContain('"optional": true')
-  await expect(secondActionResult).toContain('"nullable": true')
-  await expect(secondActionResult).toContain('"defaultFalse": true')
-  await expect(secondActionResult).toContain('"defaultTrue": false')
+  await example.expectData({
+    mandatory: true,
+    optional: true,
+    nullable: true,
+    defaultFalse: true,
+    defaultTrue: false,
+  })
 })

@@ -87,18 +87,16 @@ test('With JS enabled', async ({ example }) => {
   await example.expectValid(phoneNumber)
   await expect(button).toBeDisabled()
 
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"nonEmpty": "John"')
-  await expect(actionResult).toContain('"nullable": null')
-  await expect(actionResult).toContain('"default": "Foo Bar"')
-  await expect(actionResult).toContain('"minLength": "abcde"')
-  await expect(actionResult).toContain('"maxLength": "abcde"')
-  await expect(actionResult).toContain('"email": "john@doe.com"')
-  await expect(actionResult).toContain('"url": "http://example.com"')
-  await expect(actionResult).toContain('"phoneNumber": "5551234567"')
+  await example.expectData({
+    nonEmpty: 'John',
+    nullable: null,
+    default: 'Foo Bar',
+    minLength: 'abcde',
+    maxLength: 'abcde',
+    email: 'john@doe.com',
+    url: 'http://example.com',
+    phoneNumber: '5551234567',
+  })
 })
 
 testWithoutJS('With JS disabled', async ({ example }) => {
@@ -174,16 +172,14 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await page.reload()
   await example.expectValid(phoneNumber)
 
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"nonEmpty": "John"')
-  await expect(actionResult).toContain('"nullable": null')
-  await expect(actionResult).toContain('"default": "Foo Bar"')
-  await expect(actionResult).toContain('"minLength": "abcde"')
-  await expect(actionResult).toContain('"maxLength": "abcde"')
-  await expect(actionResult).toContain('"email": "john@doe.com"')
-  await expect(actionResult).toContain('"url": "http://example.com"')
-  await expect(actionResult).toContain('"phoneNumber": "5551234567"')
+  await example.expectData({
+    nonEmpty: 'John',
+    nullable: null,
+    default: 'Foo Bar',
+    minLength: 'abcde',
+    maxLength: 'abcde',
+    email: 'john@doe.com',
+    url: 'http://example.com',
+    phoneNumber: '5551234567',
+  })
 })

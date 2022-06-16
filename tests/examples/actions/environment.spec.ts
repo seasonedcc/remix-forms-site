@@ -42,12 +42,7 @@ test('With JS enabled', async ({ example }) => {
 
   button.click()
   await expect(button).toBeDisabled()
-
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"email": "john@doe.com"')
+  await example.expectData({ email: 'john@doe.com' })
 })
 
 testWithoutJS('With JS disabled', async ({ example }) => {
@@ -87,9 +82,5 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   await page.setExtraHTTPHeaders({ customHeader: 'foo' })
   await button.click()
   await page.reload()
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"email": "john@doe.com"')
+  await example.expectData({ email: 'john@doe.com' })
 })

@@ -105,19 +105,17 @@ test('With JS enabled', async ({ example }) => {
   await button.click()
   await expect(button).toBeDisabled()
 
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"mandatory": 1')
-  await expect(actionResult).toContain('"nullable": null')
-  await expect(actionResult).toContain('"defaultRandom":')
-  await expect(actionResult).toContain('"greaterThan": 6')
-  await expect(actionResult).toContain('"greaterThanOrEqualTo": 10')
-  await expect(actionResult).toContain('"lowerThan": 4')
-  await expect(actionResult).toContain('"lowerThanOrEqualTo": 10')
-  await expect(actionResult).toContain('"integer": 4')
-  await expect(actionResult).toContain('"optional": 5')
+  await example.expectData({
+    mandatory: 1,
+    nullable: null,
+    defaultRandom: expect.any(Number),
+    greaterThan: 6,
+    greaterThanOrEqualTo: 10,
+    lowerThan: 4,
+    lowerThanOrEqualTo: 10,
+    integer: 4,
+    optional: 5,
+  })
 })
 
 testWithoutJS('With JS disabled', async ({ example }) => {
@@ -125,7 +123,6 @@ testWithoutJS('With JS disabled', async ({ example }) => {
   const mandatory = example.field('mandatory')
   const optional = example.field('optional')
   const nullable = example.field('nullable')
-  const defaultRandom = example.field('defaultRandom')
   const greaterThan = example.field('greaterThan')
   const greaterThanOrEqualTo = example.field('greaterThanOrEqualTo')
   const lowerThan = example.field('lowerThan')
@@ -215,17 +212,15 @@ testWithoutJS('With JS disabled', async ({ example }) => {
 
   await example.expectValid(integer)
 
-  const actionResult = await page
-    .locator('#action-data > pre:visible')
-    .innerText()
-
-  await expect(actionResult).toContain('"mandatory": 1')
-  await expect(actionResult).toContain('"nullable": null')
-  await expect(actionResult).toContain('"defaultRandom":')
-  await expect(actionResult).toContain('"greaterThan": 6')
-  await expect(actionResult).toContain('"greaterThanOrEqualTo": 10')
-  await expect(actionResult).toContain('"lowerThan": 4')
-  await expect(actionResult).toContain('"lowerThanOrEqualTo": 10')
-  await expect(actionResult).toContain('"integer": 4')
-  await expect(actionResult).toContain('"optional": 5')
+  await example.expectData({
+    mandatory: 1,
+    nullable: null,
+    defaultRandom: expect.any(Number),
+    greaterThan: 6,
+    greaterThanOrEqualTo: 10,
+    lowerThan: 4,
+    lowerThanOrEqualTo: 10,
+    integer: 4,
+    optional: 5,
+  })
 })
