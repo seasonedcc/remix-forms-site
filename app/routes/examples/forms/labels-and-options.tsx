@@ -31,6 +31,7 @@ export default () => (
       ],
     }}
     multiline={['bio']}
+    pendingButtonLabel="..."
   />
 )`
 
@@ -63,6 +64,7 @@ export default function Component() {
           ],
         }}
         multiline={['bio']}
+        pendingButtonLabel="..."
       />
     </Example>
   )

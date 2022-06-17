@@ -42,8 +42,7 @@ test('With JS enabled', async ({ example }) => {
   await example.expectValid(bio)
 
   // Submit form
-  button.click()
-  await expect(button).toBeDisabled()
+  await button.click()
 
   await example.expectData({
     name: 'John',
