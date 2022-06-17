@@ -9,6 +9,7 @@ type Field = {
 
 type FieldOptions = {
   label?: string
+  placeholder?: string
   value?: string | RegExp
   type?: string
   required?: boolean
@@ -44,6 +45,7 @@ class Example {
     field: Field,
     {
       label: rawLabel,
+      placeholder,
       value = '',
       type: rawType = 'text',
       required = true,
@@ -59,6 +61,9 @@ class Example {
     await expect(field.input).toHaveValue(value)
     await expect(field.input).toHaveAttribute('type', type)
     await expect(field.input).toHaveAttribute('aria-invalid', String(invalid))
+
+    placeholder &&
+      (await expect(field.input).toHaveAttribute('placeholder', placeholder))
 
     multiline &&
       (await expect(
