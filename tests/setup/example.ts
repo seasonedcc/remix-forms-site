@@ -8,7 +8,7 @@ type Field = {
 }
 
 type FieldOptions = {
-  label?: string
+  label?: string | null
   placeholder?: string
   value?: string | RegExp
   type?: string
@@ -53,11 +53,14 @@ class Example {
       multiline = false,
     }: FieldOptions = {},
   ) {
-    const label = rawLabel || startCase(field.name)
+    const label = rawLabel === undefined ? startCase(field.name) : rawLabel
     const type = multiline ? '' : rawType
 
-    await expect(field.label).toHaveText(label)
-    await expect(field.label).toHaveId(`label-for-${field.name}`)
+    if (label) {
+      await expect(field.label).toHaveText(label)
+      await expect(field.label).toHaveId(`label-for-${field.name}`)
+    }
+
     await expect(field.input).toHaveValue(value)
     await expect(field.input).toHaveAttribute('type', type)
     await expect(field.input).toHaveAttribute('aria-invalid', String(invalid))
